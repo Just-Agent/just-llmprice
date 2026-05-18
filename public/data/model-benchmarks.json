@@ -1,0 +1,4802 @@
+{
+  "meta": {
+    "generatedAt": "2026-05-18T13:02:31.159Z",
+    "sourceName": "DataLearner AI",
+    "sourceUrl": "https://www.datalearner.com/leaderboards",
+    "fetchedFrom": "D:\\study\\code\\0ai\\产品\\07-mobile-app\\just-llmprice\\data\\raw\\datalearner-leaderboards.html",
+    "license": "CC BY 4.0 as declared in DataLearner Dataset metadata",
+    "extractedRowCount": 224,
+    "modelCount": 189,
+    "note": "Benchmark scores are parsed from DataLearner public leaderboards and matched to LiteLLM model ids by normalized aliases in the frontend."
+  },
+  "benchmarkKeys": [
+    "HLE",
+    "ARC-AGI-2",
+    "MMLU Pro",
+    "AIME2025",
+    "FrontierMath",
+    "FrontierMath - Tier 4",
+    "MATH-500",
+    "SWE-bench Verified",
+    "LiveCodeBench",
+    "SWE-Bench Pro - Public",
+    "τ²-Bench",
+    "Terminal Bench 2.0",
+    "Aider-Polyglot"
+  ],
+  "categories": {
+    "overall": [
+      "HLE",
+      "ARC-AGI-2",
+      "MMLU Pro"
+    ],
+    "math": [
+      "AIME2025",
+      "FrontierMath",
+      "FrontierMath - Tier 4",
+      "MATH-500"
+    ],
+    "coding": [
+      "SWE-bench Verified",
+      "LiveCodeBench",
+      "SWE-Bench Pro - Public"
+    ],
+    "agent": [
+      "τ²-Bench",
+      "Terminal Bench 2.0",
+      "Aider-Polyglot"
+    ]
+  },
+  "models": [
+    {
+      "modelName": "Kimi k1.5 (Long-CoT)",
+      "modelCode": "kimi_k_1_5-long",
+      "organization": "普林斯顿大学",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "MATH-500": 96.2
+      },
+      "categoryScores": {
+        "overall": null,
+        "math": 96.2,
+        "coding": null,
+        "agent": null
+      },
+      "compositeScore": 96.2,
+      "matchKeys": [
+        "kimi-k-1-5-long",
+        "kimi-k1-5"
+      ]
+    },
+    {
+      "modelName": "Kimi k1.5 (Short-CoT)",
+      "modelCode": "kimi_k_1_5-short",
+      "organization": "Moonshot AI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "MATH-500": 94.6
+      },
+      "categoryScores": {
+        "overall": null,
+        "math": 94.6,
+        "coding": null,
+        "agent": null
+      },
+      "compositeScore": 94.6,
+      "matchKeys": [
+        "kimi-k-1-5-short",
+        "kimi-k1-5"
+      ]
+    },
+    {
+      "modelName": "DeepSeek-R1-Distill-Llama-70B",
+      "modelCode": "DeepSeek-R1-Distill-Llama-70B",
+      "organization": "DeepSeek-AI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "MATH-500": 94.5
+      },
+      "categoryScores": {
+        "overall": null,
+        "math": 94.5,
+        "coding": null,
+        "agent": null
+      },
+      "compositeScore": 94.5,
+      "matchKeys": [
+        "deepseek-r1-distill-llama-70b"
+      ]
+    },
+    {
+      "modelName": "DeepSeek-R1-Distill-Qwen-7B",
+      "modelCode": "DeepSeek-R1-Distill-Qwen-7B",
+      "organization": "DeepSeek-AI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "MATH-500": 91.4
+      },
+      "categoryScores": {
+        "overall": null,
+        "math": 91.4,
+        "coding": null,
+        "agent": null
+      },
+      "compositeScore": 91.4,
+      "matchKeys": [
+        "deepseek-r1-distill-qwen-7b"
+      ]
+    },
+    {
+      "modelName": "Phi-4-instruct (reasoning-trained)",
+      "modelCode": "Phi-4-instruct-reasoning-trained",
+      "organization": "Microsoft Azure",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "MATH-500": 90.4
+      },
+      "categoryScores": {
+        "overall": null,
+        "math": 90.4,
+        "coding": null,
+        "agent": null
+      },
+      "compositeScore": 90.4,
+      "matchKeys": [
+        "phi-4",
+        "phi-4-reasoning-trained"
+      ]
+    },
+    {
+      "modelName": "Intern-S1",
+      "modelCode": "Intern-S1",
+      "organization": "上海人工智能实验室",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "MMLU Pro": 83.5,
+        "AIME2025": 86
+      },
+      "categoryScores": {
+        "overall": 83.5,
+        "math": 86,
+        "coding": null,
+        "agent": null
+      },
+      "compositeScore": 84.75,
+      "matchKeys": [
+        "intern-s1"
+      ]
+    },
+    {
+      "modelName": "QwQ-32B",
+      "modelCode": "QwQ-32B",
+      "organization": "阿里巴巴",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "MMLU Pro": 76,
+        "MATH-500": 91
+      },
+      "categoryScores": {
+        "overall": 76,
+        "math": 91,
+        "coding": null,
+        "agent": null
+      },
+      "compositeScore": 83.5,
+      "matchKeys": [
+        "qwq-32b"
+      ]
+    },
+    {
+      "modelName": "Step 3.5 Flash",
+      "modelCode": "stepfun-flash-3-5",
+      "organization": "StepFunAI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "AIME2025": 99.8,
+        "SWE-bench Verified": 74.4,
+        "LiveCodeBench": 86.4,
+        "τ²-Bench": 88.2,
+        "Terminal Bench 2.0": 51
+      },
+      "categoryScores": {
+        "overall": null,
+        "math": 99.8,
+        "coding": 80.4,
+        "agent": 69.6
+      },
+      "compositeScore": 83.267,
+      "matchKeys": [
+        "step-3-5-flash",
+        "stepfun-flash-3-5"
+      ]
+    },
+    {
+      "modelName": "Hunyuan-T1",
+      "modelCode": "Hunyuan-T1",
+      "organization": "腾讯AI实验室",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "MMLU Pro": 87.2,
+        "MATH-500": 96.2,
+        "LiveCodeBench": 64.9
+      },
+      "categoryScores": {
+        "overall": 87.2,
+        "math": 96.2,
+        "coding": 64.9,
+        "agent": null
+      },
+      "compositeScore": 82.767,
+      "matchKeys": [
+        "hunyuan-t1"
+      ]
+    },
+    {
+      "modelName": "Claude Sonnet 5",
+      "modelCode": "claude-5-sonnet",
+      "organization": "Anthropic",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "SWE-bench Verified": 82
+      },
+      "categoryScores": {
+        "overall": null,
+        "math": null,
+        "coding": 82,
+        "agent": null
+      },
+      "compositeScore": 82,
+      "matchKeys": [
+        "claude-5-sonnet",
+        "claude-sonnet-5"
+      ]
+    },
+    {
+      "modelName": "Kimi K2 Thinking",
+      "modelCode": "kimi-k2-reasoning",
+      "organization": "Moonshot AI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "HLE": 51,
+        "MMLU Pro": 84.6,
+        "AIME2025": 100,
+        "SWE-bench Verified": 71.3,
+        "LiveCodeBench": 83.1
+      },
+      "categoryScores": {
+        "overall": 67.8,
+        "math": 100,
+        "coding": 77.2,
+        "agent": null
+      },
+      "compositeScore": 81.667,
+      "matchKeys": [
+        "kimi-k2",
+        "kimi-k2-reasoning"
+      ]
+    },
+    {
+      "modelName": "GPT-5.1 Codex",
+      "modelCode": "gpt-5-1-codex",
+      "organization": "OpenAI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "SWE-bench Verified": 76.8,
+        "LiveCodeBench": 85.5
+      },
+      "categoryScores": {
+        "overall": null,
+        "math": null,
+        "coding": 81.15,
+        "agent": null
+      },
+      "compositeScore": 81.15,
+      "matchKeys": [
+        "gpt-5-1-codex"
+      ]
+    },
+    {
+      "modelName": "Pangu Embedded",
+      "modelCode": "pangu-embedded",
+      "organization": "华为",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "MMLU Pro": 79,
+        "MATH-500": 92.4,
+        "LiveCodeBench": 67.1
+      },
+      "categoryScores": {
+        "overall": 79,
+        "math": 92.4,
+        "coding": 67.1,
+        "agent": null
+      },
+      "compositeScore": 79.5,
+      "matchKeys": [
+        "pangu-embedded"
+      ]
+    },
+    {
+      "modelName": "Grok-3 - Reasoning Beta",
+      "modelCode": "grok-3-reasoning-beta",
+      "organization": "xAI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "LiveCodeBench": 79.4
+      },
+      "categoryScores": {
+        "overall": null,
+        "math": null,
+        "coding": 79.4,
+        "agent": null
+      },
+      "compositeScore": 79.4,
+      "matchKeys": [
+        "grok-3-reasoning-beta"
+      ]
+    },
+    {
+      "modelName": "Gemini 2.0 Pro Experimental",
+      "modelCode": "gemini_2_pro",
+      "organization": "DeepMind",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "MMLU Pro": 79.1
+      },
+      "categoryScores": {
+        "overall": 79.1,
+        "math": null,
+        "coding": null,
+        "agent": null
+      },
+      "compositeScore": 79.1,
+      "matchKeys": [
+        "gemini-2-0-pro-experimental",
+        "gemini-2-pro"
+      ]
+    },
+    {
+      "modelName": "Qwen3 Max (Preview)",
+      "modelCode": "qwen3-max-preview",
+      "organization": "阿里巴巴",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "HLE": 49.8,
+        "MMLU Pro": 85.7,
+        "SWE-bench Verified": 75.3,
+        "LiveCodeBench": 85.9,
+        "τ²-Bench": 82.1,
+        "AIME2025": 80.6
+      },
+      "categoryScores": {
+        "overall": 67.75,
+        "math": 80.6,
+        "coding": 80.6,
+        "agent": 82.1
+      },
+      "compositeScore": 77.762,
+      "matchKeys": [
+        "qwen3"
+      ]
+    },
+    {
+      "modelName": "Claude Mythos Preview",
+      "modelCode": "claude-mythos-preview",
+      "organization": "Anthropic",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "HLE": 64.7,
+        "SWE-bench Verified": 93.9,
+        "SWE-Bench Pro - Public": 77.8,
+        "Terminal Bench 2.0": 82
+      },
+      "categoryScores": {
+        "overall": 64.7,
+        "math": null,
+        "coding": 85.85,
+        "agent": 82
+      },
+      "compositeScore": 77.517,
+      "matchKeys": [
+        "claude-mythos"
+      ]
+    },
+    {
+      "modelName": "Grok 4.1 Fast",
+      "modelCode": "grok-4-1-fast",
+      "organization": "xAI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "HLE": 17.6,
+        "MMLU Pro": 85,
+        "AIME2025": 89,
+        "LiveCodeBench": 82,
+        "τ²-Bench": 82.71
+      },
+      "categoryScores": {
+        "overall": 51.3,
+        "math": 89,
+        "coding": 82,
+        "agent": 82.71
+      },
+      "compositeScore": 76.252,
+      "matchKeys": [
+        "grok-4-1-fast"
+      ]
+    },
+    {
+      "modelName": "Gemini 1.5 Pro",
+      "modelCode": "Gemini-1_5-Pro",
+      "organization": "Google Deep Mind",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "MMLU Pro": 76.1
+      },
+      "categoryScores": {
+        "overall": 76.1,
+        "math": null,
+        "coding": null,
+        "agent": null
+      },
+      "compositeScore": 76.1,
+      "matchKeys": [
+        "gemini-1-5-pro"
+      ]
+    },
+    {
+      "modelName": "Llama 4 Behemoth Instruct",
+      "modelCode": "Llama-4-Behemoth-Instruct",
+      "organization": "Facebook AI研究实验室",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "MMLU Pro": 82.2,
+        "MATH-500": 95,
+        "LiveCodeBench": 49.4
+      },
+      "categoryScores": {
+        "overall": 82.2,
+        "math": 95,
+        "coding": 49.4,
+        "agent": null
+      },
+      "compositeScore": 75.533,
+      "matchKeys": [
+        "llama-4-behemoth"
+      ]
+    },
+    {
+      "modelName": "DeepSeek-R1",
+      "modelCode": "DeepSeek-R1",
+      "organization": "DeepSeek-AI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "MMLU Pro": 84,
+        "AIME2025": 70,
+        "MATH-500": 97.3,
+        "SWE-bench Verified": 49.2,
+        "LiveCodeBench": 65.9
+      },
+      "categoryScores": {
+        "overall": 84,
+        "math": 83.65,
+        "coding": 57.55,
+        "agent": null
+      },
+      "compositeScore": 75.067,
+      "matchKeys": [
+        "deepseek-r1"
+      ]
+    },
+    {
+      "modelName": "Step3",
+      "modelCode": "step3",
+      "organization": "StepFunAI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "AIME2025": 82.9,
+        "LiveCodeBench": 67.1
+      },
+      "categoryScores": {
+        "overall": null,
+        "math": 82.9,
+        "coding": 67.1,
+        "agent": null
+      },
+      "compositeScore": 75,
+      "matchKeys": [
+        "step3"
+      ]
+    },
+    {
+      "modelName": "Pangu Pro MoE",
+      "modelCode": "pangu-pro-moe-model",
+      "organization": "华为",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "MMLU Pro": 82.6,
+        "AIME2025": 68.1,
+        "MATH-500": 96.8,
+        "LiveCodeBench": 59.6
+      },
+      "categoryScores": {
+        "overall": 82.6,
+        "math": 82.45,
+        "coding": 59.6,
+        "agent": null
+      },
+      "compositeScore": 74.883,
+      "matchKeys": [
+        "pangu-pro-moe",
+        "pangu-pro-moe-model"
+      ]
+    },
+    {
+      "modelName": "GPT-5 Codex",
+      "modelCode": "gpt-5-codex",
+      "organization": "OpenAI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "SWE-bench Verified": 74.5
+      },
+      "categoryScores": {
+        "overall": null,
+        "math": null,
+        "coding": 74.5,
+        "agent": null
+      },
+      "compositeScore": 74.5,
+      "matchKeys": [
+        "gpt-5-codex"
+      ]
+    },
+    {
+      "modelName": "Kimi-k1.6-IOI-high",
+      "modelCode": "Kimi-k1_6-IOI-high",
+      "organization": "Moonshot AI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "LiveCodeBench": 73.8
+      },
+      "categoryScores": {
+        "overall": null,
+        "math": null,
+        "coding": 73.8,
+        "agent": null
+      },
+      "compositeScore": 73.8,
+      "matchKeys": [
+        "kimi-k1-6-ioi"
+      ]
+    },
+    {
+      "modelName": "GPT-4.5",
+      "modelCode": "gpt-4_5",
+      "organization": "OpenAI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "MMLU Pro": 86.1,
+        "MATH-500": 90.7,
+        "SWE-bench Verified": 38,
+        "LiveCodeBench": 46.4
+      },
+      "categoryScores": {
+        "overall": 86.1,
+        "math": 90.7,
+        "coding": 42.2,
+        "agent": null
+      },
+      "compositeScore": 73,
+      "matchKeys": [
+        "gpt-4-5"
+      ]
+    },
+    {
+      "modelName": "Qwen3-8B",
+      "modelCode": "Qwen3-8B",
+      "organization": "阿里巴巴",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "MMLU Pro": 72.5,
+        "AIME2025": 67.3,
+        "MATH-500": 97.4,
+        "LiveCodeBench": 61.8
+      },
+      "categoryScores": {
+        "overall": 72.5,
+        "math": 82.35,
+        "coding": 61.8,
+        "agent": null
+      },
+      "compositeScore": 72.217,
+      "matchKeys": [
+        "qwen3-8b"
+      ]
+    },
+    {
+      "modelName": "GLM-4.5",
+      "modelCode": "glm-4_5_moe-355b-a32b-0715",
+      "organization": "智谱AI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "HLE": 14.4,
+        "MMLU Pro": 84.6,
+        "MATH-500": 98.2,
+        "SWE-bench Verified": 64.2,
+        "LiveCodeBench": 72.9
+      },
+      "categoryScores": {
+        "overall": 49.5,
+        "math": 98.2,
+        "coding": 68.55,
+        "agent": null
+      },
+      "compositeScore": 72.083,
+      "matchKeys": [
+        "glm-4-5",
+        "glm-4-5-moe-355b-a32b-0715"
+      ]
+    },
+    {
+      "modelName": "Grok 4 Code",
+      "modelCode": "grok-4-code",
+      "organization": "xAI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "SWE-bench Verified": 72
+      },
+      "categoryScores": {
+        "overall": null,
+        "math": null,
+        "coding": 72,
+        "agent": null
+      },
+      "compositeScore": 72,
+      "matchKeys": [
+        "grok-4-code"
+      ]
+    },
+    {
+      "modelName": "DeepSeek-V3.1",
+      "modelCode": "deepseek-v-3_1",
+      "organization": "DeepSeek-AI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "HLE": 15.9,
+        "MMLU Pro": 85,
+        "AIME2025": 88.4,
+        "SWE-bench Verified": 66,
+        "LiveCodeBench": 74.8,
+        "Aider-Polyglot": 76.3
+      },
+      "categoryScores": {
+        "overall": 50.45,
+        "math": 88.4,
+        "coding": 70.4,
+        "agent": 76.3
+      },
+      "compositeScore": 71.388,
+      "matchKeys": [
+        "deepseek-v-3-1",
+        "deepseek-v3-1"
+      ]
+    },
+    {
+      "modelName": "Gemma 4 31B",
+      "modelCode": "google-gemma-4-31b",
+      "organization": "DeepMind",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "HLE": 26.5,
+        "MMLU Pro": 85.2,
+        "LiveCodeBench": 80,
+        "τ²-Bench": 76.9
+      },
+      "categoryScores": {
+        "overall": 55.85,
+        "math": null,
+        "coding": 80,
+        "agent": 76.9
+      },
+      "compositeScore": 70.917,
+      "matchKeys": [
+        "gemma-4-31b",
+        "google-gemma-4-31b"
+      ]
+    },
+    {
+      "modelName": "DeepSeek V3.2-Exp",
+      "modelCode": "deepseek-v3-2-exp",
+      "organization": "DeepSeek-AI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "HLE": 20.3,
+        "MMLU Pro": 85,
+        "AIME2025": 89.3,
+        "SWE-bench Verified": 67.8,
+        "LiveCodeBench": 74.1,
+        "τ²-Bench": 66.7,
+        "Aider-Polyglot": 74.5
+      },
+      "categoryScores": {
+        "overall": 52.65,
+        "math": 89.3,
+        "coding": 70.95,
+        "agent": 70.6
+      },
+      "compositeScore": 70.875,
+      "matchKeys": [
+        "deepseek-v3-2-exp"
+      ]
+    },
+    {
+      "modelName": "Grok Code Fast 1",
+      "modelCode": "grok-code-fast-1",
+      "organization": "xAI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "SWE-bench Verified": 70.8
+      },
+      "categoryScores": {
+        "overall": null,
+        "math": null,
+        "coding": 70.8,
+        "agent": null
+      },
+      "compositeScore": 70.8,
+      "matchKeys": [
+        "grok-code-fast-1"
+      ]
+    },
+    {
+      "modelName": "DeepSeek-V4-Pro",
+      "modelCode": "deepseek-v4-pro",
+      "organization": "DeepSeek-AI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "HLE": 48.2,
+        "MMLU Pro": 87.5,
+        "SWE-bench Verified": 80.6,
+        "LiveCodeBench": 93.5,
+        "SWE-Bench Pro - Public": 55.4,
+        "Terminal Bench 2.0": 67.9
+      },
+      "categoryScores": {
+        "overall": 67.85,
+        "math": null,
+        "coding": 76.5,
+        "agent": 67.9
+      },
+      "compositeScore": 70.75,
+      "matchKeys": [
+        "deepseek-v4-pro"
+      ]
+    },
+    {
+      "modelName": "Hunyuan-7B",
+      "modelCode": "hunyuan-7_b",
+      "organization": "Tencent ARC",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "AIME2025": 75.3,
+        "MATH-500": 93.7,
+        "LiveCodeBench": 57
+      },
+      "categoryScores": {
+        "overall": null,
+        "math": 84.5,
+        "coding": 57,
+        "agent": null
+      },
+      "compositeScore": 70.75,
+      "matchKeys": [
+        "hunyuan-7-b",
+        "hunyuan-7b"
+      ]
+    },
+    {
+      "modelName": "Claude Opus 4.6",
+      "modelCode": "claude-opus-4-6",
+      "organization": "Anthropic",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": 1502,
+      "arenaRank": 1,
+      "benchmarks": {
+        "HLE": 53,
+        "ARC-AGI-2": 66.3,
+        "AIME2025": 99.79,
+        "FrontierMath": 40.7,
+        "FrontierMath - Tier 4": 22.9,
+        "MATH-500": 97.6,
+        "SWE-bench Verified": 80.84,
+        "LiveCodeBench": 76,
+        "τ²-Bench": 91.89,
+        "Terminal Bench 2.0": 65.4
+      },
+      "categoryScores": {
+        "overall": 59.65,
+        "math": 65.248,
+        "coding": 78.42,
+        "agent": 78.645
+      },
+      "compositeScore": 70.491,
+      "matchKeys": [
+        "claude-opus-4-6"
+      ]
+    },
+    {
+      "modelName": "Phi 4 - 14B",
+      "modelCode": "phi-4-14b",
+      "organization": "Microsoft Azure",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "MMLU Pro": 70.4
+      },
+      "categoryScores": {
+        "overall": 70.4,
+        "math": null,
+        "coding": null,
+        "agent": null
+      },
+      "compositeScore": 70.4,
+      "matchKeys": [
+        "phi-4-14b"
+      ]
+    },
+    {
+      "modelName": "MiniMax M2",
+      "modelCode": "minimax-m2",
+      "organization": "MiniMaxAI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "HLE": 12.5,
+        "MMLU Pro": 82,
+        "AIME2025": 78,
+        "SWE-bench Verified": 69.4,
+        "LiveCodeBench": 83,
+        "τ²-Bench": 77.2
+      },
+      "categoryScores": {
+        "overall": 47.25,
+        "math": 78,
+        "coding": 76.2,
+        "agent": 77.2
+      },
+      "compositeScore": 69.662,
+      "matchKeys": [
+        "mini-m2"
+      ]
+    },
+    {
+      "modelName": "GLM-4.5-Air",
+      "modelCode": "glm-4_5_moe-106b-a12b-0715",
+      "organization": "智谱AI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "HLE": 10.6,
+        "MMLU Pro": 81.4,
+        "MATH-500": 98.1,
+        "SWE-bench Verified": 57.6,
+        "LiveCodeBench": 70.7
+      },
+      "categoryScores": {
+        "overall": 46,
+        "math": 98.1,
+        "coding": 64.15,
+        "agent": null
+      },
+      "compositeScore": 69.417,
+      "matchKeys": [
+        "glm-4-5-air",
+        "glm-4-5-moe-106b-a12b-0715"
+      ]
+    },
+    {
+      "modelName": "Qwen3.5-397B-A17B",
+      "modelCode": "qwen3-5-397b-a17b",
+      "organization": "阿里巴巴",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "HLE": 48.3,
+        "MMLU Pro": 87.8,
+        "SWE-bench Verified": 76.4,
+        "LiveCodeBench": 83.6,
+        "SWE-Bench Pro - Public": 50.9,
+        "τ²-Bench": 86.7,
+        "Terminal Bench 2.0": 52.5
+      },
+      "categoryScores": {
+        "overall": 68.05,
+        "math": null,
+        "coding": 70.3,
+        "agent": 69.6
+      },
+      "compositeScore": 69.317,
+      "matchKeys": [
+        "qwen3-5-397b-a17b"
+      ]
+    },
+    {
+      "modelName": "Hunyuan-A13B-Instruct",
+      "modelCode": "Hunyuan-A13B-Instruct",
+      "organization": "腾讯AI实验室",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "MMLU Pro": 67.23,
+        "AIME2025": 76.8,
+        "LiveCodeBench": 63.9
+      },
+      "categoryScores": {
+        "overall": 67.23,
+        "math": 76.8,
+        "coding": 63.9,
+        "agent": null
+      },
+      "compositeScore": 69.31,
+      "matchKeys": [
+        "hunyuan-a13b"
+      ]
+    },
+    {
+      "modelName": "Mistral-Small-3.2",
+      "modelCode": "Mistral-Small-3_2-24B-Instruct-2506",
+      "organization": "MistralAI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "MMLU Pro": 69.06
+      },
+      "categoryScores": {
+        "overall": 69.06,
+        "math": null,
+        "coding": null,
+        "agent": null
+      },
+      "compositeScore": 69.06,
+      "matchKeys": [
+        "mistral-small-3-2",
+        "mistral-small-3-2-24b-2506"
+      ]
+    },
+    {
+      "modelName": "GPT OSS 120B",
+      "modelCode": "gpt-oss-120b",
+      "organization": "OpenAI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "HLE": 19,
+        "MMLU Pro": 79,
+        "AIME2025": 97.9,
+        "SWE-bench Verified": 60.1
+      },
+      "categoryScores": {
+        "overall": 49,
+        "math": 97.9,
+        "coding": 60.1,
+        "agent": null
+      },
+      "compositeScore": 69,
+      "matchKeys": [
+        "gpt-oss-120b"
+      ]
+    },
+    {
+      "modelName": "DeepSeek-V3.1 Terminus",
+      "modelCode": "DeepSeek-V3_1-Terminus",
+      "organization": "DeepSeek-AI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "HLE": 21.7,
+        "MMLU Pro": 85,
+        "AIME2025": 90,
+        "SWE-bench Verified": 68.4,
+        "LiveCodeBench": 80,
+        "τ²-Bench": 37,
+        "Aider-Polyglot": 76.1
+      },
+      "categoryScores": {
+        "overall": 53.35,
+        "math": 90,
+        "coding": 74.2,
+        "agent": 56.55
+      },
+      "compositeScore": 68.525,
+      "matchKeys": [
+        "deepseek-v3-1-terminus"
+      ]
+    },
+    {
+      "modelName": "o3-pro",
+      "modelCode": "o3-pro",
+      "organization": "OpenAI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "HLE": 21,
+        "AIME2025": 93,
+        "SWE-bench Verified": 75,
+        "Aider-Polyglot": 84.9
+      },
+      "categoryScores": {
+        "overall": 21,
+        "math": 93,
+        "coding": 75,
+        "agent": 84.9
+      },
+      "compositeScore": 68.475,
+      "matchKeys": [
+        "o3-pro"
+      ]
+    },
+    {
+      "modelName": "Claude3-Opus",
+      "modelCode": "Claude3-Opus",
+      "organization": "Anthropic",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "MMLU Pro": 68.45
+      },
+      "categoryScores": {
+        "overall": 68.45,
+        "math": null,
+        "coding": null,
+        "agent": null
+      },
+      "compositeScore": 68.45,
+      "matchKeys": [
+        "claude3-opus"
+      ]
+    },
+    {
+      "modelName": "Qwen 3.6 Plus Preview",
+      "modelCode": "qwen-3.6-plus-preview",
+      "organization": "阿里巴巴",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "HLE": 50.6,
+        "MMLU Pro": 88.5,
+        "SWE-bench Verified": 78.8,
+        "LiveCodeBench": 87.1,
+        "SWE-Bench Pro - Public": 56.6,
+        "Terminal Bench 2.0": 61.6
+      },
+      "categoryScores": {
+        "overall": 69.55,
+        "math": null,
+        "coding": 74.167,
+        "agent": 61.6
+      },
+      "compositeScore": 68.439,
+      "matchKeys": [
+        "qwen-3-6-plus"
+      ]
+    },
+    {
+      "modelName": "Qwen3-4B-Thinking-2507",
+      "modelCode": "qwen-4b-thinking-2507",
+      "organization": "阿里巴巴",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "AIME2025": 81.3,
+        "LiveCodeBench": 55.2
+      },
+      "categoryScores": {
+        "overall": null,
+        "math": 81.3,
+        "coding": 55.2,
+        "agent": null
+      },
+      "compositeScore": 68.25,
+      "matchKeys": [
+        "qwen-4b-2507",
+        "qwen3-4b-2507"
+      ]
+    },
+    {
+      "modelName": "Qwen3.5-27B",
+      "modelCode": "qwen3-5-27b-dense",
+      "organization": "阿里巴巴",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "HLE": 48.5,
+        "MMLU Pro": 86.1,
+        "SWE-bench Verified": 72.4,
+        "LiveCodeBench": 80.7,
+        "τ²-Bench": 79,
+        "Terminal Bench 2.0": 41.6
+      },
+      "categoryScores": {
+        "overall": 67.3,
+        "math": null,
+        "coding": 76.55,
+        "agent": 60.3
+      },
+      "compositeScore": 68.05,
+      "matchKeys": [
+        "qwen3-5-27b",
+        "qwen3-5-27b-dense"
+      ]
+    },
+    {
+      "modelName": "Qwen3-235B-A22B-2507",
+      "modelCode": "Qwen3-235B-A22B-Instruct-2507",
+      "organization": "阿里巴巴",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "HLE": 18.2,
+        "MMLU Pro": 84.4,
+        "AIME2025": 92.3,
+        "LiveCodeBench": 74.1,
+        "ARC-AGI-2": 1.3
+      },
+      "categoryScores": {
+        "overall": 34.633,
+        "math": 92.3,
+        "coding": 74.1,
+        "agent": null
+      },
+      "compositeScore": 67.011,
+      "matchKeys": [
+        "qwen3-235b-a22b",
+        "qwen3-235b-a22b-2507"
+      ]
+    },
+    {
+      "modelName": "Qwen3-Coder-480B-A35B",
+      "modelCode": "Qwen3-Coder-480B-A35B-Instruct",
+      "organization": "阿里巴巴",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "SWE-bench Verified": 67
+      },
+      "categoryScores": {
+        "overall": null,
+        "math": null,
+        "coding": 67,
+        "agent": null
+      },
+      "compositeScore": 67,
+      "matchKeys": [
+        "qwen3-coder-480b-a35b"
+      ]
+    },
+    {
+      "modelName": "Mistral-Small-3.1-24B-Instruct-2503",
+      "modelCode": "Mistral-Small-3_1-24B-Instruct-2503",
+      "organization": "MistralAI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "MMLU Pro": 66.76
+      },
+      "categoryScores": {
+        "overall": 66.76,
+        "math": null,
+        "coding": null,
+        "agent": null
+      },
+      "compositeScore": 66.76,
+      "matchKeys": [
+        "mistral-small-3-1-24b-2503"
+      ]
+    },
+    {
+      "modelName": "Gemini 3.0 Pro (Preview 11-2025)",
+      "modelCode": "gemini-3-0-pro-preview-11-2025",
+      "organization": "Google Deep Mind",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": 1486,
+      "arenaRank": 7,
+      "benchmarks": {
+        "HLE": 45.8,
+        "ARC-AGI-2": 45.1,
+        "MMLU Pro": 90,
+        "AIME2025": 95,
+        "FrontierMath": 38,
+        "FrontierMath - Tier 4": 18.8,
+        "SWE-bench Verified": 76.2,
+        "LiveCodeBench": 92,
+        "τ²-Bench": 85.4,
+        "Terminal Bench 2.0": 56.9
+      },
+      "categoryScores": {
+        "overall": 60.3,
+        "math": 50.6,
+        "coding": 84.1,
+        "agent": 71.15
+      },
+      "compositeScore": 66.537,
+      "matchKeys": [
+        "gemini-3-0-pro",
+        "gemini-3-0-pro-11-2025"
+      ]
+    },
+    {
+      "modelName": "Gemini 3 Deep Think - 2620",
+      "modelCode": "gemini-3-deep-think-2026-02",
+      "organization": "Google Deep Mind",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "HLE": 48.4,
+        "ARC-AGI-2": 84.6
+      },
+      "categoryScores": {
+        "overall": 66.5,
+        "math": null,
+        "coding": null,
+        "agent": null
+      },
+      "compositeScore": 66.5,
+      "matchKeys": [
+        "gemini-3-deep-think-2026-02",
+        "gemini-3-deep-think-2620"
+      ]
+    },
+    {
+      "modelName": "DeepSeek-R1-0528",
+      "modelCode": "DeepSeek-R1-0528",
+      "organization": "DeepSeek-AI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "HLE": 17.7,
+        "ARC-AGI-2": 1.3,
+        "MMLU Pro": 85,
+        "AIME2025": 87.5,
+        "MATH-500": 98,
+        "SWE-bench Verified": 57.6,
+        "LiveCodeBench": 73.3,
+        "Aider-Polyglot": 71.4
+      },
+      "categoryScores": {
+        "overall": 34.667,
+        "math": 92.75,
+        "coding": 65.45,
+        "agent": 71.4
+      },
+      "compositeScore": 66.067,
+      "matchKeys": [
+        "deepseek-r1-0528"
+      ]
+    },
+    {
+      "modelName": "DeepSeek-V4-Flash",
+      "modelCode": "deepseek-v4-flash",
+      "organization": "DeepSeek-AI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "HLE": 45.1,
+        "MMLU Pro": 86.4,
+        "SWE-bench Verified": 79,
+        "LiveCodeBench": 91.6,
+        "SWE-Bench Pro - Public": 52.6,
+        "Terminal Bench 2.0": 56.9
+      },
+      "categoryScores": {
+        "overall": 65.75,
+        "math": null,
+        "coding": 74.4,
+        "agent": 56.9
+      },
+      "compositeScore": 65.683,
+      "matchKeys": [
+        "deepseek-v4-flash"
+      ]
+    },
+    {
+      "modelName": "QwQ-Max-Preview",
+      "modelCode": "QwQ-Max-Preview",
+      "organization": "阿里巴巴",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "LiveCodeBench": 65.6
+      },
+      "categoryScores": {
+        "overall": null,
+        "math": null,
+        "coding": 65.6,
+        "agent": null
+      },
+      "compositeScore": 65.6,
+      "matchKeys": [
+        "qwq"
+      ]
+    },
+    {
+      "modelName": "Gemma 4 26B A4B",
+      "modelCode": "google-gemma-4-26b-a4b",
+      "organization": "DeepMind",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "HLE": 17.2,
+        "MMLU Pro": 82.6,
+        "LiveCodeBench": 77.1,
+        "τ²-Bench": 68.2
+      },
+      "categoryScores": {
+        "overall": 49.9,
+        "math": null,
+        "coding": 77.1,
+        "agent": 68.2
+      },
+      "compositeScore": 65.067,
+      "matchKeys": [
+        "gemma-4-26b-a4b",
+        "google-gemma-4-26b-a4b"
+      ]
+    },
+    {
+      "modelName": "GLM-4.6",
+      "modelCode": "glm-4_6",
+      "organization": "智谱AI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "HLE": 30.4,
+        "MMLU Pro": 83,
+        "AIME2025": 98.6,
+        "FrontierMath - Tier 4": 2.1,
+        "SWE-bench Verified": 68,
+        "LiveCodeBench": 84.5,
+        "τ²-Bench": 75.9
+      },
+      "categoryScores": {
+        "overall": 56.7,
+        "math": 50.35,
+        "coding": 76.25,
+        "agent": 75.9
+      },
+      "compositeScore": 64.8,
+      "matchKeys": [
+        "glm-4-6"
+      ]
+    },
+    {
+      "modelName": "Opus 4.1",
+      "modelCode": "claude-opus-4_1",
+      "organization": "Anthropic",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "MMLU Pro": 88,
+        "AIME2025": 78,
+        "FrontierMath": 7.2,
+        "FrontierMath - Tier 4": 4.2,
+        "SWE-bench Verified": 74.5
+      },
+      "categoryScores": {
+        "overall": 88,
+        "math": 29.8,
+        "coding": 74.5,
+        "agent": null
+      },
+      "compositeScore": 64.1,
+      "matchKeys": [
+        "claude-opus-4-1",
+        "opus-4-1"
+      ]
+    },
+    {
+      "modelName": "MiniMax-M1-80k",
+      "modelCode": "MiniMax-M1-80k",
+      "organization": "MiniMaxAI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "HLE": 8.4,
+        "MMLU Pro": 81.1,
+        "AIME2025": 76.9,
+        "MATH-500": 96.8,
+        "SWE-bench Verified": 56,
+        "LiveCodeBench": 65
+      },
+      "categoryScores": {
+        "overall": 44.75,
+        "math": 86.85,
+        "coding": 60.5,
+        "agent": null
+      },
+      "compositeScore": 64.033,
+      "matchKeys": [
+        "mini-m1-80k"
+      ]
+    },
+    {
+      "modelName": "Grok 4 Fast",
+      "modelCode": "Grok-4-Fast",
+      "organization": "xAI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "HLE": 20,
+        "AIME2025": 92,
+        "LiveCodeBench": 80
+      },
+      "categoryScores": {
+        "overall": 20,
+        "math": 92,
+        "coding": 80,
+        "agent": null
+      },
+      "compositeScore": 64,
+      "matchKeys": [
+        "grok-4-fast"
+      ]
+    },
+    {
+      "modelName": "Qwen2.5-14B",
+      "modelCode": "Qwen2_5-14B",
+      "organization": "阿里巴巴",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "MMLU Pro": 63.69
+      },
+      "categoryScores": {
+        "overall": 63.69,
+        "math": null,
+        "coding": null,
+        "agent": null
+      },
+      "compositeScore": 63.69,
+      "matchKeys": [
+        "qwen2-5-14b"
+      ]
+    },
+    {
+      "modelName": "Qwen3-32B",
+      "modelCode": "Qwen3-32B",
+      "organization": "阿里巴巴",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "AIME2025": 72.9,
+        "MATH-500": 97.2,
+        "LiveCodeBench": 65.7,
+        "Aider-Polyglot": 40
+      },
+      "categoryScores": {
+        "overall": null,
+        "math": 85.05,
+        "coding": 65.7,
+        "agent": 40
+      },
+      "compositeScore": 63.583,
+      "matchKeys": [
+        "qwen3-32b"
+      ]
+    },
+    {
+      "modelName": "DeepSeek V3.2 Speciale",
+      "modelCode": "deepseek-v3-2-speciale",
+      "organization": "DeepSeek-AI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "HLE": 30.6,
+        "AIME2025": 96
+      },
+      "categoryScores": {
+        "overall": 30.6,
+        "math": 96,
+        "coding": null,
+        "agent": null
+      },
+      "compositeScore": 63.3,
+      "matchKeys": [
+        "deepseek-v3-2-speciale"
+      ]
+    },
+    {
+      "modelName": "GPT-5.2",
+      "modelCode": "openai-gpt-5-2",
+      "organization": "OpenAI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "HLE": 45.5,
+        "ARC-AGI-2": 54.2,
+        "AIME2025": 100,
+        "FrontierMath": 40.3,
+        "FrontierMath - Tier 4": 18.8,
+        "SWE-bench Verified": 80,
+        "SWE-Bench Pro - Public": 55.6,
+        "τ²-Bench": 82
+      },
+      "categoryScores": {
+        "overall": 49.85,
+        "math": 53.033,
+        "coding": 67.8,
+        "agent": 82
+      },
+      "compositeScore": 63.171,
+      "matchKeys": [
+        "gpt-5-2",
+        "openai-gpt-5-2"
+      ]
+    },
+    {
+      "modelName": "MiniMax-M1-40k",
+      "modelCode": "MiniMax-M1-40k",
+      "organization": "MiniMaxAI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "HLE": 7.2,
+        "MMLU Pro": 80.6,
+        "AIME2025": 74.6,
+        "MATH-500": 96,
+        "SWE-bench Verified": 55.6,
+        "LiveCodeBench": 62.3
+      },
+      "categoryScores": {
+        "overall": 43.9,
+        "math": 85.3,
+        "coding": 58.95,
+        "agent": null
+      },
+      "compositeScore": 62.717,
+      "matchKeys": [
+        "mini-m1-40k"
+      ]
+    },
+    {
+      "modelName": "Phi-4-mini-instruct (3.8B)",
+      "modelCode": "Phi-4-mini-instruct",
+      "organization": "Microsoft Azure",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "MMLU Pro": 52.8,
+        "MATH-500": 71.8
+      },
+      "categoryScores": {
+        "overall": 52.8,
+        "math": 71.8,
+        "coding": null,
+        "agent": null
+      },
+      "compositeScore": 62.3,
+      "matchKeys": [
+        "phi-4-mini"
+      ]
+    },
+    {
+      "modelName": "Magistral-Medium-2506",
+      "modelCode": "Magistral-Medium-2506",
+      "organization": "MistralAI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "AIME2025": 64.95,
+        "LiveCodeBench": 59.36
+      },
+      "categoryScores": {
+        "overall": null,
+        "math": 64.95,
+        "coding": 59.36,
+        "agent": null
+      },
+      "compositeScore": 62.155,
+      "matchKeys": [
+        "magistral-2506"
+      ]
+    },
+    {
+      "modelName": "GLM-4-9B-Chat",
+      "modelCode": "glm-4-9b-chat",
+      "organization": "智谱AI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "MMLU Pro": 72.4,
+        "LiveCodeBench": 51.8
+      },
+      "categoryScores": {
+        "overall": 72.4,
+        "math": null,
+        "coding": 51.8,
+        "agent": null
+      },
+      "compositeScore": 62.1,
+      "matchKeys": [
+        "glm-4-9b-chat"
+      ]
+    },
+    {
+      "modelName": "Qwen3.6-27B",
+      "modelCode": "qwen3-6-27b",
+      "organization": "阿里巴巴",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "HLE": 24,
+        "MMLU Pro": 86.2,
+        "SWE-bench Verified": 77.2,
+        "LiveCodeBench": 83.9,
+        "SWE-Bench Pro - Public": 53.5,
+        "Terminal Bench 2.0": 59.3
+      },
+      "categoryScores": {
+        "overall": 55.1,
+        "math": null,
+        "coding": 71.533,
+        "agent": 59.3
+      },
+      "compositeScore": 61.978,
+      "matchKeys": [
+        "qwen3-6-27b"
+      ]
+    },
+    {
+      "modelName": "Composer 2",
+      "modelCode": "composer-2",
+      "organization": "Cursor",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "Terminal Bench 2.0": 61.7
+      },
+      "categoryScores": {
+        "overall": null,
+        "math": null,
+        "coding": null,
+        "agent": 61.7
+      },
+      "compositeScore": 61.7,
+      "matchKeys": [
+        "composer-2"
+      ]
+    },
+    {
+      "modelName": "GPT-4o mini",
+      "modelCode": "GPT-4o-mini",
+      "organization": "OpenAI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "MMLU Pro": 61.7
+      },
+      "categoryScores": {
+        "overall": 61.7,
+        "math": null,
+        "coding": null,
+        "agent": null
+      },
+      "compositeScore": 61.7,
+      "matchKeys": [
+        "gpt-4o-mini"
+      ]
+    },
+    {
+      "modelName": "Devstral Medium",
+      "modelCode": "Devstral-Medium",
+      "organization": "MistralAI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "SWE-bench Verified": 61.6
+      },
+      "categoryScores": {
+        "overall": null,
+        "math": null,
+        "coding": 61.6,
+        "agent": null
+      },
+      "compositeScore": 61.6,
+      "matchKeys": [
+        "devstral"
+      ]
+    },
+    {
+      "modelName": "Qwen3.6-Max-Preview",
+      "modelCode": "qwen3-6-max-preview",
+      "organization": "阿里巴巴",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "SWE-Bench Pro - Public": 57.3,
+        "Terminal Bench 2.0": 65.4
+      },
+      "categoryScores": {
+        "overall": null,
+        "math": null,
+        "coding": 57.3,
+        "agent": 65.4
+      },
+      "compositeScore": 61.35,
+      "matchKeys": [
+        "qwen3-6"
+      ]
+    },
+    {
+      "modelName": "GLM-4.7-Flash",
+      "modelCode": "glm-4-7-flash",
+      "organization": "智谱AI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "HLE": 14.4,
+        "AIME2025": 91.6,
+        "SWE-bench Verified": 59.2,
+        "τ²-Bench": 79.5
+      },
+      "categoryScores": {
+        "overall": 14.4,
+        "math": 91.6,
+        "coding": 59.2,
+        "agent": 79.5
+      },
+      "compositeScore": 61.175,
+      "matchKeys": [
+        "glm-4-7-flash"
+      ]
+    },
+    {
+      "modelName": "M2.1",
+      "modelCode": "minimax-m2-1-preview",
+      "organization": "MiniMaxAI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "HLE": 22,
+        "MMLU Pro": 88,
+        "AIME2025": 81,
+        "SWE-bench Verified": 74.8,
+        "SWE-Bench Pro - Public": 32.6,
+        "Terminal Bench 2.0": 47.9,
+        "Aider-Polyglot": 61
+      },
+      "categoryScores": {
+        "overall": 55,
+        "math": 81,
+        "coding": 53.7,
+        "agent": 54.45
+      },
+      "compositeScore": 61.037,
+      "matchKeys": [
+        "m2-1",
+        "mini-m2-1"
+      ]
+    },
+    {
+      "modelName": "ERNIE-4.5-300B-A47B",
+      "modelCode": "ERNIE-4_5-300B-A47B",
+      "organization": "百度",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "MMLU Pro": 78.4,
+        "AIME2025": 35.1,
+        "MATH-500": 96.4,
+        "LiveCodeBench": 38.8
+      },
+      "categoryScores": {
+        "overall": 78.4,
+        "math": 65.75,
+        "coding": 38.8,
+        "agent": null
+      },
+      "compositeScore": 60.983,
+      "matchKeys": [
+        "ernie-4-5-300b-a47b"
+      ]
+    },
+    {
+      "modelName": "Qwen3-Next",
+      "modelCode": "Qwen3-Next-80B-A3B",
+      "organization": "阿里巴巴",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "MMLU Pro": 66.05,
+        "AIME2025": 69.5,
+        "LiveCodeBench": 56.6,
+        "Aider-Polyglot": 49.8
+      },
+      "categoryScores": {
+        "overall": 66.05,
+        "math": 69.5,
+        "coding": 56.6,
+        "agent": 49.8
+      },
+      "compositeScore": 60.487,
+      "matchKeys": [
+        "qwen3-next",
+        "qwen3-next-80b-a3b"
+      ]
+    },
+    {
+      "modelName": "OpenAI o3",
+      "modelCode": "o3",
+      "organization": "OpenAI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "HLE": 20.32,
+        "ARC-AGI-2": 6.5,
+        "MMLU Pro": 85.6,
+        "AIME2025": 88.9,
+        "FrontierMath": 10.3,
+        "FrontierMath - Tier 4": 2.1,
+        "MATH-500": 98.1,
+        "SWE-bench Verified": 69.1,
+        "LiveCodeBench": 75.8,
+        "Aider-Polyglot": 81.3
+      },
+      "categoryScores": {
+        "overall": 37.473,
+        "math": 49.85,
+        "coding": 72.45,
+        "agent": 81.3
+      },
+      "compositeScore": 60.268,
+      "matchKeys": [
+        "o3",
+        "openai-o3"
+      ]
+    },
+    {
+      "modelName": "Qwen2.5-32B",
+      "modelCode": "Qwen2_5-32B",
+      "organization": "阿里巴巴",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "MMLU Pro": 69.23,
+        "LiveCodeBench": 51.2
+      },
+      "categoryScores": {
+        "overall": 69.23,
+        "math": null,
+        "coding": 51.2,
+        "agent": null
+      },
+      "compositeScore": 60.215,
+      "matchKeys": [
+        "qwen2-5-32b"
+      ]
+    },
+    {
+      "modelName": "GLM-4.7",
+      "modelCode": "glm-4-7",
+      "organization": "智谱AI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "HLE": 42.8,
+        "MMLU Pro": 84.3,
+        "AIME2025": 95.7,
+        "FrontierMath - Tier 4": 2.1,
+        "SWE-bench Verified": 73.8,
+        "LiveCodeBench": 84.9,
+        "SWE-Bench Pro - Public": 40.6,
+        "τ²-Bench": 87.4,
+        "Terminal Bench 2.0": 41,
+        "Aider-Polyglot": 52.1
+      },
+      "categoryScores": {
+        "overall": 63.55,
+        "math": 48.9,
+        "coding": 66.433,
+        "agent": 60.167
+      },
+      "compositeScore": 59.762,
+      "matchKeys": [
+        "glm-4-7"
+      ]
+    },
+    {
+      "modelName": "OpenAI o1-mini",
+      "modelCode": "openai-o1-mini",
+      "organization": "OpenAI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "MMLU Pro": 80.3,
+        "FrontierMath": 1.7,
+        "MATH-500": 90,
+        "LiveCodeBench": 52
+      },
+      "categoryScores": {
+        "overall": 80.3,
+        "math": 45.85,
+        "coding": 52,
+        "agent": null
+      },
+      "compositeScore": 59.383,
+      "matchKeys": [
+        "openai-o1-mini"
+      ]
+    },
+    {
+      "modelName": "Magistral-Small-2506",
+      "modelCode": "Magistral-Small-2506",
+      "organization": "MistralAI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "AIME2025": 62.76,
+        "LiveCodeBench": 55.84
+      },
+      "categoryScores": {
+        "overall": null,
+        "math": 62.76,
+        "coding": 55.84,
+        "agent": null
+      },
+      "compositeScore": 59.3,
+      "matchKeys": [
+        "magistral-small-2506"
+      ]
+    },
+    {
+      "modelName": "GPT-5.4",
+      "modelCode": "gpt-5-4",
+      "organization": "OpenAI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": 1479,
+      "arenaRank": 9,
+      "benchmarks": {
+        "HLE": 52.1,
+        "ARC-AGI-2": 77.1,
+        "FrontierMath": 47.6,
+        "FrontierMath - Tier 4": 27.1,
+        "SWE-Bench Pro - Public": 57.7,
+        "Terminal Bench 2.0": 75.1
+      },
+      "categoryScores": {
+        "overall": 64.6,
+        "math": 37.35,
+        "coding": 57.7,
+        "agent": 75.1
+      },
+      "compositeScore": 58.687,
+      "matchKeys": [
+        "gpt-5-4"
+      ]
+    },
+    {
+      "modelName": "Grok 4",
+      "modelCode": "grok-4",
+      "organization": "xAI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "HLE": 38.6,
+        "ARC-AGI-2": 15.9,
+        "MMLU Pro": 87,
+        "AIME2025": 98.8,
+        "FrontierMath": 12.1,
+        "FrontierMath - Tier 4": 2.1,
+        "SWE-bench Verified": 58.6,
+        "LiveCodeBench": 82,
+        "Aider-Polyglot": 79.6
+      },
+      "categoryScores": {
+        "overall": 47.167,
+        "math": 37.667,
+        "coding": 70.3,
+        "agent": 79.6
+      },
+      "compositeScore": 58.684,
+      "matchKeys": [
+        "grok-4"
+      ]
+    },
+    {
+      "modelName": "GPT-5.5 Pro",
+      "modelCode": "gpt-5-5-pro",
+      "organization": "OpenAI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "HLE": 57.2,
+        "ARC-AGI-2": 84.6,
+        "FrontierMath": 52.4,
+        "FrontierMath - Tier 4": 39.6
+      },
+      "categoryScores": {
+        "overall": 70.9,
+        "math": 46,
+        "coding": null,
+        "agent": null
+      },
+      "compositeScore": 58.45,
+      "matchKeys": [
+        "gpt-5-5-pro"
+      ]
+    },
+    {
+      "modelName": "Qwen2.5-72B",
+      "modelCode": "Qwen2_5_72B",
+      "organization": "阿里巴巴",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "MMLU Pro": 58.1
+      },
+      "categoryScores": {
+        "overall": 58.1,
+        "math": null,
+        "coding": null,
+        "agent": null
+      },
+      "compositeScore": 58.1,
+      "matchKeys": [
+        "qwen2-5-72b"
+      ]
+    },
+    {
+      "modelName": "GLM 5.1",
+      "modelCode": "glm-5-1",
+      "organization": "智谱AI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "HLE": 52.3,
+        "SWE-Bench Pro - Public": 58.4,
+        "Terminal Bench 2.0": 63.5
+      },
+      "categoryScores": {
+        "overall": 52.3,
+        "math": null,
+        "coding": 58.4,
+        "agent": 63.5
+      },
+      "compositeScore": 58.067,
+      "matchKeys": [
+        "glm-5-1"
+      ]
+    },
+    {
+      "modelName": "Qwen3.6-35B-A3B",
+      "modelCode": "qwen3-6-35b-a3b",
+      "organization": "阿里巴巴",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "HLE": 21.4,
+        "MMLU Pro": 85.2,
+        "SWE-bench Verified": 73.4,
+        "LiveCodeBench": 80.4,
+        "SWE-Bench Pro - Public": 49.5,
+        "Terminal Bench 2.0": 51.5
+      },
+      "categoryScores": {
+        "overall": 53.3,
+        "math": null,
+        "coding": 67.767,
+        "agent": 51.5
+      },
+      "compositeScore": 57.522,
+      "matchKeys": [
+        "qwen3-6-35b-a3b"
+      ]
+    },
+    {
+      "modelName": "GPT-5.4 Pro",
+      "modelCode": "gpt-5-4-pro",
+      "organization": "OpenAI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "HLE": 58.7,
+        "ARC-AGI-2": 83.3,
+        "FrontierMath": 50,
+        "FrontierMath - Tier 4": 38
+      },
+      "categoryScores": {
+        "overall": 71,
+        "math": 44,
+        "coding": null,
+        "agent": null
+      },
+      "compositeScore": 57.5,
+      "matchKeys": [
+        "gpt-5-4-pro"
+      ]
+    },
+    {
+      "modelName": "Gemini 3.0 Flash",
+      "modelCode": "gemini3-flash",
+      "organization": "Google Deep Mind",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "HLE": 43.5,
+        "ARC-AGI-2": 33.6,
+        "AIME2025": 99.7,
+        "FrontierMath - Tier 4": 4.2,
+        "SWE-bench Verified": 68.7,
+        "τ²-Bench": 90.2,
+        "Terminal Bench 2.0": 47.6
+      },
+      "categoryScores": {
+        "overall": 38.55,
+        "math": 51.95,
+        "coding": 68.7,
+        "agent": 68.9
+      },
+      "compositeScore": 57.025,
+      "matchKeys": [
+        "gemini-3-0-flash",
+        "gemini3-flash"
+      ]
+    },
+    {
+      "modelName": "GPT-5.5",
+      "modelCode": "gpt-5-5",
+      "organization": "OpenAI",
+      "aaScore": 57,
+      "aaRank": 1,
+      "arenaScore": 1484,
+      "arenaRank": 8,
+      "benchmarks": {
+        "HLE": 52.2,
+        "ARC-AGI-2": 85,
+        "FrontierMath": 51.7,
+        "FrontierMath - Tier 4": 35.4,
+        "SWE-Bench Pro - Public": 58.6,
+        "Terminal Bench 2.0": 82.7
+      },
+      "categoryScores": {
+        "overall": 68.6,
+        "math": 43.55,
+        "coding": 58.6,
+        "agent": 82.7
+      },
+      "compositeScore": 62.09,
+      "matchKeys": [
+        "gpt-5-5"
+      ]
+    },
+    {
+      "modelName": "Opus 4.7",
+      "modelCode": "claude-opus-4-7",
+      "organization": "Anthropic",
+      "aaScore": 57,
+      "aaRank": 3,
+      "arenaScore": 1500,
+      "arenaRank": 2,
+      "benchmarks": {
+        "HLE": 54.7,
+        "ARC-AGI-2": 75.8,
+        "FrontierMath": 43.8,
+        "FrontierMath - Tier 4": 22.9,
+        "SWE-bench Verified": 87.6,
+        "SWE-Bench Pro - Public": 64.3,
+        "Terminal Bench 2.0": 69.4
+      },
+      "categoryScores": {
+        "overall": 65.25,
+        "math": 33.35,
+        "coding": 75.95,
+        "agent": 69.4
+      },
+      "compositeScore": 60.19,
+      "matchKeys": [
+        "claude-opus-4-7",
+        "opus-4-7"
+      ]
+    },
+    {
+      "modelName": "Gemini 3.1 Pro Preview",
+      "modelCode": "gemini-3-1-pro-preview",
+      "organization": "Google Deep Mind",
+      "aaScore": 57,
+      "aaRank": 4,
+      "arenaScore": 1489,
+      "arenaRank": 6,
+      "benchmarks": {
+        "HLE": 51.4,
+        "ARC-AGI-2": 77.1,
+        "FrontierMath": 36.9,
+        "FrontierMath - Tier 4": 16.7,
+        "SWE-bench Verified": 80.6,
+        "LiveCodeBench": 91.7,
+        "SWE-Bench Pro - Public": 54.2,
+        "τ²-Bench": 90.8,
+        "Terminal Bench 2.0": 68.5
+      },
+      "categoryScores": {
+        "overall": 64.25,
+        "math": 26.8,
+        "coding": 75.5,
+        "agent": 79.65
+      },
+      "compositeScore": 60.64,
+      "matchKeys": [
+        "gemini-3-1-pro"
+      ]
+    },
+    {
+      "modelName": "Claude3-Sonnet",
+      "modelCode": "Claude3-Sonnet",
+      "organization": "Anthropic",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "MMLU Pro": 56.8
+      },
+      "categoryScores": {
+        "overall": 56.8,
+        "math": null,
+        "coding": null,
+        "agent": null
+      },
+      "compositeScore": 56.8,
+      "matchKeys": [
+        "claude3-sonnet"
+      ]
+    },
+    {
+      "modelName": "Gemma2-27B",
+      "modelCode": "Gemma2-27B",
+      "organization": "Google Deep Mind",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "MMLU Pro": 56.54
+      },
+      "categoryScores": {
+        "overall": 56.54,
+        "math": null,
+        "coding": null,
+        "agent": null
+      },
+      "compositeScore": 56.54,
+      "matchKeys": [
+        "gemma2-27b"
+      ]
+    },
+    {
+      "modelName": "GPT OSS 20B",
+      "modelCode": "gpt-oss-20b",
+      "organization": "OpenAI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "HLE": 17.3,
+        "MMLU Pro": 74,
+        "AIME2025": 98.7,
+        "SWE-bench Verified": 34,
+        "τ²-Bench": 47.7
+      },
+      "categoryScores": {
+        "overall": 45.65,
+        "math": 98.7,
+        "coding": 34,
+        "agent": 47.7
+      },
+      "compositeScore": 56.513,
+      "matchKeys": [
+        "gpt-oss-20b"
+      ]
+    },
+    {
+      "modelName": "Mixtral-8x22B-Instruct-v0.1",
+      "modelCode": "Mixtral-8x22B-Instruct-v0_1",
+      "organization": "MistralAI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "MMLU Pro": 56.33
+      },
+      "categoryScores": {
+        "overall": 56.33,
+        "math": null,
+        "coding": null,
+        "agent": null
+      },
+      "compositeScore": 56.33,
+      "matchKeys": [
+        "mixtral-8x22b-v0-1"
+      ]
+    },
+    {
+      "modelName": "Grok 4 Heavy",
+      "modelCode": "grok-4-heavy",
+      "organization": "xAI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "HLE": 44.4,
+        "AIME2025": 100,
+        "FrontierMath - Tier 4": 2.1,
+        "SWE-bench Verified": 73.5
+      },
+      "categoryScores": {
+        "overall": 44.4,
+        "math": 51.05,
+        "coding": 73.5,
+        "agent": null
+      },
+      "compositeScore": 56.317,
+      "matchKeys": [
+        "grok-4-heavy"
+      ]
+    },
+    {
+      "modelName": "Gemini 2.5 Deep Think",
+      "modelCode": "gemini-2_5-deep-think",
+      "organization": "Google Deep Mind",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "HLE": 34.8,
+        "AIME2025": 99.2,
+        "FrontierMath": 29,
+        "FrontierMath - Tier 4": 10.4,
+        "LiveCodeBench": 87.6
+      },
+      "categoryScores": {
+        "overall": 34.8,
+        "math": 46.2,
+        "coding": 87.6,
+        "agent": null
+      },
+      "compositeScore": 56.2,
+      "matchKeys": [
+        "gemini-2-5-deep-think"
+      ]
+    },
+    {
+      "modelName": "Llama3-70B-Instruct",
+      "modelCode": "Llama3-70B-Instruct",
+      "organization": "Facebook AI研究实验室",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "MMLU Pro": 56.2
+      },
+      "categoryScores": {
+        "overall": 56.2,
+        "math": null,
+        "coding": null,
+        "agent": null
+      },
+      "compositeScore": 56.2,
+      "matchKeys": [
+        "llama3-70b"
+      ]
+    },
+    {
+      "modelName": "Opus 4.5",
+      "modelCode": "anthropic-claude-opus-4-5",
+      "organization": "Anthropic",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "HLE": 43.2,
+        "ARC-AGI-2": 37.6,
+        "MMLU Pro": 90,
+        "FrontierMath": 20.7,
+        "FrontierMath - Tier 4": 4.2,
+        "SWE-bench Verified": 80.9,
+        "LiveCodeBench": 87,
+        "τ²-Bench": 81.99,
+        "Terminal Bench 2.0": 59.3
+      },
+      "categoryScores": {
+        "overall": 56.933,
+        "math": 12.45,
+        "coding": 83.95,
+        "agent": 70.645
+      },
+      "compositeScore": 55.995,
+      "matchKeys": [
+        "anthropic-claude-opus-4-5",
+        "opus-4-5"
+      ]
+    },
+    {
+      "modelName": "OpenAI o4 - mini",
+      "modelCode": "o4-mini",
+      "organization": "OpenAI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "HLE": 17.7,
+        "MMLU Pro": 80.6,
+        "AIME2025": 99.5,
+        "FrontierMath": 19.3,
+        "FrontierMath - Tier 4": 6.3,
+        "SWE-bench Verified": 68.1,
+        "τ²-Bench": 56.9,
+        "Aider-Polyglot": 72
+      },
+      "categoryScores": {
+        "overall": 49.15,
+        "math": 41.7,
+        "coding": 68.1,
+        "agent": 64.45
+      },
+      "compositeScore": 55.85,
+      "matchKeys": [
+        "o4-mini",
+        "openai-o4-mini"
+      ]
+    },
+    {
+      "modelName": "Grok 3",
+      "modelCode": "grok-3",
+      "organization": "xAI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "AIME2025": 77.1,
+        "FrontierMath": 3.8,
+        "LiveCodeBench": 70.6
+      },
+      "categoryScores": {
+        "overall": null,
+        "math": 40.45,
+        "coding": 70.6,
+        "agent": null
+      },
+      "compositeScore": 55.525,
+      "matchKeys": [
+        "grok-3"
+      ]
+    },
+    {
+      "modelName": "Hunyuan-TurboS",
+      "modelCode": "Hunyuan-TurboS",
+      "organization": "腾讯AI实验室",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "MMLU Pro": 79,
+        "LiveCodeBench": 32
+      },
+      "categoryScores": {
+        "overall": 79,
+        "math": null,
+        "coding": 32,
+        "agent": null
+      },
+      "compositeScore": 55.5,
+      "matchKeys": [
+        "hunyuan-turbos"
+      ]
+    },
+    {
+      "modelName": "Kimi K2.5",
+      "modelCode": "kimi-k2-5",
+      "organization": "Moonshot AI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "HLE": 50.2,
+        "ARC-AGI-2": 11.8,
+        "MMLU Pro": 78.5,
+        "AIME2025": 96.1,
+        "FrontierMath - Tier 4": 4.2,
+        "SWE-bench Verified": 76.8,
+        "LiveCodeBench": 85,
+        "SWE-Bench Pro - Public": 50.7,
+        "Terminal Bench 2.0": 50.8
+      },
+      "categoryScores": {
+        "overall": 46.833,
+        "math": 50.15,
+        "coding": 70.833,
+        "agent": 50.8
+      },
+      "compositeScore": 54.654,
+      "matchKeys": [
+        "kimi-k2-5"
+      ]
+    },
+    {
+      "modelName": "Grok 4.1",
+      "modelCode": "grok-4-1",
+      "organization": "xAI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "SWE-bench Verified": 54.6
+      },
+      "categoryScores": {
+        "overall": null,
+        "math": null,
+        "coding": 54.6,
+        "agent": null
+      },
+      "compositeScore": 54.6,
+      "matchKeys": [
+        "grok-4-1"
+      ]
+    },
+    {
+      "modelName": "MiniMax M2.5",
+      "modelCode": "minimax-m2-5",
+      "organization": "MiniMaxAI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "HLE": 19.4,
+        "ARC-AGI-2": 4.9,
+        "AIME2025": 86.3,
+        "SWE-bench Verified": 80.2,
+        "SWE-Bench Pro - Public": 55.4,
+        "Terminal Bench 2.0": 51.7
+      },
+      "categoryScores": {
+        "overall": 12.15,
+        "math": 86.3,
+        "coding": 67.8,
+        "agent": 51.7
+      },
+      "compositeScore": 54.487,
+      "matchKeys": [
+        "mini-m2-5"
+      ]
+    },
+    {
+      "modelName": "Gemini 2.5-Pro",
+      "modelCode": "gemini-2_5-pro-preview-06-05",
+      "organization": "Google Deep Mind",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "HLE": 21.6,
+        "ARC-AGI-2": 4.9,
+        "MMLU Pro": 86,
+        "AIME2025": 88,
+        "FrontierMath": 11,
+        "FrontierMath - Tier 4": 2.1,
+        "MATH-500": 98.8,
+        "SWE-bench Verified": 67.2,
+        "LiveCodeBench": 77.1,
+        "Terminal Bench 2.0": 32.6,
+        "Aider-Polyglot": 83.1
+      },
+      "categoryScores": {
+        "overall": 37.5,
+        "math": 49.975,
+        "coding": 72.15,
+        "agent": 57.85
+      },
+      "compositeScore": 54.369,
+      "matchKeys": [
+        "gemini-2-5-pro",
+        "gemini-2-5-pro-06-05"
+      ]
+    },
+    {
+      "modelName": "Qwen3-Coder-Next",
+      "modelCode": "qwen3-coder-next",
+      "organization": "阿里巴巴",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "SWE-bench Verified": 70.6,
+        "SWE-Bench Pro - Public": 44.3,
+        "Terminal Bench 2.0": 36.2,
+        "Aider-Polyglot": 66.2
+      },
+      "categoryScores": {
+        "overall": null,
+        "math": null,
+        "coding": 57.45,
+        "agent": 51.2
+      },
+      "compositeScore": 54.325,
+      "matchKeys": [
+        "qwen3-coder-next"
+      ]
+    },
+    {
+      "modelName": "Claude Opus 4",
+      "modelCode": "claude-opus-4",
+      "organization": "Anthropic",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "HLE": 10.7,
+        "ARC-AGI-2": 8.6,
+        "MMLU Pro": 85,
+        "AIME2025": 75.5,
+        "FrontierMath": 4.5,
+        "FrontierMath - Tier 4": 4.2,
+        "MATH-500": 98.2,
+        "SWE-bench Verified": 72.5,
+        "LiveCodeBench": 56.6,
+        "τ²-Bench": 72.5,
+        "Aider-Polyglot": 72
+      },
+      "categoryScores": {
+        "overall": 34.767,
+        "math": 45.6,
+        "coding": 64.55,
+        "agent": 72.25
+      },
+      "compositeScore": 54.292,
+      "matchKeys": [
+        "claude-opus-4"
+      ]
+    },
+    {
+      "modelName": "OpenAI o1",
+      "modelCode": "openai-o1",
+      "organization": "OpenAI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "HLE": 9.1,
+        "MMLU Pro": 91.04,
+        "FrontierMath": 9.3,
+        "MATH-500": 96.4,
+        "SWE-bench Verified": 48.9,
+        "LiveCodeBench": 71
+      },
+      "categoryScores": {
+        "overall": 50.07,
+        "math": 52.85,
+        "coding": 59.95,
+        "agent": null
+      },
+      "compositeScore": 54.29,
+      "matchKeys": [
+        "openai-o1"
+      ]
+    },
+    {
+      "modelName": "Qwen3-235B-A22B",
+      "modelCode": "Qwen3-235B-A22B",
+      "organization": "阿里巴巴",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "HLE": 7.6,
+        "MMLU Pro": 72.9,
+        "AIME2025": 81.5,
+        "MATH-500": 98,
+        "SWE-bench Verified": 34.4,
+        "LiveCodeBench": 70.7,
+        "τ²-Bench": 34.4
+      },
+      "categoryScores": {
+        "overall": 40.25,
+        "math": 89.75,
+        "coding": 52.55,
+        "agent": 34.4
+      },
+      "compositeScore": 54.238,
+      "matchKeys": [
+        "qwen3-235b-a22b"
+      ]
+    },
+    {
+      "modelName": "Kimi K2.6",
+      "modelCode": "kimi-k2-6",
+      "organization": "Moonshot AI",
+      "aaScore": 54,
+      "aaRank": 6,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "HLE": 54,
+        "SWE-bench Verified": 80.2,
+        "LiveCodeBench": 89.6,
+        "SWE-Bench Pro - Public": 58.6,
+        "Terminal Bench 2.0": 66.7
+      },
+      "categoryScores": {
+        "overall": 54,
+        "math": null,
+        "coding": 76.133,
+        "agent": 66.7
+      },
+      "compositeScore": 62.708,
+      "matchKeys": [
+        "kimi-k2-6"
+      ]
+    },
+    {
+      "modelName": "MiMo-V2.5-Pro",
+      "modelCode": null,
+      "organization": "Xiaomi",
+      "aaScore": 54,
+      "aaRank": 7,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {},
+      "categoryScores": {
+        "overall": null,
+        "math": null,
+        "coding": null,
+        "agent": null
+      },
+      "compositeScore": 54,
+      "matchKeys": [
+        "mimo-v2-5-pro"
+      ]
+    },
+    {
+      "modelName": "GPT-5.3 Codex",
+      "modelCode": "gpt-5-3-codex",
+      "organization": "OpenAI",
+      "aaScore": 54,
+      "aaRank": 8,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "SWE-Bench Pro - Public": 56.8,
+        "Terminal Bench 2.0": 77.3
+      },
+      "categoryScores": {
+        "overall": null,
+        "math": null,
+        "coding": 56.8,
+        "agent": 77.3
+      },
+      "compositeScore": 62.7,
+      "matchKeys": [
+        "gpt-5-3-codex"
+      ]
+    },
+    {
+      "modelName": "Gemini 2.5 Flash-Preview-09-2025",
+      "modelCode": "gemini-2_5-flash-2509",
+      "organization": "Google Deep Mind",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "SWE-bench Verified": 54
+      },
+      "categoryScores": {
+        "overall": null,
+        "math": null,
+        "coding": 54,
+        "agent": null
+      },
+      "compositeScore": 54,
+      "matchKeys": [
+        "gemini-2-5-flash-09-2025",
+        "gemini-2-5-flash-2509"
+      ]
+    },
+    {
+      "modelName": "Devstral Small 1.1",
+      "modelCode": "Devstral-Small-2507",
+      "organization": "MistralAI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "SWE-bench Verified": 53.6
+      },
+      "categoryScores": {
+        "overall": null,
+        "math": null,
+        "coding": 53.6,
+        "agent": null
+      },
+      "compositeScore": 53.6,
+      "matchKeys": [
+        "devstral-small-1-1",
+        "devstral-small-2507"
+      ]
+    },
+    {
+      "modelName": "Llama 4 Scout Instruct",
+      "modelCode": "Llama-4-Scout-Instruct",
+      "organization": "Facebook AI研究实验室",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "MMLU Pro": 74.3,
+        "LiveCodeBench": 32.8
+      },
+      "categoryScores": {
+        "overall": 74.3,
+        "math": null,
+        "coding": 32.8,
+        "agent": null
+      },
+      "compositeScore": 53.55,
+      "matchKeys": [
+        "llama-4-scout"
+      ]
+    },
+    {
+      "modelName": "Claude 3.5 Sonnet New",
+      "modelCode": "claude-3_5-sonnet-new",
+      "organization": "Anthropic",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "MMLU Pro": 78,
+        "FrontierMath": 2.1,
+        "MATH-500": 78,
+        "SWE-bench Verified": 49,
+        "LiveCodeBench": 38.7,
+        "Aider-Polyglot": 51.6
+      },
+      "categoryScores": {
+        "overall": 78,
+        "math": 40.05,
+        "coding": 43.85,
+        "agent": 51.6
+      },
+      "compositeScore": 53.375,
+      "matchKeys": [
+        "claude-3-5-sonnet-new"
+      ]
+    },
+    {
+      "modelName": "Grok 4.3 Beta (high)",
+      "modelCode": "grok-4-3-beta",
+      "organization": "xAI",
+      "aaScore": 53,
+      "aaRank": 9,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {},
+      "categoryScores": {
+        "overall": null,
+        "math": null,
+        "coding": null,
+        "agent": null
+      },
+      "compositeScore": 53,
+      "matchKeys": [
+        "grok-4-3-beta"
+      ]
+    },
+    {
+      "modelName": "Claude Sonnet 4.5",
+      "modelCode": "claude-sonnet-4_5",
+      "organization": "Anthropic",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "HLE": 33.6,
+        "ARC-AGI-2": 13.6,
+        "MMLU Pro": 88,
+        "AIME2025": 100,
+        "FrontierMath": 5.2,
+        "FrontierMath - Tier 4": 4.2,
+        "SWE-bench Verified": 82,
+        "LiveCodeBench": 71,
+        "SWE-Bench Pro - Public": 43.6,
+        "τ²-Bench": 84.7,
+        "Terminal Bench 2.0": 42.8
+      },
+      "categoryScores": {
+        "overall": 45.067,
+        "math": 36.467,
+        "coding": 65.533,
+        "agent": 63.75
+      },
+      "compositeScore": 52.704,
+      "matchKeys": [
+        "claude-sonnet-4-5"
+      ]
+    },
+    {
+      "modelName": "Muse Spark",
+      "modelCode": "muse-spark",
+      "organization": "Facebook AI研究实验室",
+      "aaScore": 52,
+      "aaRank": 10,
+      "arenaScore": 1490,
+      "arenaRank": 5,
+      "benchmarks": {
+        "HLE": 58,
+        "ARC-AGI-2": 42.5,
+        "FrontierMath": 39,
+        "FrontierMath - Tier 4": 14.6,
+        "SWE-bench Verified": 77.4,
+        "Terminal Bench 2.0": 59
+      },
+      "categoryScores": {
+        "overall": 50.25,
+        "math": 26.8,
+        "coding": 77.4,
+        "agent": 59
+      },
+      "compositeScore": 53.09,
+      "matchKeys": [
+        "muse-spark"
+      ]
+    },
+    {
+      "modelName": "Llama3.1-405B",
+      "modelCode": "Llama3_1-405B",
+      "organization": "Facebook AI研究实验室",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "MMLU Pro": 73.4,
+        "LiveCodeBench": 30.2
+      },
+      "categoryScores": {
+        "overall": 73.4,
+        "math": null,
+        "coding": 30.2,
+        "agent": null
+      },
+      "compositeScore": 51.8,
+      "matchKeys": [
+        "llama3-1-405b"
+      ]
+    },
+    {
+      "modelName": "DeepSeek-V3",
+      "modelCode": "DeepSeek-V3",
+      "organization": "DeepSeek-AI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "MMLU Pro": 75.9,
+        "FrontierMath": 1.7,
+        "MATH-500": 87.8,
+        "LiveCodeBench": 34.6
+      },
+      "categoryScores": {
+        "overall": 75.9,
+        "math": 44.75,
+        "coding": 34.6,
+        "agent": null
+      },
+      "compositeScore": 51.75,
+      "matchKeys": [
+        "deepseek-v3"
+      ]
+    },
+    {
+      "modelName": "Qwen3-Coder-Flash",
+      "modelCode": "Qwen3-Coder-30B-A3B-Instruct",
+      "organization": "阿里巴巴",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "SWE-bench Verified": 51.6
+      },
+      "categoryScores": {
+        "overall": null,
+        "math": null,
+        "coding": 51.6,
+        "agent": null
+      },
+      "compositeScore": 51.6,
+      "matchKeys": [
+        "qwen3-coder-30b-a3b",
+        "qwen3-coder-flash"
+      ]
+    },
+    {
+      "modelName": "DeepSeek-V3-0324",
+      "modelCode": "DeepSeek-V3-0324",
+      "organization": "DeepSeek-AI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "HLE": 5.2,
+        "MMLU Pro": 81.2,
+        "AIME2025": 47.7,
+        "MATH-500": 94,
+        "SWE-bench Verified": 38.8,
+        "LiveCodeBench": 49.2,
+        "τ²-Bench": 38.8,
+        "Aider-Polyglot": 55.1
+      },
+      "categoryScores": {
+        "overall": 43.2,
+        "math": 70.85,
+        "coding": 44,
+        "agent": 46.95
+      },
+      "compositeScore": 51.25,
+      "matchKeys": [
+        "deepseek-v3-0324"
+      ]
+    },
+    {
+      "modelName": "Llama3.3-70B-Instruct",
+      "modelCode": "llama3_3_70B_instruct",
+      "organization": "Facebook AI研究实验室",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "MMLU Pro": 68.9,
+        "LiveCodeBench": 33.3
+      },
+      "categoryScores": {
+        "overall": 68.9,
+        "math": null,
+        "coding": 33.3,
+        "agent": null
+      },
+      "compositeScore": 51.1,
+      "matchKeys": [
+        "llama3-3-70b"
+      ]
+    },
+    {
+      "modelName": "Grok-1.5",
+      "modelCode": "Grok-1_5",
+      "organization": "xAI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "MMLU Pro": 51
+      },
+      "categoryScores": {
+        "overall": 51,
+        "math": null,
+        "coding": null,
+        "agent": null
+      },
+      "compositeScore": 51,
+      "matchKeys": [
+        "grok-1-5"
+      ]
+    },
+    {
+      "modelName": "GPT-5",
+      "modelCode": "gpt-5",
+      "organization": "OpenAI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "HLE": 35.2,
+        "ARC-AGI-2": 9.9,
+        "AIME2025": 99.6,
+        "FrontierMath": 26.3,
+        "FrontierMath - Tier 4": 12.5,
+        "SWE-bench Verified": 72.8,
+        "SWE-Bench Pro - Public": 36.3,
+        "τ²-Bench": 80
+      },
+      "categoryScores": {
+        "overall": 22.55,
+        "math": 46.133,
+        "coding": 54.55,
+        "agent": 80
+      },
+      "compositeScore": 50.808,
+      "matchKeys": [
+        "gpt-5"
+      ]
+    },
+    {
+      "modelName": "Gemini 2.0 Flash-Lite",
+      "modelCode": "gemini-2_0-flash-lite",
+      "organization": "DeepMind",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "MMLU Pro": 71.6,
+        "LiveCodeBench": 28.9
+      },
+      "categoryScores": {
+        "overall": 71.6,
+        "math": null,
+        "coding": 28.9,
+        "agent": null
+      },
+      "compositeScore": 50.25,
+      "matchKeys": [
+        "gemini-2-0-flash-lite"
+      ]
+    },
+    {
+      "modelName": "Claude Sonnet 4.6",
+      "modelCode": "claude-sonnet-4-6",
+      "organization": "Anthropic",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "HLE": 49,
+        "ARC-AGI-2": 58.3,
+        "FrontierMath - Tier 4": 8.3,
+        "SWE-bench Verified": 79.6,
+        "Terminal Bench 2.0": 59.1
+      },
+      "categoryScores": {
+        "overall": 53.65,
+        "math": 8.3,
+        "coding": 79.6,
+        "agent": 59.1
+      },
+      "compositeScore": 50.163,
+      "matchKeys": [
+        "claude-sonnet-4-6"
+      ]
+    },
+    {
+      "modelName": "Llama3.1-70B-Instruct",
+      "modelCode": "Llama3_1-70B-Instruct",
+      "organization": "Facebook AI研究实验室",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "MMLU Pro": 66.4,
+        "LiveCodeBench": 33.3
+      },
+      "categoryScores": {
+        "overall": 66.4,
+        "math": null,
+        "coding": 33.3,
+        "agent": null
+      },
+      "compositeScore": 49.85,
+      "matchKeys": [
+        "llama3-1-70b"
+      ]
+    },
+    {
+      "modelName": "Claude Sonnet 4",
+      "modelCode": "claude-sonnet-4",
+      "organization": "Anthropic",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "HLE": 9.6,
+        "ARC-AGI-2": 5.9,
+        "MMLU Pro": 84,
+        "AIME2025": 85,
+        "FrontierMath": 4.1,
+        "SWE-bench Verified": 80.2,
+        "LiveCodeBench": 66,
+        "SWE-Bench Pro - Public": 42.7,
+        "τ²-Bench": 52,
+        "Aider-Polyglot": 61.3
+      },
+      "categoryScores": {
+        "overall": 33.167,
+        "math": 44.55,
+        "coding": 62.967,
+        "agent": 56.65
+      },
+      "compositeScore": 49.334,
+      "matchKeys": [
+        "claude-sonnet-4"
+      ]
+    },
+    {
+      "modelName": "Kimi K2",
+      "modelCode": "kimi-k2-0711-base-preview",
+      "organization": "Moonshot AI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "HLE": 4.7,
+        "MMLU Pro": 81.1,
+        "AIME2025": 54,
+        "FrontierMath": 2.1,
+        "FrontierMath - Tier 4": 0.01,
+        "MATH-500": 97.4,
+        "SWE-bench Verified": 51.8,
+        "LiveCodeBench": 53.7,
+        "τ²-Bench": 64.3,
+        "Aider-Polyglot": 59.1
+      },
+      "categoryScores": {
+        "overall": 42.9,
+        "math": 38.377,
+        "coding": 52.75,
+        "agent": 61.7
+      },
+      "compositeScore": 48.932,
+      "matchKeys": [
+        "kimi-k2",
+        "kimi-k2-0711-base"
+      ]
+    },
+    {
+      "modelName": "Claude Sonnet 3.7-64K Extended Thinking",
+      "modelCode": "claude-sonnet-3_7-thinking",
+      "organization": "Anthropic",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "HLE": 10.3,
+        "AIME2025": 54.8,
+        "FrontierMath": 4.1,
+        "MATH-500": 96.2,
+        "SWE-bench Verified": 70.3,
+        "τ²-Bench": 61.8,
+        "Aider-Polyglot": 64.9
+      },
+      "categoryScores": {
+        "overall": 10.3,
+        "math": 51.7,
+        "coding": 70.3,
+        "agent": 63.35
+      },
+      "compositeScore": 48.913,
+      "matchKeys": [
+        "claude-sonnet-3-7",
+        "claude-sonnet-3-7-64k-extended"
+      ]
+    },
+    {
+      "modelName": "Gemma 3 - 27B (IT)",
+      "modelCode": "gemma-3-27b-it",
+      "organization": "Google Deep Mind",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "MMLU Pro": 67.5,
+        "LiveCodeBench": 29.7
+      },
+      "categoryScores": {
+        "overall": 67.5,
+        "math": null,
+        "coding": 29.7,
+        "agent": null
+      },
+      "compositeScore": 48.6,
+      "matchKeys": [
+        "gemma-3-27b",
+        "gemma-3-27b-it"
+      ]
+    },
+    {
+      "modelName": "Kimi K2 0905",
+      "modelCode": "kimi-k2-0905",
+      "organization": "Moonshot AI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "HLE": 21.7,
+        "AIME2025": 75.2,
+        "SWE-bench Verified": 69.2,
+        "SWE-Bench Pro - Public": 27.67
+      },
+      "categoryScores": {
+        "overall": 21.7,
+        "math": 75.2,
+        "coding": 48.435,
+        "agent": null
+      },
+      "compositeScore": 48.445,
+      "matchKeys": [
+        "kimi-k2-0905"
+      ]
+    },
+    {
+      "modelName": "DeepSeek V3.2",
+      "modelCode": "deepseek-v3-2",
+      "organization": "DeepSeek-AI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "HLE": 25.1,
+        "ARC-AGI-2": 4,
+        "AIME2025": 93.1,
+        "FrontierMath - Tier 4": 2.1,
+        "SWE-bench Verified": 73.1,
+        "LiveCodeBench": 83.3,
+        "SWE-Bench Pro - Public": 40.9,
+        "τ²-Bench": 80.3,
+        "Terminal Bench 2.0": 46.4,
+        "Aider-Polyglot": 69.9
+      },
+      "categoryScores": {
+        "overall": 14.55,
+        "math": 47.6,
+        "coding": 65.767,
+        "agent": 65.533
+      },
+      "compositeScore": 48.362,
+      "matchKeys": [
+        "deepseek-v3-2"
+      ]
+    },
+    {
+      "modelName": "Composer 1.5",
+      "modelCode": "cursor-composer-1-5",
+      "organization": "Cursor",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "Terminal Bench 2.0": 47.9
+      },
+      "categoryScores": {
+        "overall": null,
+        "math": null,
+        "coding": null,
+        "agent": 47.9
+      },
+      "compositeScore": 47.9,
+      "matchKeys": [
+        "composer-1-5",
+        "cursor-composer-1-5"
+      ]
+    },
+    {
+      "modelName": "GPT-4.1",
+      "modelCode": "gpt-4_1",
+      "organization": "OpenAI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "HLE": 3.7,
+        "MMLU Pro": 80.5,
+        "AIME2025": 36.7,
+        "FrontierMath": 5.5,
+        "MATH-500": 92.8,
+        "SWE-bench Verified": 54.6,
+        "LiveCodeBench": 40.5,
+        "τ²-Bench": 54.7
+      },
+      "categoryScores": {
+        "overall": 42.1,
+        "math": 45,
+        "coding": 47.55,
+        "agent": 54.7
+      },
+      "compositeScore": 47.337,
+      "matchKeys": [
+        "gpt-4-1"
+      ]
+    },
+    {
+      "modelName": "C4AI Aya Vision 32B",
+      "modelCode": "aya-vision-32b",
+      "organization": "CohereAI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "MMLU Pro": 47.16
+      },
+      "categoryScores": {
+        "overall": 47.16,
+        "math": null,
+        "coding": null,
+        "agent": null
+      },
+      "compositeScore": 47.16,
+      "matchKeys": [
+        "aya-vision-32b",
+        "c4ai-aya-vision-32b"
+      ]
+    },
+    {
+      "modelName": "Devstral Small 1.0",
+      "modelCode": "Devstral-Small-2505",
+      "organization": "MistralAI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "SWE-bench Verified": 46.8
+      },
+      "categoryScores": {
+        "overall": null,
+        "math": null,
+        "coding": 46.8,
+        "agent": null
+      },
+      "compositeScore": 46.8,
+      "matchKeys": [
+        "devstral-small-1-0",
+        "devstral-small-2505"
+      ]
+    },
+    {
+      "modelName": "Gemini-2.5-Pro-Preview-05-06",
+      "modelCode": "gemini-2_5-pro-preview-05-06",
+      "organization": "Google Deep Mind",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "HLE": 21.6,
+        "AIME2025": 83,
+        "FrontierMath": 10.3,
+        "FrontierMath - Tier 4": 2.1,
+        "MATH-500": 98.8,
+        "SWE-bench Verified": 63.2,
+        "LiveCodeBench": 77.1
+      },
+      "categoryScores": {
+        "overall": 21.6,
+        "math": 48.55,
+        "coding": 70.15,
+        "agent": null
+      },
+      "compositeScore": 46.767,
+      "matchKeys": [
+        "gemini-2-5-pro-05-06"
+      ]
+    },
+    {
+      "modelName": "Qwen3-30B-A3B-2507",
+      "modelCode": "Qwen3-30B-A3B-Instruct-2507",
+      "organization": "阿里巴巴",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "HLE": 9.8,
+        "MMLU Pro": 78.4,
+        "AIME2025": 61.3,
+        "SWE-bench Verified": 22,
+        "LiveCodeBench": 43.2,
+        "τ²-Bench": 49
+      },
+      "categoryScores": {
+        "overall": 44.1,
+        "math": 61.3,
+        "coding": 32.6,
+        "agent": 49
+      },
+      "compositeScore": 46.75,
+      "matchKeys": [
+        "qwen3-30b-a3b-2507"
+      ]
+    },
+    {
+      "modelName": "GPT-5.1",
+      "modelCode": "gpt-5-1-reasoning",
+      "organization": "OpenAI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "HLE": 42.7,
+        "ARC-AGI-2": 17.6,
+        "AIME2025": 94,
+        "FrontierMath": 26.7,
+        "FrontierMath - Tier 4": 12.5,
+        "SWE-bench Verified": 76.3,
+        "SWE-Bench Pro - Public": 50.8,
+        "Terminal Bench 2.0": 47.6
+      },
+      "categoryScores": {
+        "overall": 30.15,
+        "math": 44.4,
+        "coding": 63.55,
+        "agent": 47.6
+      },
+      "compositeScore": 46.425,
+      "matchKeys": [
+        "gpt-5-1",
+        "gpt-5-1-reasoning"
+      ]
+    },
+    {
+      "modelName": "GLM-5",
+      "modelCode": "glm-5",
+      "organization": "智谱AI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "HLE": 50.4,
+        "ARC-AGI-2": 4.9,
+        "FrontierMath - Tier 4": 2.1,
+        "SWE-bench Verified": 77.8,
+        "τ²-Bench": 89.7,
+        "Terminal Bench 2.0": 61.1
+      },
+      "categoryScores": {
+        "overall": 27.65,
+        "math": 2.1,
+        "coding": 77.8,
+        "agent": 75.4
+      },
+      "compositeScore": 45.737,
+      "matchKeys": [
+        "glm-5"
+      ]
+    },
+    {
+      "modelName": "Gemini 2.5 Pro Deep Think",
+      "modelCode": "Gemini-2_5-Pro-Deep-Think",
+      "organization": "Google Deep Mind",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "FrontierMath - Tier 4": 10.4,
+        "LiveCodeBench": 80.4
+      },
+      "categoryScores": {
+        "overall": null,
+        "math": 10.4,
+        "coding": 80.4,
+        "agent": null
+      },
+      "compositeScore": 45.4,
+      "matchKeys": [
+        "gemini-2-5-pro-deep-think"
+      ]
+    },
+    {
+      "modelName": "Qwen2.5-7B",
+      "modelCode": "Qwen2_5-7B",
+      "organization": "阿里巴巴",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "MMLU Pro": 45
+      },
+      "categoryScores": {
+        "overall": 45,
+        "math": null,
+        "coding": null,
+        "agent": null
+      },
+      "compositeScore": 45,
+      "matchKeys": [
+        "qwen2-5-7b"
+      ]
+    },
+    {
+      "modelName": "Gemma 2 - 9B",
+      "modelCode": "gemma-2-9b",
+      "organization": "Google Research",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "MMLU Pro": 44.7
+      },
+      "categoryScores": {
+        "overall": 44.7,
+        "math": null,
+        "coding": null,
+        "agent": null
+      },
+      "compositeScore": 44.7,
+      "matchKeys": [
+        "gemma-2-9b"
+      ]
+    },
+    {
+      "modelName": "Llama3.1-8B-Instruct",
+      "modelCode": "Llama3_1-8B-Instruct",
+      "organization": "Facebook AI研究实验室",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "MMLU Pro": 44
+      },
+      "categoryScores": {
+        "overall": 44,
+        "math": null,
+        "coding": null,
+        "agent": null
+      },
+      "compositeScore": 44,
+      "matchKeys": [
+        "llama3-1-8b"
+      ]
+    },
+    {
+      "modelName": "Gemini 2.5 Pro Experimental 03-25",
+      "modelCode": "Gemini-2_5-Pro",
+      "organization": "Google Deep Mind",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "HLE": 18.8,
+        "AIME2025": 86.9,
+        "FrontierMath - Tier 4": 4.2,
+        "SWE-bench Verified": 63.8,
+        "LiveCodeBench": 70.4
+      },
+      "categoryScores": {
+        "overall": 18.8,
+        "math": 45.55,
+        "coding": 67.1,
+        "agent": null
+      },
+      "compositeScore": 43.817,
+      "matchKeys": [
+        "gemini-2-5-pro",
+        "gemini-2-5-pro-experimental-03-25"
+      ]
+    },
+    {
+      "modelName": "GPT-5-Pro",
+      "modelCode": "gpt-5-pro",
+      "organization": "OpenAI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "HLE": 42,
+        "ARC-AGI-2": 18,
+        "AIME2025": 100,
+        "FrontierMath - Tier 4": 14.6
+      },
+      "categoryScores": {
+        "overall": 30,
+        "math": 57.3,
+        "coding": null,
+        "agent": null
+      },
+      "compositeScore": 43.65,
+      "matchKeys": [
+        "gpt-5-pro"
+      ]
+    },
+    {
+      "modelName": "Gemma 3 - 12B (IT)",
+      "modelCode": "gemma-3-12b-it",
+      "organization": "Google Deep Mind",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "MMLU Pro": 60.6,
+        "LiveCodeBench": 24.6
+      },
+      "categoryScores": {
+        "overall": 60.6,
+        "math": null,
+        "coding": 24.6,
+        "agent": null
+      },
+      "compositeScore": 42.6,
+      "matchKeys": [
+        "gemma-3-12b",
+        "gemma-3-12b-it"
+      ]
+    },
+    {
+      "modelName": "Moonlight-16B-A3B-Instruct",
+      "modelCode": "Moonlight-16B-A3B-Instruct",
+      "organization": "Moonshot AI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "MMLU Pro": 42.4
+      },
+      "categoryScores": {
+        "overall": 42.4,
+        "math": null,
+        "coding": null,
+        "agent": null
+      },
+      "compositeScore": 42.4,
+      "matchKeys": [
+        "moonlight-16b-a3b"
+      ]
+    },
+    {
+      "modelName": "GPT-4o(2025-03-27)",
+      "modelCode": "gpt-4o-2025-03-26",
+      "organization": "OpenAI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "MMLU Pro": 79.8,
+        "AIME2025": 26.7,
+        "LiveCodeBench": 35.8,
+        "Aider-Polyglot": 27.1
+      },
+      "categoryScores": {
+        "overall": 79.8,
+        "math": 26.7,
+        "coding": 35.8,
+        "agent": 27.1
+      },
+      "compositeScore": 42.35,
+      "matchKeys": [
+        "gpt-4o",
+        "gpt-4o-2025-03-26"
+      ]
+    },
+    {
+      "modelName": "MiniMax-M2.7",
+      "modelCode": "minimax-m2-7",
+      "organization": "MiniMaxAI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "HLE": 28,
+        "SWE-Bench Pro - Public": 56.2
+      },
+      "categoryScores": {
+        "overall": 28,
+        "math": null,
+        "coding": 56.2,
+        "agent": null
+      },
+      "compositeScore": 42.1,
+      "matchKeys": [
+        "mini-m2-7"
+      ]
+    },
+    {
+      "modelName": "GPT-5.2 Pro",
+      "modelCode": "gpt-5-2-pro",
+      "organization": "OpenAI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "HLE": 50,
+        "ARC-AGI-2": 54.2,
+        "FrontierMath - Tier 4": 31.3
+      },
+      "categoryScores": {
+        "overall": 52.1,
+        "math": 31.3,
+        "coding": null,
+        "agent": null
+      },
+      "compositeScore": 41.7,
+      "matchKeys": [
+        "gpt-5-2-pro"
+      ]
+    },
+    {
+      "modelName": "Llama 4 Maverick Instruct",
+      "modelCode": "Llama-4-Maverick-Instruct",
+      "organization": "Facebook AI研究实验室",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "MMLU Pro": 80.5,
+        "FrontierMath": 0.7,
+        "LiveCodeBench": 43.4
+      },
+      "categoryScores": {
+        "overall": 80.5,
+        "math": 0.7,
+        "coding": 43.4,
+        "agent": null
+      },
+      "compositeScore": 41.533,
+      "matchKeys": [
+        "llama-4-maverick"
+      ]
+    },
+    {
+      "modelName": "Qwen3-4B-2507",
+      "modelCode": "qwen-4b",
+      "organization": "阿里巴巴",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "AIME2025": 47.4,
+        "LiveCodeBench": 35.1
+      },
+      "categoryScores": {
+        "overall": null,
+        "math": 47.4,
+        "coding": 35.1,
+        "agent": null
+      },
+      "compositeScore": 41.25,
+      "matchKeys": [
+        "qwen-4b",
+        "qwen3-4b-2507"
+      ]
+    },
+    {
+      "modelName": "OpenAI o3-mini (high)",
+      "modelCode": "openai-o3-mini-high",
+      "organization": "OpenAI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "HLE": 13.4,
+        "AIME2025": 86.5,
+        "FrontierMath - Tier 4": 4.2,
+        "MATH-500": 97.9,
+        "SWE-bench Verified": 49.3,
+        "FrontierMath": 11,
+        "LiveCodeBench": 69.5
+      },
+      "categoryScores": {
+        "overall": 13.4,
+        "math": 49.9,
+        "coding": 59.4,
+        "agent": null
+      },
+      "compositeScore": 40.9,
+      "matchKeys": [
+        "openai-o3-mini"
+      ]
+    },
+    {
+      "modelName": "GPT-5-mini",
+      "modelCode": "gpt-5-reasoning",
+      "organization": "OpenAI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "HLE": 5,
+        "MMLU Pro": 78,
+        "AIME2025": 47,
+        "FrontierMath": 19.3,
+        "FrontierMath - Tier 4": 6.3,
+        "LiveCodeBench": 55
+      },
+      "categoryScores": {
+        "overall": 41.5,
+        "math": 24.2,
+        "coding": 55,
+        "agent": null
+      },
+      "compositeScore": 40.233,
+      "matchKeys": [
+        "gpt-5-mini",
+        "gpt-5-reasoning"
+      ]
+    },
+    {
+      "modelName": "Composer 1",
+      "modelCode": "composer",
+      "organization": "Cursor",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "Terminal Bench 2.0": 40
+      },
+      "categoryScores": {
+        "overall": null,
+        "math": null,
+        "coding": null,
+        "agent": 40
+      },
+      "compositeScore": 40,
+      "matchKeys": [
+        "composer",
+        "composer-1"
+      ]
+    },
+    {
+      "modelName": "Qwen3-30B-A3B",
+      "modelCode": "Qwen3-30B-A3B",
+      "organization": "阿里巴巴",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "MMLU Pro": 69.1,
+        "AIME2025": 21.6,
+        "LiveCodeBench": 29
+      },
+      "categoryScores": {
+        "overall": 69.1,
+        "math": 21.6,
+        "coding": 29,
+        "agent": null
+      },
+      "compositeScore": 39.9,
+      "matchKeys": [
+        "qwen3-30b-a3b"
+      ]
+    },
+    {
+      "modelName": "Gemini 2.5 Flash",
+      "modelCode": "Gemini-2_5-Flash",
+      "organization": "Google Deep Mind",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "HLE": 11,
+        "AIME2025": 72,
+        "FrontierMath - Tier 4": 4.2,
+        "SWE-bench Verified": 50,
+        "LiveCodeBench": 55.4,
+        "Aider-Polyglot": 56.7
+      },
+      "categoryScores": {
+        "overall": 11,
+        "math": 38.1,
+        "coding": 52.7,
+        "agent": 56.7
+      },
+      "compositeScore": 39.625,
+      "matchKeys": [
+        "gemini-2-5-flash"
+      ]
+    },
+    {
+      "modelName": "GPT-5.4 mini",
+      "modelCode": "gpt-5-4-mini",
+      "organization": "OpenAI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "HLE": 41.5,
+        "FrontierMath - Tier 4": 2.1,
+        "SWE-Bench Pro - Public": 54.4,
+        "Terminal Bench 2.0": 60
+      },
+      "categoryScores": {
+        "overall": 41.5,
+        "math": 2.1,
+        "coding": 54.4,
+        "agent": 60
+      },
+      "compositeScore": 39.5,
+      "matchKeys": [
+        "gpt-5-4-mini"
+      ]
+    },
+    {
+      "modelName": "Claude 3.5 Sonnet",
+      "modelCode": "claude-3_5-sonnet",
+      "organization": "Anthropic",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "MMLU Pro": 77.64,
+        "FrontierMath": 1
+      },
+      "categoryScores": {
+        "overall": 77.64,
+        "math": 1,
+        "coding": null,
+        "agent": null
+      },
+      "compositeScore": 39.32,
+      "matchKeys": [
+        "claude-3-5-sonnet"
+      ]
+    },
+    {
+      "modelName": "Haiku 4.5",
+      "modelCode": "claude-haiku-4-5",
+      "organization": "Anthropic",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "HLE": 9.7,
+        "ARC-AGI-2": 4.5,
+        "MMLU Pro": 80,
+        "AIME2025": 96.3,
+        "FrontierMath": 4.1,
+        "FrontierMath - Tier 4": 2.1,
+        "SWE-bench Verified": 73.3,
+        "LiveCodeBench": 62,
+        "SWE-Bench Pro - Public": 39.45,
+        "τ²-Bench": 33
+      },
+      "categoryScores": {
+        "overall": 31.4,
+        "math": 34.167,
+        "coding": 58.25,
+        "agent": 33
+      },
+      "compositeScore": 39.204,
+      "matchKeys": [
+        "claude-haiku-4-5",
+        "haiku-4-5"
+      ]
+    },
+    {
+      "modelName": "Qwen2.5-Max",
+      "modelCode": "Qwen2_5-Max",
+      "organization": "阿里巴巴",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "MMLU Pro": 76.1,
+        "FrontierMath": 1
+      },
+      "categoryScores": {
+        "overall": 76.1,
+        "math": 1,
+        "coding": null,
+        "agent": null
+      },
+      "compositeScore": 38.55,
+      "matchKeys": [
+        "qwen2-5"
+      ]
+    },
+    {
+      "modelName": "Grok 2",
+      "modelCode": "grok-2",
+      "organization": "xAI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "MMLU Pro": 75.5,
+        "FrontierMath": 0.7
+      },
+      "categoryScores": {
+        "overall": 75.5,
+        "math": 0.7,
+        "coding": null,
+        "agent": null
+      },
+      "compositeScore": 38.1,
+      "matchKeys": [
+        "grok-2"
+      ]
+    },
+    {
+      "modelName": "GPT-4o",
+      "modelCode": "gpt-4o",
+      "organization": "OpenAI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "HLE": 5.3,
+        "MMLU Pro": 77.9,
+        "AIME2025": 42.1,
+        "FrontierMath": 0.3,
+        "MATH-500": 75.9,
+        "SWE-bench Verified": 31,
+        "LiveCodeBench": 35.1
+      },
+      "categoryScores": {
+        "overall": 41.6,
+        "math": 39.433,
+        "coding": 33.05,
+        "agent": null
+      },
+      "compositeScore": 38.028,
+      "matchKeys": [
+        "gpt-4o"
+      ]
+    },
+    {
+      "modelName": "Codestral 25.01",
+      "modelCode": "Codestral_25_01",
+      "organization": "MistralAI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "LiveCodeBench": 37.9
+      },
+      "categoryScores": {
+        "overall": null,
+        "math": null,
+        "coding": 37.9,
+        "agent": null
+      },
+      "compositeScore": 37.9,
+      "matchKeys": [
+        "codestral-25-01"
+      ]
+    },
+    {
+      "modelName": "ERNIE-4.5-VL-424B-A47B-Base",
+      "modelCode": "ERNIE-4_5-VL-424B-A47B-Base",
+      "organization": "百度",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "AIME2025": 35.1,
+        "LiveCodeBench": 38.8
+      },
+      "categoryScores": {
+        "overall": null,
+        "math": 35.1,
+        "coding": 38.8,
+        "agent": null
+      },
+      "compositeScore": 36.95,
+      "matchKeys": [
+        "ernie-4-5-vl-424b-a47b-base"
+      ]
+    },
+    {
+      "modelName": "GPT-4o(2024-11-20)",
+      "modelCode": "gpt-4o-2024-11-20",
+      "organization": "OpenAI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "MMLU Pro": 77.9,
+        "FrontierMath": 0.3,
+        "SWE-bench Verified": 31
+      },
+      "categoryScores": {
+        "overall": 77.9,
+        "math": 0.3,
+        "coding": 31,
+        "agent": null
+      },
+      "compositeScore": 36.4,
+      "matchKeys": [
+        "gpt-4o",
+        "gpt-4o-2024-11-20"
+      ]
+    },
+    {
+      "modelName": "GPT-5.4 nano",
+      "modelCode": "gpt-5-4-nano",
+      "organization": "OpenAI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "HLE": 37.7,
+        "FrontierMath - Tier 4": 6.3,
+        "SWE-Bench Pro - Public": 52.4,
+        "Terminal Bench 2.0": 46.3
+      },
+      "categoryScores": {
+        "overall": 37.7,
+        "math": 6.3,
+        "coding": 52.4,
+        "agent": 46.3
+      },
+      "compositeScore": 35.675,
+      "matchKeys": [
+        "gpt-5-4-nano"
+      ]
+    },
+    {
+      "modelName": "Qwen2.5-3B",
+      "modelCode": "Qwen2_5-3B",
+      "organization": "阿里巴巴",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "MMLU Pro": 34.6
+      },
+      "categoryScores": {
+        "overall": 34.6,
+        "math": null,
+        "coding": null,
+        "agent": null
+      },
+      "compositeScore": 34.6,
+      "matchKeys": [
+        "qwen2-5-3b"
+      ]
+    },
+    {
+      "modelName": "Gemini 2.5 Flash-Lite",
+      "modelCode": "Gemini-2_5-Flash-Lite",
+      "organization": "Google Deep Mind",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "HLE": 6.9,
+        "AIME2025": 63.1,
+        "SWE-bench Verified": 27.6,
+        "LiveCodeBench": 34.3
+      },
+      "categoryScores": {
+        "overall": 6.9,
+        "math": 63.1,
+        "coding": 30.95,
+        "agent": null
+      },
+      "compositeScore": 33.65,
+      "matchKeys": [
+        "gemini-2-5-flash-lite"
+      ]
+    },
+    {
+      "modelName": "Claude 3.5 Haiku",
+      "modelCode": "claude-3_5-haiku",
+      "organization": "Anthropic",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "MMLU Pro": 65,
+        "FrontierMath": 0.3
+      },
+      "categoryScores": {
+        "overall": 65,
+        "math": 0.3,
+        "coding": null,
+        "agent": null
+      },
+      "compositeScore": 32.65,
+      "matchKeys": [
+        "claude-3-5-haiku"
+      ]
+    },
+    {
+      "modelName": "Gemini 2.0 Flash Experimental",
+      "modelCode": "gemini_2_flash_exp",
+      "organization": "DeepMind",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "HLE": 5.1,
+        "MMLU Pro": 76.24,
+        "AIME2025": 29.7,
+        "SWE-bench Verified": 21.4,
+        "LiveCodeBench": 29.1
+      },
+      "categoryScores": {
+        "overall": 40.67,
+        "math": 29.7,
+        "coding": 25.25,
+        "agent": null
+      },
+      "compositeScore": 31.873,
+      "matchKeys": [
+        "gemini-2-0-flash-experimental",
+        "gemini-2-flash-exp"
+      ]
+    },
+    {
+      "modelName": "Codestral",
+      "modelCode": "Codestral",
+      "organization": "MistralAI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "LiveCodeBench": 31.5
+      },
+      "categoryScores": {
+        "overall": null,
+        "math": null,
+        "coding": 31.5,
+        "agent": null
+      },
+      "compositeScore": 31.5,
+      "matchKeys": [
+        "codestral"
+      ]
+    },
+    {
+      "modelName": "Mistral-7B-Instruct-v0.3",
+      "modelCode": "Mistral-7B-Instruct-v0_3",
+      "organization": "MistralAI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "MMLU Pro": 30.9
+      },
+      "categoryScores": {
+        "overall": 30.9,
+        "math": null,
+        "coding": null,
+        "agent": null
+      },
+      "compositeScore": 30.9,
+      "matchKeys": [
+        "mistral-7b-v0-3"
+      ]
+    },
+    {
+      "modelName": "GPT-4.1 mini",
+      "modelCode": "gpt-4_1-mini",
+      "organization": "OpenAI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "FrontierMath": 4.5,
+        "SWE-bench Verified": 23.6,
+        "τ²-Bench": 53
+      },
+      "categoryScores": {
+        "overall": null,
+        "math": 4.5,
+        "coding": 23.6,
+        "agent": 53
+      },
+      "compositeScore": 27.033,
+      "matchKeys": [
+        "gpt-4-1-mini"
+      ]
+    },
+    {
+      "modelName": "Llama-3.2-3B",
+      "modelCode": "Llama-3_2-3B",
+      "organization": "Facebook AI研究实验室",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "MMLU Pro": 25
+      },
+      "categoryScores": {
+        "overall": 25,
+        "math": null,
+        "coding": null,
+        "agent": null
+      },
+      "compositeScore": 25,
+      "matchKeys": [
+        "llama-3-2-3b"
+      ]
+    },
+    {
+      "modelName": "Grok 3 mini",
+      "modelCode": "grok3-mini",
+      "organization": "xAI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "FrontierMath": 5.9
+      },
+      "categoryScores": {
+        "overall": null,
+        "math": 5.9,
+        "coding": null,
+        "agent": null
+      },
+      "compositeScore": 5.9,
+      "matchKeys": [
+        "grok-3-mini",
+        "grok3-mini"
+      ]
+    },
+    {
+      "modelName": "GPT-5-Nano",
+      "modelCode": "gpt-5-nano",
+      "organization": "OpenAI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "FrontierMath": 8.3,
+        "FrontierMath - Tier 4": 2.1
+      },
+      "categoryScores": {
+        "overall": null,
+        "math": 5.2,
+        "coding": null,
+        "agent": null
+      },
+      "compositeScore": 5.2,
+      "matchKeys": [
+        "gpt-5-nano"
+      ]
+    },
+    {
+      "modelName": "GPT-4.1 nano",
+      "modelCode": "gpt-4_1-nano",
+      "organization": "OpenAI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "FrontierMath": 1
+      },
+      "categoryScores": {
+        "overall": null,
+        "math": 1,
+        "coding": null,
+        "agent": null
+      },
+      "compositeScore": 1,
+      "matchKeys": [
+        "gpt-4-1-nano"
+      ]
+    },
+    {
+      "modelName": "Mistral Large",
+      "modelCode": "Mistral-Large",
+      "organization": "MistralAI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "FrontierMath": 0.3
+      },
+      "categoryScores": {
+        "overall": null,
+        "math": 0.3,
+        "coding": null,
+        "agent": null
+      },
+      "compositeScore": 0.3,
+      "matchKeys": [
+        "mistral-large"
+      ]
+    },
+    {
+      "modelName": "GPT-5.1 Instant",
+      "modelCode": "gpt-5-1",
+      "organization": "OpenAI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "ARC-AGI-2": 0.004
+      },
+      "categoryScores": {
+        "overall": 0.004,
+        "math": null,
+        "coding": null,
+        "agent": null
+      },
+      "compositeScore": 0.004,
+      "matchKeys": [
+        "gpt-5-1",
+        "gpt-5-1-instant"
+      ]
+    }
+  ]
+}

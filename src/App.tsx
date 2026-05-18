@@ -16,6 +16,7 @@ import './App.css'
 
 type PriceMetric = 'blendedPrice' | 'inputPrice' | 'outputPrice'
 type Currency = 'USD' | 'CNY'
+type BenchmarkMode = 'aa' | 'overall' | 'coding' | 'math' | 'agent'
 
 type PriceEntry = {
   sourceKey: string
@@ -90,6 +91,46 @@ type BrandMeta = {
 
 type PlatformLogoMeta = BrandMeta
 
+type BenchmarkModel = {
+  modelName: string
+  modelCode: string | null
+  organization: string | null
+  aaScore: number | null
+  aaRank: number | null
+  arenaScore: number | null
+  arenaRank: number | null
+  benchmarks: Record<string, number>
+  categoryScores: Record<string, number | null>
+  compositeScore: number | null
+  matchKeys: string[]
+}
+
+type BenchmarkData = {
+  meta: {
+    generatedAt: string
+    sourceName: string
+    sourceUrl: string
+    fetchedFrom: string
+    license: string
+    extractedRowCount: number
+    modelCount: number
+    note: string
+  }
+  benchmarkKeys: string[]
+  categories: Record<string, string[]>
+  models: BenchmarkModel[]
+}
+
+type AbilityValueItem = {
+  model: ModelSummary
+  benchmark: BenchmarkModel
+  matchedKey: string
+  score: number
+  price: number
+  pricePerPoint: number
+  valueScore: number
+}
+
 type PriceData = {
   meta: {
     generatedAt: string
@@ -112,6 +153,16 @@ const metricLabels: Record<PriceMetric, string> = {
   inputPrice: '输入价',
   outputPrice: '输出价',
 }
+
+const benchmarkModeLabels: Record<BenchmarkMode, string> = {
+  aa: 'AA 综合',
+  overall: '综合基准',
+  coding: '编程',
+  math: '数学',
+  agent: 'Agent',
+}
+
+const litellmSourceUrl = 'https://github.com/BerriAI/litellm/blob/main/model_prices_and_context_window.json'
 
 const familyOrder = [
   '全部',
@@ -145,52 +196,50 @@ const flagshipModelIds = [
   'qwen3-coder',
 ]
 const fallbackHotModelIds = ['deepseek-r1', 'qwen3', 'gpt-4o-mini', 'claude-sonnet-4', 'gemini-2.5-pro', 'gpt-oss-120b']
+const localLogo = (file: string) => `${import.meta.env.BASE_URL}logos/${file}`
 const brandMeta: Record<string, BrandMeta> = {
-  OpenAI: {
-    initials: 'OA',
-    logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/6/66/OpenAI_logo_2025_%28symbol%29.svg',
-  },
-  Anthropic: { initials: 'A', logoUrl: 'https://cdn.simpleicons.org/anthropic/111111' },
-  Google: { initials: 'G', logoUrl: 'https://cdn.simpleicons.org/google/4285F4' },
-  DeepSeek: { initials: 'D', logoUrl: 'https://cdn.simpleicons.org/deepseek/5786FE' },
-  Qwen: { initials: 'Q', logoUrl: 'https://cdn.simpleicons.org/qwen/615CED' },
-  Moonshot: { initials: 'K', logoUrl: 'https://cdn.simpleicons.org/moonshotai/111111' },
-  ZAI: { initials: 'Z', logoUrl: 'https://chatglm.cn/favicon.ico' },
-  Llama: { initials: 'M', logoUrl: 'https://cdn.simpleicons.org/meta/0668E1' },
-  Mistral: { initials: 'M', logoUrl: 'https://cdn.simpleicons.org/mistralai/FA520F' },
-  Cohere: { initials: 'C', logoUrl: 'https://cohere.com/favicon.ico' },
+  OpenAI: { initials: 'OA', logoUrl: localLogo('brand-openai.svg') },
+  Anthropic: { initials: 'A', logoUrl: localLogo('brand-anthropic.svg') },
+  Google: { initials: 'G', logoUrl: localLogo('brand-google.svg') },
+  DeepSeek: { initials: 'D', logoUrl: localLogo('brand-deepseek.svg') },
+  Qwen: { initials: 'Q', logoUrl: localLogo('brand-qwen.svg') },
+  Moonshot: { initials: 'K', logoUrl: localLogo('brand-moonshot.svg') },
+  ZAI: { initials: 'Z', logoUrl: localLogo('brand-zai.ico') },
+  Llama: { initials: 'M', logoUrl: localLogo('brand-meta.svg') },
+  Mistral: { initials: 'M', logoUrl: localLogo('brand-mistral.svg') },
+  Cohere: { initials: 'C', logoUrl: localLogo('brand-cohere.ico') },
   Other: { initials: 'AI' },
 }
 const platformLogoMeta: Record<string, PlatformLogoMeta> = {
-  openai: { initials: 'OA', logoUrl: 'https://www.google.com/s2/favicons?domain=openai.com&sz=64' },
-  azure: { initials: 'AZ', logoUrl: 'https://www.google.com/s2/favicons?domain=azure.microsoft.com&sz=64' },
-  azure_ai: { initials: 'AI', logoUrl: 'https://www.google.com/s2/favicons?domain=ai.azure.com&sz=64' },
-  vertex_ai: { initials: 'G', logoUrl: 'https://www.google.com/s2/favicons?domain=cloud.google.com&sz=64' },
-  'vertex_ai-language-models': { initials: 'VE', logoUrl: 'https://www.google.com/s2/favicons?domain=cloud.google.com&sz=64' },
-  'vertex_ai-anthropic_models': { initials: 'VA', logoUrl: 'https://www.google.com/s2/favicons?domain=cloud.google.com&sz=64' },
-  gemini: { initials: 'G', logoUrl: 'https://www.google.com/s2/favicons?domain=gemini.google.com&sz=64' },
-  anthropic: { initials: 'A', logoUrl: 'https://www.google.com/s2/favicons?domain=anthropic.com&sz=64' },
-  bedrock: { initials: 'AWS', logoUrl: 'https://www.google.com/s2/favicons?domain=aws.amazon.com&sz=64' },
-  bedrock_converse: { initials: 'AWS', logoUrl: 'https://www.google.com/s2/favicons?domain=aws.amazon.com&sz=64' },
-  openrouter: { initials: 'OR', logoUrl: 'https://www.google.com/s2/favicons?domain=openrouter.ai&sz=64' },
-  vercel_ai_gateway: { initials: 'V', logoUrl: 'https://www.google.com/s2/favicons?domain=vercel.com&sz=64' },
-  deepinfra: { initials: 'DI', logoUrl: 'https://www.google.com/s2/favicons?domain=deepinfra.com&sz=64' },
-  fireworks_ai: { initials: 'FW', logoUrl: 'https://www.google.com/s2/favicons?domain=fireworks.ai&sz=64' },
-  together_ai: { initials: 'TG', logoUrl: 'https://www.google.com/s2/favicons?domain=together.ai&sz=64' },
-  xai: { initials: 'xAI', logoUrl: 'https://www.google.com/s2/favicons?domain=x.ai&sz=64' },
-  ai21: { initials: '21', logoUrl: 'https://www.google.com/s2/favicons?domain=ai21.com&sz=64' },
-  'vertex_ai-ai21_models': { initials: '21', logoUrl: 'https://www.google.com/s2/favicons?domain=ai21.com&sz=64' },
-  zai: { initials: 'Z', logoUrl: 'https://www.google.com/s2/favicons?domain=chatglm.cn&sz=64' },
-  deepseek: { initials: 'DS', logoUrl: 'https://www.google.com/s2/favicons?domain=deepseek.com&sz=64' },
-  groq: { initials: 'GR', logoUrl: 'https://www.google.com/s2/favicons?domain=groq.com&sz=64' },
-  cerebras: { initials: 'CB', logoUrl: 'https://www.google.com/s2/favicons?domain=cerebras.ai&sz=64' },
-  baseten: { initials: 'B', logoUrl: 'https://www.google.com/s2/favicons?domain=baseten.co&sz=64' },
-  novita: { initials: 'N', logoUrl: 'https://www.google.com/s2/favicons?domain=novita.ai&sz=64' },
-  replicate: { initials: 'R', logoUrl: 'https://www.google.com/s2/favicons?domain=replicate.com&sz=64' },
-  perplexity: { initials: 'P', logoUrl: 'https://www.google.com/s2/favicons?domain=perplexity.ai&sz=64' },
-  mistral: { initials: 'M', logoUrl: 'https://www.google.com/s2/favicons?domain=mistral.ai&sz=64' },
-  oci: { initials: 'OCI', logoUrl: 'https://www.google.com/s2/favicons?domain=oracle.com&sz=64' },
-  cohere_chat: { initials: 'C', logoUrl: 'https://www.google.com/s2/favicons?domain=cohere.com&sz=64' },
+  openai: { initials: 'OA', logoUrl: localLogo('platform-openai.png') },
+  azure: { initials: 'AZ', logoUrl: localLogo('platform-azure.png') },
+  azure_ai: { initials: 'AI', logoUrl: localLogo('platform-azure.png') },
+  vertex_ai: { initials: 'G', logoUrl: localLogo('platform-google-cloud.svg') },
+  'vertex_ai-language-models': { initials: 'VE', logoUrl: localLogo('platform-google-cloud.svg') },
+  'vertex_ai-anthropic_models': { initials: 'VA', logoUrl: localLogo('platform-google-cloud.svg') },
+  gemini: { initials: 'G', logoUrl: localLogo('platform-gemini.svg') },
+  anthropic: { initials: 'A', logoUrl: localLogo('platform-anthropic.svg') },
+  bedrock: { initials: 'AWS', logoUrl: localLogo('platform-aws.png') },
+  bedrock_converse: { initials: 'AWS', logoUrl: localLogo('platform-aws.png') },
+  openrouter: { initials: 'OR', logoUrl: localLogo('platform-openrouter.ico') },
+  vercel_ai_gateway: { initials: 'V', logoUrl: localLogo('platform-vercel.svg') },
+  deepinfra: { initials: 'DI', logoUrl: localLogo('platform-deepinfra.ico') },
+  fireworks_ai: { initials: 'FW', logoUrl: localLogo('platform-fireworks.ico') },
+  together_ai: { initials: 'TG', logoUrl: localLogo('platform-together.png') },
+  xai: { initials: 'xAI', logoUrl: localLogo('platform-xai.ico') },
+  ai21: { initials: '21', logoUrl: localLogo('platform-ai21.png') },
+  'vertex_ai-ai21_models': { initials: '21', logoUrl: localLogo('platform-ai21.png') },
+  zai: { initials: 'Z', logoUrl: localLogo('platform-zai.ico') },
+  deepseek: { initials: 'DS', logoUrl: localLogo('platform-deepseek.svg') },
+  groq: { initials: 'GR', logoUrl: localLogo('platform-groq.ico') },
+  cerebras: { initials: 'CB', logoUrl: localLogo('platform-cerebras.png') },
+  baseten: { initials: 'B', logoUrl: localLogo('platform-baseten.ico') },
+  novita: { initials: 'N', logoUrl: localLogo('platform-novita.ico') },
+  replicate: { initials: 'R', logoUrl: localLogo('platform-replicate.svg') },
+  perplexity: { initials: 'P', logoUrl: localLogo('platform-perplexity.svg') },
+  mistral: { initials: 'M', logoUrl: localLogo('platform-mistral.svg') },
+  oci: { initials: 'OCI', logoUrl: localLogo('platform-oracle.png') },
+  cohere_chat: { initials: 'C', logoUrl: localLogo('platform-cohere.ico') },
 }
 const cnyRate = 7.2
 
@@ -357,6 +406,155 @@ function buildPlatformInsights(models: ModelSummary[]): PlatformInsight[] {
     .slice(0, 8)
 }
 
+function normalizeBenchmarkKey(value: string | null | undefined) {
+  return String(value || '')
+    .toLowerCase()
+    .replace(/\([^)]*\)/g, '')
+    .replace(/preview/g, '')
+    .replace(/instruct/g, '')
+    .replace(/thinking/g, '')
+    .replace(/xhigh|high|medium|low|max/g, '')
+    .replace(/[_./]+/g, '-')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '')
+}
+
+function benchmarkStrength(model: BenchmarkModel) {
+  return model.aaScore ?? model.compositeScore ?? model.arenaScore ?? 0
+}
+
+function buildBenchmarkIndex(models: BenchmarkModel[]) {
+  const index = new Map<string, BenchmarkModel>()
+
+  models.forEach((model) => {
+    model.matchKeys.forEach((key) => {
+      const normalized = normalizeBenchmarkKey(key)
+      if (!normalized) return
+      const current = index.get(normalized)
+      if (!current || benchmarkStrength(model) > benchmarkStrength(current)) {
+        index.set(normalized, model)
+      }
+    })
+  })
+
+  return index
+}
+
+function addBenchmarkKeyVariant(keys: Set<string>, value: string | null | undefined) {
+  const normalized = normalizeBenchmarkKey(value)
+  if (!normalized) return
+  keys.add(normalized)
+
+  const suffixes = ['-chat-latest', '-chat', '-latest', '-default', '-v1']
+  suffixes.forEach((suffix) => {
+    if (normalized.endsWith(suffix)) keys.add(normalized.slice(0, -suffix.length))
+  })
+
+  const vendorPrefixes = ['openai-', 'anthropic-', 'google-', 'moonshotai-', 'zai-', 'qwen-', 'meta-', 'mistral-']
+  vendorPrefixes.forEach((prefix) => {
+    if (normalized.startsWith(prefix)) keys.add(normalized.slice(prefix.length))
+  })
+}
+
+function benchmarkKeysForModel(model: ModelSummary) {
+  const keys = new Set<string>()
+  addBenchmarkKeyVariant(keys, model.id)
+  addBenchmarkKeyVariant(keys, model.label)
+
+  model.entries.forEach((entry) => {
+    addBenchmarkKeyVariant(keys, entry.sourceKey)
+    const sourceParts = entry.sourceKey.split(/[/:@]+/).filter(Boolean)
+    sourceParts.slice(-3).forEach((part) => addBenchmarkKeyVariant(keys, part))
+  })
+
+  return Array.from(keys)
+}
+
+function findBenchmarkMatch(model: ModelSummary, index: Map<string, BenchmarkModel>) {
+  for (const key of benchmarkKeysForModel(model)) {
+    const benchmark = index.get(key)
+    if (benchmark) return { benchmark, matchedKey: key }
+  }
+  return null
+}
+
+function scoreForBenchmark(model: BenchmarkModel, mode: BenchmarkMode) {
+  const value =
+    mode === 'aa'
+      ? model.aaScore ?? model.compositeScore
+      : model.categoryScores[mode] ?? model.aaScore ?? model.compositeScore
+  return typeof value === 'number' && Number.isFinite(value) && value > 0 ? value : null
+}
+
+function formatBenchmarkScore(value: number | null | undefined) {
+  if (value === null || value === undefined || !Number.isFinite(value)) return '-'
+  return value >= 100 ? Math.round(value).toLocaleString() : value.toFixed(value >= 10 ? 1 : 2)
+}
+
+function benchmarkRadarAxes(model: BenchmarkModel): RadarAxis[] {
+  return [
+    { label: 'AA', value: model.aaScore ?? model.compositeScore ?? 0 },
+    { label: '综合', value: model.categoryScores.overall ?? 0 },
+    { label: '编程', value: model.categoryScores.coding ?? 0 },
+    { label: '数学', value: model.categoryScores.math ?? 0 },
+    { label: 'Agent', value: model.categoryScores.agent ?? 0 },
+  ]
+}
+
+function buildAbilityValueItems(
+  models: ModelSummary[],
+  benchmarkIndex: Map<string, BenchmarkModel>,
+  mode: BenchmarkMode,
+) {
+  return models
+    .map<AbilityValueItem | null>((model) => {
+      const match = findBenchmarkMatch(model, benchmarkIndex)
+      if (!match) return null
+      const score = scoreForBenchmark(match.benchmark, mode)
+      const entries = cleanEntries(model.entries, false, false, 'blendedPrice')
+      const price = entries[0]?.blendedPrice ?? model.minBlendedPrice
+      if (!score || !price || price <= 0) return null
+
+      return {
+        model,
+        benchmark: match.benchmark,
+        matchedKey: match.matchedKey,
+        score,
+        price,
+        pricePerPoint: price / score,
+        valueScore: score / price,
+      }
+    })
+    .filter((item): item is AbilityValueItem => item !== null)
+    .toSorted((a, b) => b.valueScore - a.valueScore || b.score - a.score)
+}
+
+function buildUnmatchedBenchmarkHighlights(
+  benchmarkModels: BenchmarkModel[],
+  priceModels: ModelSummary[],
+  benchmarkIndex: Map<string, BenchmarkModel>,
+  mode: BenchmarkMode,
+) {
+  const matched = new Set<BenchmarkModel>()
+
+  priceModels.forEach((model) => {
+    const match = findBenchmarkMatch(model, benchmarkIndex)
+    if (match) matched.add(match.benchmark)
+  })
+
+  return benchmarkModels
+    .filter((model) => !matched.has(model))
+    .filter((model) => {
+      if (mode === 'aa') return model.aaScore !== null
+      return typeof model.categoryScores[mode] === 'number'
+    })
+    .map((model) => ({ model, score: scoreForBenchmark(model, mode) ?? 0 }))
+    .filter((item) => item.score > 0)
+    .toSorted((a, b) => b.score - a.score)
+    .slice(0, 5)
+}
+
 function App() {
   const analysisRef = useRef<HTMLElement | null>(null)
   const [data, setData] = useState<PriceData | null>(null)
@@ -368,6 +566,9 @@ function App() {
   const [includeZero, setIncludeZero] = useState(false)
   const [includeExtreme, setIncludeExtreme] = useState(false)
   const [loadError, setLoadError] = useState<string | null>(null)
+  const [benchmarkData, setBenchmarkData] = useState<BenchmarkData | null>(null)
+  const [benchmarkMode, setBenchmarkMode] = useState<BenchmarkMode>('aa')
+  const [benchmarkError, setBenchmarkError] = useState<string | null>(null)
 
   useEffect(() => {
     fetch(`${import.meta.env.BASE_URL}data/llm-prices.json`)
@@ -383,6 +584,19 @@ function App() {
         })
       })
       .catch((error) => setLoadError(error instanceof Error ? error.message : '数据加载失败'))
+  }, [])
+
+  useEffect(() => {
+    fetch(`${import.meta.env.BASE_URL}data/model-benchmarks.json`)
+      .then((response) => {
+        if (!response.ok) throw new Error(`HTTP ${response.status}`)
+        return response.json() as Promise<BenchmarkData>
+      })
+      .then((payload) => {
+        setBenchmarkData(payload)
+        setBenchmarkError(null)
+      })
+      .catch((error) => setBenchmarkError(error instanceof Error ? error.message : '能力榜数据加载失败'))
   }, [])
 
   const families = useMemo(() => {
@@ -446,6 +660,21 @@ function App() {
   }, [data])
 
   const platformInsights = useMemo(() => (data ? buildPlatformInsights(data.models) : []), [data])
+  const benchmarkIndex = useMemo(
+    () => (benchmarkData ? buildBenchmarkIndex(benchmarkData.models) : new Map<string, BenchmarkModel>()),
+    [benchmarkData],
+  )
+  const abilityValueItems = useMemo(
+    () => (data && benchmarkData ? buildAbilityValueItems(data.models, benchmarkIndex, benchmarkMode) : []),
+    [benchmarkData, benchmarkIndex, benchmarkMode, data],
+  )
+  const unmatchedBenchmarkHighlights = useMemo(
+    () =>
+      data && benchmarkData
+        ? buildUnmatchedBenchmarkHighlights(benchmarkData.models, data.models, benchmarkIndex, benchmarkMode)
+        : [],
+    [benchmarkData, benchmarkIndex, benchmarkMode, data],
+  )
 
   const visibleEntries = useMemo(() => {
     if (!selectedModel) return []
@@ -524,7 +753,7 @@ function App() {
               </button>
             ))}
           </div>
-          <a className="icon-link" href="https://github.com/BerriAI/litellm" target="_blank" title="LiteLLM 数据源">
+          <a className="icon-link" href="https://github.com/BerriAI/litellm" rel="noreferrer" target="_blank" title="LiteLLM 数据源">
             <GitBranch size={18} aria-hidden="true" />
           </a>
         </div>
@@ -634,6 +863,90 @@ function App() {
             </button>
           ))}
         </div>
+      </section>
+
+      <section className="value-section" aria-label="能力价比 Beta">
+        <div className="value-head">
+          <div>
+            <span>
+              <Sparkles size={17} aria-hidden="true" />
+              能力价比 Beta
+            </span>
+            <h2>把能力榜分数除以真实 API 最低价。</h2>
+          </div>
+          <div>
+            <p>
+              价格只取 LiteLLM JSON 里的每 1M tokens 报价；能力分来自 DataLearner 榜单。这里只做标准化别名匹配，
+              未能同名匹配的强模型会单独列出，避免把近似型号混成同一个模型。
+            </p>
+            <div className="source-links" aria-label="数据来源">
+              <a href={litellmSourceUrl} rel="noreferrer" target="_blank">
+                价格源：LiteLLM model_prices_and_context_window.json
+              </a>
+              <a
+                href={benchmarkData?.meta.sourceUrl ?? 'https://www.datalearner.com/leaderboards'}
+                rel="noreferrer"
+                target="_blank"
+              >
+                能力源：DataLearner Leaderboards
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div className="value-toolbar">
+          <div className="segmented value-tabs" aria-label="能力口径">
+            {(Object.keys(benchmarkModeLabels) as BenchmarkMode[]).map((item) => (
+              <button
+                className={benchmarkMode === item ? 'active' : ''}
+                key={item}
+                type="button"
+                onClick={() => setBenchmarkMode(item)}
+              >
+                {benchmarkModeLabels[item]}
+              </button>
+            ))}
+          </div>
+          <span>
+            {benchmarkData
+              ? `${benchmarkData.meta.modelCount} 个 DataLearner 模型 · ${abilityValueItems.length} 个已匹配价格`
+              : benchmarkError
+                ? `DataLearner 加载失败：${benchmarkError}`
+                : '正在载入 DataLearner 能力榜...'}
+          </span>
+        </div>
+
+        {benchmarkData && (
+          <>
+            <div className="value-grid">
+              {abilityValueItems.slice(0, 8).map((item, index) => (
+                <AbilityValueCard
+                  currency={currency}
+                  item={item}
+                  key={`${benchmarkMode}-${item.model.id}`}
+                  mode={benchmarkMode}
+                  onSelect={() => selectModelAndFocus(item.model.id)}
+                  rank={index + 1}
+                />
+              ))}
+            </div>
+
+            <div className="benchmark-note-strip">
+              <div>
+                <strong>能力强，但暂无同名 LiteLLM 可比价</strong>
+                <small>这些卡片只来自 DataLearner，不参与价格排行；适合提醒后续手动确认 LiteLLM 是否新增了同名模型。</small>
+              </div>
+              <div className="benchmark-ghost-list">
+                {unmatchedBenchmarkHighlights.map(({ model, score }) => (
+                  <span key={`${benchmarkMode}-${model.modelName}`}>
+                    <strong>{model.modelName}</strong>
+                    <em>{formatBenchmarkScore(score)}</em>
+                  </span>
+                ))}
+              </div>
+            </div>
+          </>
+        )}
       </section>
 
       <section className="status-strip" aria-label="数据摘要">
@@ -862,7 +1175,7 @@ function BrandLogo({ family }: { family: string }) {
   return (
     <span className="brand-logo" aria-hidden="true">
       <span>{meta.initials}</span>
-      {meta.logoUrl && <img alt="" loading="lazy" src={meta.logoUrl} onError={(event) => (event.currentTarget.style.display = 'none')} />}
+      {meta.logoUrl && <img alt="" src={meta.logoUrl} onError={(event) => (event.currentTarget.style.display = 'none')} />}
     </span>
   )
 }
@@ -888,7 +1201,7 @@ function PlatformLogo({ provider, label }: { provider: string; label: string }) 
   return (
     <span className="platform-avatar" aria-hidden="true">
       <span>{meta.initials}</span>
-      {meta.logoUrl && <img alt="" loading="lazy" src={meta.logoUrl} onError={(event) => (event.currentTarget.style.display = 'none')} />}
+      {meta.logoUrl && <img alt="" src={meta.logoUrl} onError={(event) => (event.currentTarget.style.display = 'none')} />}
     </span>
   )
 }
@@ -960,6 +1273,62 @@ function HotModelCard({
           )
         })}
       </div>
+    </button>
+  )
+}
+
+function AbilityValueCard({
+  item,
+  mode,
+  currency,
+  rank,
+  onSelect,
+}: {
+  item: AbilityValueItem
+  mode: BenchmarkMode
+  currency: Currency
+  rank: number
+  onSelect: () => void
+}) {
+  const bestEntry = cleanEntries(item.model.entries, false, false, 'blendedPrice')[0]
+  const convertedPrice = currency === 'CNY' ? item.price * cnyRate : item.price
+  const valuePerCurrency = item.score / convertedPrice
+  const meterWidth = clamp(item.score)
+
+  return (
+    <button className="value-card" type="button" onClick={onSelect}>
+      <div className="value-card-top">
+        <span className="rank-dot">{rank}</span>
+        <FamilyBadge family={item.model.family} />
+        <RadarChart axes={benchmarkRadarAxes(item.benchmark)} size={88} />
+      </div>
+      <h3>{item.model.label}</h3>
+      <p className="benchmark-match">
+        DataLearner: {item.benchmark.modelName}
+        {item.benchmark.organization ? ` · ${item.benchmark.organization}` : ''}
+      </p>
+      <div className="value-metrics">
+        <span>
+          <small>{benchmarkModeLabels[mode]}</small>
+          <strong>{formatBenchmarkScore(item.score)}</strong>
+        </span>
+        <span>
+          <small>最低综合价</small>
+          <strong>{formatPrice(item.price, currency)}</strong>
+        </span>
+        <span>
+          <small>每分成本</small>
+          <strong>{formatPrice(item.pricePerPoint, currency)}</strong>
+        </span>
+      </div>
+      <div className="value-meter" aria-hidden="true">
+        <i style={{ width: `${meterWidth}%` }} />
+      </div>
+      <div className="value-card-foot">
+        <span>{bestEntry?.providerLabel ?? item.model.cheapestProvider ?? '未知平台'}</span>
+        <span>{valuePerCurrency.toFixed(valuePerCurrency > 100 ? 0 : 1)} 分/{currency === 'CNY' ? '¥' : '$'}</span>
+      </div>
+      <div className="value-source">LiteLLM 价格 × DataLearner 能力 · 匹配键 {item.matchedKey}</div>
     </button>
   )
 }

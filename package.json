@@ -5,8 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "data:update": "node scripts/generate-price-data.mjs",
-    "prebuild": "node scripts/generate-price-data.mjs --prefer-local",
+    "data:update": "node scripts/generate-price-data.mjs && node scripts/generate-benchmark-data.mjs",
+    "benchmark:update": "node scripts/generate-benchmark-data.mjs",
+    "prebuild": "node scripts/generate-price-data.mjs --prefer-local && node scripts/generate-benchmark-data.mjs --prefer-local",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
