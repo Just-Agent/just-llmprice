@@ -130,7 +130,7 @@
 .hot-hero {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(320px, 0.76fr) minmax(520px, 1.24fr);
+  grid-template-columns: minmax(440px, 0.78fr) minmax(720px, 1.22fr);
   gap: 28px;
   align-items: stretch;
   overflow: hidden;
@@ -164,10 +164,10 @@
 
 .hot-copy {
   display: flex;
-  min-height: 350px;
+  min-height: 0;
   flex-direction: column;
-  justify-content: center;
-  padding: 16px 0;
+  justify-content: flex-start;
+  padding: 140px 0 16px;
 }
 
 .radar-mark {
@@ -286,9 +286,9 @@
 
 .hot-card {
   display: flex;
-  min-height: 214px;
+  min-height: 198px;
   flex-direction: column;
-  padding: 16px;
+  padding: 14px;
   border: 1px solid rgba(169, 195, 196, 0.18);
   border-radius: 8px;
   color: #eefaf7;
@@ -322,7 +322,7 @@
   overflow-wrap: anywhere;
   margin-top: -4px;
   color: #ffffff;
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 850;
   line-height: 1.02;
 }
@@ -433,7 +433,7 @@
 
 .radar-cards {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 12px;
 }
 
@@ -450,6 +450,179 @@
   text-align: left;
   background: rgba(11, 24, 27, 0.82);
   cursor: pointer;
+}
+
+.platform-section {
+  padding: 26px 28px 30px;
+  border-bottom: 1px solid #e3e8ea;
+  background:
+    linear-gradient(90deg, rgba(32, 201, 190, 0.08), transparent 34%),
+    linear-gradient(180deg, #f8fbfb 0%, #ffffff 100%);
+}
+
+.platform-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 520px);
+  gap: 24px;
+  align-items: end;
+  margin-bottom: 16px;
+}
+
+.platform-head span {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  color: #008a83;
+  font-size: 13px;
+  font-weight: 820;
+}
+
+.platform-head h2 {
+  margin-top: 8px;
+  color: #101416;
+  font-size: 28px;
+  font-weight: 850;
+  line-height: 1.06;
+}
+
+.platform-head p {
+  color: #5f6871;
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.platform-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.platform-card {
+  display: grid;
+  gap: 14px;
+  min-height: 176px;
+  padding: 14px;
+  border: 1px solid #dfe8e9;
+  border-radius: 8px;
+  color: #17191c;
+  text-align: left;
+  background: rgba(255, 255, 255, 0.86);
+  box-shadow: 0 12px 34px rgba(15, 31, 36, 0.06);
+  cursor: pointer;
+}
+
+.platform-card:hover {
+  border-color: #97d8d3;
+  background: #ffffff;
+}
+
+.platform-card-head {
+  display: grid;
+  grid-template-columns: 38px minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: center;
+}
+
+.platform-avatar {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  border-radius: 8px;
+  color: #eafffc;
+  font-size: 12px;
+  font-weight: 850;
+  background: linear-gradient(135deg, #073335, #008a83);
+}
+
+.platform-card-head strong,
+.platform-card-head small {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.platform-card-head strong {
+  color: #101416;
+  font-size: 15px;
+  font-weight: 830;
+}
+
+.platform-card-head small {
+  margin-top: 3px;
+  color: #6d767e;
+  font-size: 12px;
+}
+
+.platform-card-head em {
+  display: grid;
+  min-width: 34px;
+  height: 30px;
+  place-items: center;
+  border-radius: 8px;
+  color: #006e67;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 860;
+  background: #e6f7f3;
+}
+
+.platform-bars {
+  display: grid;
+  gap: 10px;
+}
+
+.platform-metric {
+  display: grid;
+  gap: 6px;
+}
+
+.platform-metric span {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  color: #5b656d;
+  font-size: 12px;
+}
+
+.platform-metric strong {
+  color: #111416;
+}
+
+.platform-metric i {
+  display: block;
+  height: 8px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #edf2f3;
+}
+
+.platform-metric b {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #20c9be, #d89422);
+}
+
+.platform-foot {
+  display: grid;
+  gap: 5px;
+  margin-top: auto;
+}
+
+.platform-foot span,
+.platform-foot small {
+  overflow: hidden;
+  color: #687078;
+  font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.platform-foot span {
+  color: #006e67;
+  font-weight: 760;
 }
 
 .radar-card:hover {
@@ -564,6 +737,20 @@
   font-size: 14px;
 }
 
+.family-list button > span {
+  display: inline-flex;
+  gap: 7px;
+  align-items: center;
+  min-width: 0;
+}
+
+.family-list .brand-logo {
+  width: 20px;
+  height: 20px;
+  border: 1px solid #e5ecee;
+  background: #ffffff;
+}
+
 .family-list button.active,
 .model-list button.selected {
   border-color: #cfe6e4;
@@ -628,6 +815,7 @@
 .family {
   display: inline-flex;
   height: 24px;
+  gap: 6px;
   align-items: center;
   padding: 0 8px;
   border-radius: 6px;
@@ -635,6 +823,33 @@
   font-size: 12px;
   font-weight: 800;
   background: #e8f7f4;
+}
+
+.brand-logo {
+  position: relative;
+  display: inline-grid;
+  width: 18px;
+  height: 18px;
+  flex: 0 0 auto;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 5px;
+  color: #062426;
+  font-size: 8px;
+  font-weight: 900;
+  background: rgba(255, 255, 255, 0.86);
+}
+
+.brand-logo img {
+  position: absolute;
+  inset: 3px;
+  width: calc(100% - 6px);
+  height: calc(100% - 6px);
+  object-fit: contain;
+}
+
+.brand-logo span {
+  line-height: 1;
 }
 
 .family-anthropic {
@@ -651,6 +866,16 @@
 .family-qwen {
   color: #7a4b00;
   background: #fff6d9;
+}
+
+.family-moonshot {
+  color: #22336e;
+  background: #eef2ff;
+}
+
+.family-zai {
+  color: #006e67;
+  background: #e4f6f2;
 }
 
 .family-llama,
@@ -1057,6 +1282,7 @@ p {
 
   .hot-copy {
     min-height: 0;
+    padding: 16px 0;
   }
 
   .hot-grid {
@@ -1074,6 +1300,14 @@ p {
   }
 
   .radar-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .platform-head {
+    grid-template-columns: 1fr;
+  }
+
+  .platform-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -1099,12 +1333,17 @@ p {
     padding: 26px 16px;
   }
 
+  .platform-section {
+    padding: 22px 16px 24px;
+  }
+
   .hot-copy h1 {
     font-size: 38px;
   }
 
   .hot-grid,
   .radar-cards,
+  .platform-grid,
   .hot-card-stats,
   .leaderboards {
     grid-template-columns: 1fr;

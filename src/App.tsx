@@ -67,6 +67,27 @@ type RadarAxis = {
   value: number
 }
 
+type PlatformInsight = {
+  provider: string
+  label: string
+  modelCount: number
+  comparisons: number
+  wins: number
+  topThree: number
+  avgRelative: number
+  score: number
+  bestModels: Array<{
+    id: string
+    family: string
+    price: number | null
+  }>
+}
+
+type BrandMeta = {
+  initials: string
+  logoUrl?: string
+}
+
 type PriceData = {
   meta: {
     generatedAt: string
@@ -90,8 +111,54 @@ const metricLabels: Record<PriceMetric, string> = {
   outputPrice: '输出价',
 }
 
-const familyOrder = ['全部', 'OpenAI', 'Anthropic', 'Google', 'DeepSeek', 'Qwen', 'Llama', 'Mistral', 'Cohere', 'Other']
-const hotModelIds = ['deepseek-r1', 'qwen3', 'gpt-4o-mini', 'claude-sonnet-4', 'gemini-2.5-pro', 'gpt-oss-120b']
+const familyOrder = [
+  '全部',
+  'OpenAI',
+  'Anthropic',
+  'Google',
+  'DeepSeek',
+  'Qwen',
+  'Moonshot',
+  'ZAI',
+  'Llama',
+  'Mistral',
+  'Cohere',
+  'Other',
+]
+const defaultModelCandidates = ['gpt-5.5-pro', 'gpt-5.5', 'gpt-5.4-pro', 'gpt-5', 'gpt-4o-mini']
+const flagshipModelIds = [
+  'gpt-5.5-pro',
+  'gpt-5.5',
+  'claude-opus-4.7',
+  'gemini-3.1-pro',
+  'qwen3.6-plus',
+  'kimi-k2.5',
+  'zai.glm-5',
+  'glm-4.7',
+  'deepseek-r1',
+  'qwen3',
+  'gpt-oss-120b',
+  'claude-sonnet-4',
+  'gemini-3-pro',
+  'qwen3-coder',
+]
+const fallbackHotModelIds = ['deepseek-r1', 'qwen3', 'gpt-4o-mini', 'claude-sonnet-4', 'gemini-2.5-pro', 'gpt-oss-120b']
+const brandMeta: Record<string, BrandMeta> = {
+  OpenAI: {
+    initials: 'OA',
+    logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/6/66/OpenAI_logo_2025_%28symbol%29.svg',
+  },
+  Anthropic: { initials: 'A', logoUrl: 'https://cdn.simpleicons.org/anthropic/111111' },
+  Google: { initials: 'G', logoUrl: 'https://cdn.simpleicons.org/google/4285F4' },
+  DeepSeek: { initials: 'D', logoUrl: 'https://cdn.simpleicons.org/deepseek/5786FE' },
+  Qwen: { initials: 'Q', logoUrl: 'https://cdn.simpleicons.org/qwen/615CED' },
+  Moonshot: { initials: 'K', logoUrl: 'https://cdn.simpleicons.org/moonshotai/111111' },
+  ZAI: { initials: 'Z', logoUrl: 'https://chatglm.cn/favicon.ico' },
+  Llama: { initials: 'M', logoUrl: 'https://cdn.simpleicons.org/meta/0668E1' },
+  Mistral: { initials: 'M', logoUrl: 'https://cdn.simpleicons.org/mistralai/FA520F' },
+  Cohere: { initials: 'C', logoUrl: 'https://cohere.com/favicon.ico' },
+  Other: { initials: 'AI' },
+}
 const cnyRate = 7.2
 
 function formatPrice(value: number | null | undefined, currency: Currency) {
@@ -168,10 +235,99 @@ function radarAxes(model: ModelSummary): RadarAxis[] {
   ]
 }
 
+function resolveDefaultModel(models: ModelSummary[]) {
+  for (const id of defaultModelCandidates) {
+    if (models.some((model) => model.id === id)) return id
+  }
+  return models[0]?.id ?? ''
+}
+
+function formatPercent(value: number) {
+  return `${Math.round(value)}%`
+}
+
+function buildPlatformInsights(models: ModelSummary[]): PlatformInsight[] {
+  const buckets = new Map<
+    string,
+    {
+      provider: string
+      label: string
+      modelIds: Set<string>
+      comparisons: number
+      wins: number
+      topThree: number
+      relativeSum: number
+      bestModels: PlatformInsight['bestModels']
+    }
+  >()
+
+  for (const model of models) {
+    const entries = cleanEntries(model.entries, false, false, 'blendedPrice')
+    const cheapestPrice = entries[0]?.blendedPrice
+    if (!cheapestPrice || cheapestPrice <= 0) continue
+
+    entries.forEach((entry, index) => {
+      if (!entry.blendedPrice || entry.blendedPrice <= 0) return
+      const key = entry.provider
+      const current =
+        buckets.get(key) ??
+        {
+          provider: entry.provider,
+          label: entry.providerLabel,
+          modelIds: new Set<string>(),
+          comparisons: 0,
+          wins: 0,
+          topThree: 0,
+          relativeSum: 0,
+          bestModels: [],
+        }
+
+      const relative = entry.blendedPrice / cheapestPrice
+      current.modelIds.add(model.id)
+      current.comparisons += 1
+      current.relativeSum += relative
+      if (relative <= 1.02) {
+        current.wins += 1
+        current.bestModels.push({ id: model.id, family: model.family, price: entry.blendedPrice })
+      }
+      if (index < 3) current.topThree += 1
+      buckets.set(key, current)
+    })
+  }
+
+  return Array.from(buckets.values())
+    .map((bucket) => {
+      const modelCount = bucket.modelIds.size
+      const avgRelative = bucket.relativeSum / bucket.comparisons
+      const winRate = bucket.wins / bucket.comparisons
+      const topThreeRate = bucket.topThree / bucket.comparisons
+      const coverageScore = clamp((Math.log2(modelCount + 1) / Math.log2(42)) * 100)
+      const priceScore = clamp(((2.4 - avgRelative) / 1.4) * 100)
+      const score = coverageScore * 0.28 + winRate * 100 * 0.34 + topThreeRate * 100 * 0.24 + priceScore * 0.14
+
+      return {
+        provider: bucket.provider,
+        label: bucket.label,
+        modelCount,
+        comparisons: bucket.comparisons,
+        wins: bucket.wins,
+        topThree: bucket.topThree,
+        avgRelative,
+        score,
+        bestModels: bucket.bestModels
+          .toSorted((a, b) => (a.price ?? Number.POSITIVE_INFINITY) - (b.price ?? Number.POSITIVE_INFINITY))
+          .slice(0, 3),
+      }
+    })
+    .filter((item) => item.modelCount >= 5)
+    .toSorted((a, b) => b.score - a.score)
+    .slice(0, 8)
+}
+
 function App() {
   const analysisRef = useRef<HTMLElement | null>(null)
   const [data, setData] = useState<PriceData | null>(null)
-  const [selectedModelId, setSelectedModelId] = useState('gpt-4o-mini')
+  const [selectedModelId, setSelectedModelId] = useState(defaultModelCandidates[0])
   const [query, setQuery] = useState('')
   const [family, setFamily] = useState('全部')
   const [metric, setMetric] = useState<PriceMetric>('blendedPrice')
@@ -190,7 +346,7 @@ function App() {
         setData(payload)
         setSelectedModelId((current) => {
           if (payload.models.some((model) => model.id === current)) return current
-          return payload.models.some((model) => model.id === 'gpt-4o-mini') ? 'gpt-4o-mini' : (payload.models[0]?.id ?? '')
+          return resolveDefaultModel(payload.models)
         })
       })
       .catch((error) => setLoadError(error instanceof Error ? error.message : '数据加载失败'))
@@ -212,7 +368,11 @@ function App() {
         return (
           model.id.toLowerCase().includes(keyword) ||
           model.cheapestProvider?.toLowerCase().includes(keyword) ||
-          model.highestProvider?.toLowerCase().includes(keyword)
+          model.highestProvider?.toLowerCase().includes(keyword) ||
+          model.entries.some(
+            (entry) =>
+              entry.provider.toLowerCase().includes(keyword) || entry.providerLabel.toLowerCase().includes(keyword),
+          )
         )
       })
       .slice(0, 80)
@@ -233,7 +393,12 @@ function App() {
     const byId = new Map(data.models.map((model) => [model.id, model]))
     const picked = new Map<string, ModelSummary>()
 
-    for (const id of hotModelIds) {
+    for (const id of flagshipModelIds) {
+      const model = byId.get(id)
+      if (model) picked.set(model.id, model)
+    }
+
+    for (const id of fallbackHotModelIds) {
       const model = byId.get(id)
       if (model) picked.set(model.id, model)
     }
@@ -241,11 +406,13 @@ function App() {
     for (const item of data.leaderboards.priceSpread) {
       const model = byId.get(item.id)
       if (model) picked.set(model.id, model)
-      if (picked.size >= 6) break
+      if (picked.size >= 14) break
     }
 
-    return Array.from(picked.values()).slice(0, 6)
+    return Array.from(picked.values()).slice(0, 14)
   }, [data])
+
+  const platformInsights = useMemo(() => (data ? buildPlatformInsights(data.models) : []), [data])
 
   const visibleEntries = useMemo(() => {
     if (!selectedModel) return []
@@ -263,6 +430,12 @@ function App() {
 
   const selectModelAndFocus = (modelId: string) => {
     setSelectedModelId(modelId)
+    analysisRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
+
+  const selectPlatformAndFocus = (providerLabel: string) => {
+    setFamily('全部')
+    setQuery(providerLabel)
     analysisRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
 
@@ -288,7 +461,7 @@ function App() {
   return (
     <main className="app-shell">
       <header className="topbar">
-        <button className="brand" type="button" onClick={() => setSelectedModelId('gpt-4o-mini')}>
+        <button className="brand" type="button" onClick={() => setSelectedModelId(resolveDefaultModel(data.models))}>
           <span className="brand-mark">jl</span>
           <span>
             <strong>just-llmprice</strong>
@@ -331,11 +504,15 @@ function App() {
           </span>
           <span className="hot-label">
             <Flame size={16} aria-hidden="true" />
-            热门模型价格雷达
+            旗舰与热门模型价格雷达
           </span>
-          <h1>同一个模型，平台价差可以很离谱。</h1>
+          <h1>
+            同一个模型
+            <br />
+            平台价差很离谱。
+          </h1>
           <p>
-            先看高热模型的最低价、最高价和价差，再进入下方分析台做模型族筛选、平台排行和价格分布对比。
+            先看 GPT、Claude、Gemini、Qwen、Kimi、GLM 等旗舰模型的最低价、最高价和价差，再进入下方分析台做模型族筛选、平台排行和价格分布对比。
           </p>
           <div className="hot-actions">
             <button type="button" onClick={() => analysisRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })}>
@@ -344,7 +521,7 @@ function App() {
             </button>
             <span>
               <Activity size={15} aria-hidden="true" />
-              每 1M tokens · 来自 LiteLLM
+              {hotModels.length} 个模型 · 每 1M tokens · 来自 LiteLLM
             </span>
           </div>
         </div>
@@ -369,7 +546,7 @@ function App() {
             <small>低价 / 平台 / 窗口 / 价差 / 能力</small>
           </div>
           <div className="radar-cards">
-            {hotModels.slice(0, 4).map((model) => (
+            {hotModels.slice(0, 6).map((model) => (
               <button className="radar-card" key={`radar-${model.id}`} type="button" onClick={() => selectModelAndFocus(model.id)}>
                 <RadarChart axes={radarAxes(model)} showLabels size={148} />
                 <span>
@@ -382,6 +559,48 @@ function App() {
             ))}
           </div>
         </section>
+      </section>
+
+      <section className="platform-section" aria-label="平台优势分析">
+        <div className="platform-head">
+          <div>
+            <span>
+              <BarChart3 size={17} aria-hidden="true" />
+              平台优势分析
+            </span>
+            <h2>哪些平台不是偶尔便宜，而是经常便宜？</h2>
+          </div>
+          <p>
+            综合每个平台在全部可比模型里的最低价命中、Top 3 命中、覆盖模型数和平均溢价倍数，筛出更像“全方位优势”的平台。
+          </p>
+        </div>
+        <div className="platform-grid">
+          {platformInsights.map((platform) => (
+            <button
+              className="platform-card"
+              key={platform.provider}
+              type="button"
+              onClick={() => selectPlatformAndFocus(platform.label)}
+            >
+              <div className="platform-card-head">
+                <span className="platform-avatar">{platform.label.slice(0, 2).toUpperCase()}</span>
+                <span>
+                  <strong>{platform.label}</strong>
+                  <small>{platform.modelCount} 个模型可比</small>
+                </span>
+                <em>{Math.round(platform.score)}</em>
+              </div>
+              <div className="platform-bars">
+                <MetricBar label="最低价命中" value={(platform.wins / platform.comparisons) * 100} />
+                <MetricBar label="Top 3 命中" value={(platform.topThree / platform.comparisons) * 100} />
+              </div>
+              <div className="platform-foot">
+                <span>均价约为最低价 {platform.avgRelative.toFixed(2)}x</span>
+                <small>{platform.bestModels.map((model) => model.id).join(' · ') || '等待更多命中'}</small>
+              </div>
+            </button>
+          ))}
+        </div>
       </section>
 
       <section className="status-strip" aria-label="数据摘要">
@@ -417,7 +636,10 @@ function App() {
                 type="button"
                 onClick={() => setFamily(item)}
               >
-                <span>{item}</span>
+                <span>
+                  {item !== '全部' && <BrandLogo family={item} />}
+                  {item}
+                </span>
                 <strong>{item === '全部' ? data.meta.modelCount : data.familyCounts[item]}</strong>
               </button>
             ))}
@@ -448,7 +670,7 @@ function App() {
         <section className="main-panel" ref={analysisRef}>
           <div className="model-header">
             <div>
-              <span className={familyClass(selectedModel.family)}>{selectedModel.family}</span>
+              <FamilyBadge family={selectedModel.family} />
               <h1>{selectedModel.label}</h1>
               <p>
                 每 1M tokens 计价。综合价为输入和输出价格的平均值，默认隐藏 0 价和异常高价。
@@ -601,6 +823,42 @@ function App() {
   )
 }
 
+function BrandLogo({ family }: { family: string }) {
+  const meta = brandMeta[family] ?? brandMeta.Other
+
+  return (
+    <span className="brand-logo" aria-hidden="true">
+      <span>{meta.initials}</span>
+      {meta.logoUrl && <img alt="" loading="lazy" src={meta.logoUrl} onError={(event) => (event.currentTarget.style.display = 'none')} />}
+    </span>
+  )
+}
+
+function FamilyBadge({ family }: { family: string }) {
+  return (
+    <span className={familyClass(family)}>
+      <BrandLogo family={family} />
+      {family}
+    </span>
+  )
+}
+
+function MetricBar({ label, value }: { label: string; value: number }) {
+  const safeValue = clamp(value)
+
+  return (
+    <div className="platform-metric">
+      <span>
+        {label}
+        <strong>{formatPercent(safeValue)}</strong>
+      </span>
+      <i>
+        <b style={{ width: `${safeValue}%` }} />
+      </i>
+    </div>
+  )
+}
+
 function HotModelCard({
   model,
   currency,
@@ -620,7 +878,7 @@ function HotModelCard({
   return (
     <button className="hot-card" type="button" onClick={onSelect}>
       <div className="hot-card-top">
-        <span className={familyClass(model.family)}>{model.family}</span>
+        <FamilyBadge family={model.family} />
         <RadarChart axes={radarAxes(model)} size={82} />
       </div>
       <h2>{model.label}</h2>

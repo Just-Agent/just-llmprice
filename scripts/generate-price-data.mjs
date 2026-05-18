@@ -11,6 +11,17 @@ const OUTPUT_PATH = path.resolve('public', 'data', 'llm-prices.json')
 
 const preferLocal = process.argv.includes('--prefer-local')
 const now = new Date().toISOString()
+const FLAGSHIP_MODEL_ALLOWLIST = new Set([
+  'gpt-5.5-pro',
+  'gpt-5.5',
+  'claude-opus-4.7',
+  'gemini-3.1-pro',
+  'qwen3.6-plus',
+  'kimi-k2.5',
+  'moonshotai.kimi-k2.5',
+  'zai.glm-5',
+  'glm-4.7',
+])
 
 function numberOrNull(value) {
   return typeof value === 'number' && Number.isFinite(value) ? value : null
@@ -112,6 +123,10 @@ function normalizeModelName(key, provider) {
     .replace(/-$/, '')
 
   const aliases = [
+    [/^claude-opus-4[-.]7(?:-.+)?$/, 'claude-opus-4.7'],
+    [/^claude-opus-4[-.]6(?:-.+)?$/, 'claude-opus-4.6'],
+    [/^claude-opus-4[-.]5(?:-.+)?$/, 'claude-opus-4.5'],
+    [/^claude-opus-4[-.]1(?:-.+)?$/, 'claude-opus-4.1'],
     [/^gpt-4o-mini(?:-.+)?$/, 'gpt-4o-mini'],
     [/^gpt-4o(?:-.+)?$/, 'gpt-4o'],
     [/^gpt-4\.1-mini(?:-.+)?$/, 'gpt-4.1-mini'],
@@ -153,6 +168,8 @@ function modelFamily(model) {
   if (model.startsWith('gemini')) return 'Google'
   if (model.startsWith('deepseek')) return 'DeepSeek'
   if (model.startsWith('qwen')) return 'Qwen'
+  if (model.includes('kimi') || model.includes('moonshot')) return 'Moonshot'
+  if (model.includes('glm') || model.includes('zai')) return 'ZAI'
   if (model.includes('llama')) return 'Llama'
   if (model.includes('mistral') || model.includes('mixtral')) return 'Mistral'
   if (model.includes('command')) return 'Cohere'
@@ -351,7 +368,7 @@ const models = Array.from(groups.entries()).map(([modelId, entries]) => {
 })
 
 const visibleModels = models
-  .filter((model) => model.providerCount >= 2)
+  .filter((model) => model.providerCount >= 2 || FLAGSHIP_MODEL_ALLOWLIST.has(model.id))
   .sort((a, b) => {
     const scoreA = (a.spreadRatio || 0) * 4 + a.providerCount
     const scoreB = (b.spreadRatio || 0) * 4 + b.providerCount
