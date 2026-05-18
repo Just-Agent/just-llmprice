@@ -524,15 +524,31 @@
 }
 
 .platform-avatar {
+  position: relative;
   display: grid;
   width: 38px;
   height: 38px;
   place-items: center;
+  overflow: hidden;
   border-radius: 8px;
   color: #eafffc;
   font-size: 12px;
   font-weight: 850;
   background: linear-gradient(135deg, #073335, #008a83);
+}
+
+.platform-avatar img {
+  position: absolute;
+  inset: 7px;
+  width: calc(100% - 14px);
+  height: calc(100% - 14px);
+  border-radius: 5px;
+  background: #ffffff;
+  object-fit: contain;
+}
+
+.platform-avatar span {
+  line-height: 1;
 }
 
 .platform-card-head strong,

@@ -180,6 +180,7 @@ function providerLabel(provider) {
   const labels = {
     anthropic: 'Anthropic',
     azure: 'Azure OpenAI',
+    azure_ai: 'Azure AI',
     bedrock: 'AWS Bedrock',
     bedrock_converse: 'AWS Bedrock',
     cerebras: 'Cerebras',
@@ -196,11 +197,17 @@ function providerLabel(provider) {
     openai: 'OpenAI',
     openrouter: 'OpenRouter',
     perplexity: 'Perplexity',
+    replicate: 'Replicate',
     together_ai: 'Together AI',
     vertex_ai: 'Google Vertex AI',
     'vertex_ai-anthropic_models': 'Vertex AI Anthropic',
+    'vertex_ai-ai21_models': 'Vertex AI AI21',
     'vertex_ai-language-models': 'Vertex AI',
     vercel_ai_gateway: 'Vercel AI Gateway',
+    xai: 'xAI',
+    zai: 'ZAI',
+    ai21: 'AI21',
+    cohere_chat: 'Cohere',
   }
 
   return labels[provider] || String(provider || 'unknown').replaceAll('_', ' ')

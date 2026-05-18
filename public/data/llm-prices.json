@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generatedAt": "2026-05-18T11:26:44.213Z",
+    "generatedAt": "2026-05-18T11:54:47.638Z",
     "sourceUrl": "https://raw.githubusercontent.com/BerriAI/litellm/main/model_prices_and_context_window.json",
     "fetchedFrom": "D:\\study\\code\\0ai\\产品\\07-mobile-app\\just-llmprice\\data\\raw\\model_prices_and_context_window.json",
     "rawModelCount": 2717,
@@ -30,7 +30,7 @@
         "maxBlendedPrice": 6.875,
         "spreadRatio": 275,
         "cheapestProvider": "nscale",
-        "highestProvider": "replicate"
+        "highestProvider": "Replicate"
       },
       {
         "id": "qwen3",
@@ -50,7 +50,7 @@
         "maxBlendedPrice": 10.665,
         "spreadRatio": 50.79,
         "cheapestProvider": "hyperbolic",
-        "highestProvider": "azure ai"
+        "highestProvider": "Azure AI"
       },
       {
         "id": "llama-3.2-11b-vision",
@@ -90,7 +90,7 @@
         "maxBlendedPrice": 2,
         "spreadRatio": 16.67,
         "cheapestProvider": "Mistral",
-        "highestProvider": "azure ai"
+        "highestProvider": "Azure AI"
       },
       {
         "id": "mistral-large",
@@ -110,7 +110,7 @@
         "maxBlendedPrice": 3.11,
         "spreadRatio": 14.81,
         "cheapestProvider": "hyperbolic",
-        "highestProvider": "azure ai"
+        "highestProvider": "Azure AI"
       },
       {
         "id": "qwen3-coder",
@@ -130,7 +130,7 @@
         "maxBlendedPrice": 2.85,
         "spreadRatio": 14.25,
         "cheapestProvider": "hyperbolic",
-        "highestProvider": "azure ai"
+        "highestProvider": "Azure AI"
       },
       {
         "id": "mistral-small-24b-instruct-2501",
@@ -317,7 +317,7 @@
       "spreadRatio": 275,
       "medianContext": 114729,
       "cheapestProvider": "nscale",
-      "highestProvider": "replicate",
+      "highestProvider": "Replicate",
       "entries": [
         {
           "sourceKey": "nscale/deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
@@ -577,7 +577,7 @@
         {
           "sourceKey": "azure_ai/deepseek-r1",
           "provider": "azure_ai",
-          "providerLabel": "azure ai",
+          "providerLabel": "Azure AI",
           "inputPrice": 1.35,
           "outputPrice": 5.4,
           "blendedPrice": 3.375,
@@ -628,7 +628,7 @@
         {
           "sourceKey": "replicate/deepseek-ai/deepseek-r1",
           "provider": "replicate",
-          "providerLabel": "replicate",
+          "providerLabel": "Replicate",
           "inputPrice": 3.75,
           "outputPrice": 10,
           "blendedPrice": 6.875,
@@ -950,7 +950,7 @@
         {
           "sourceKey": "replicate/qwen/qwen3-235b-a22b-instruct-2507",
           "provider": "replicate",
-          "providerLabel": "replicate",
+          "providerLabel": "Replicate",
           "inputPrice": 0.264,
           "outputPrice": 1.06,
           "blendedPrice": 0.662,
@@ -1046,7 +1046,7 @@
       "spreadRatio": 50.79,
       "medianContext": 76288,
       "cheapestProvider": "hyperbolic",
-      "highestProvider": "azure ai",
+      "highestProvider": "Azure AI",
       "entries": [
         {
           "sourceKey": "hyperbolic/meta-llama/Meta-Llama-3.1-405B-Instruct",
@@ -1102,7 +1102,7 @@
         {
           "sourceKey": "azure_ai/Meta-Llama-3.1-405B-Instruct",
           "provider": "azure_ai",
-          "providerLabel": "azure ai",
+          "providerLabel": "Azure AI",
           "inputPrice": 5.33,
           "outputPrice": 16,
           "blendedPrice": 10.665,
@@ -1152,7 +1152,7 @@
         {
           "sourceKey": "azure_ai/Llama-3.2-11B-Vision-Instruct",
           "provider": "azure_ai",
-          "providerLabel": "azure ai",
+          "providerLabel": "Azure AI",
           "inputPrice": 0.37,
           "outputPrice": 0.37,
           "blendedPrice": 0.37,
@@ -1270,7 +1270,7 @@
         {
           "sourceKey": "azure_ai/gpt-oss-120b",
           "provider": "azure_ai",
-          "providerLabel": "azure ai",
+          "providerLabel": "Azure AI",
           "inputPrice": 0.15,
           "outputPrice": 0.6,
           "blendedPrice": 0.375,
@@ -1372,7 +1372,7 @@
         {
           "sourceKey": "replicate/openai/gpt-oss-120b",
           "provider": "replicate",
-          "providerLabel": "replicate",
+          "providerLabel": "Replicate",
           "inputPrice": 0.18,
           "outputPrice": 0.72,
           "blendedPrice": 0.45,
@@ -1591,7 +1591,7 @@
         {
           "sourceKey": "azure_ai/mistral-large-latest",
           "provider": "azure_ai",
-          "providerLabel": "azure ai",
+          "providerLabel": "Azure AI",
           "inputPrice": 2,
           "outputPrice": 6,
           "blendedPrice": 4,
@@ -1890,7 +1890,7 @@
       "spreadRatio": 16.67,
       "medianContext": 65024,
       "cheapestProvider": "Mistral",
-      "highestProvider": "azure ai",
+      "highestProvider": "Azure AI",
       "entries": [
         {
           "sourceKey": "mistral/mistral-small-latest",
@@ -1929,7 +1929,7 @@
         {
           "sourceKey": "azure_ai/mistral-small",
           "provider": "azure_ai",
-          "providerLabel": "azure ai",
+          "providerLabel": "Azure AI",
           "inputPrice": 1,
           "outputPrice": 3,
           "blendedPrice": 2,
@@ -1957,7 +1957,7 @@
       "spreadRatio": 14.25,
       "medianContext": 106906,
       "cheapestProvider": "hyperbolic",
-      "highestProvider": "azure ai",
+      "highestProvider": "Azure AI",
       "entries": [
         {
           "sourceKey": "hyperbolic/deepseek-ai/DeepSeek-V3",
@@ -2098,7 +2098,7 @@
         {
           "sourceKey": "replicate/deepseek-ai/deepseek-v3",
           "provider": "replicate",
-          "providerLabel": "replicate",
+          "providerLabel": "Replicate",
           "inputPrice": 1.45,
           "outputPrice": 1.45,
           "blendedPrice": 1.45,
@@ -2115,7 +2115,7 @@
         {
           "sourceKey": "azure_ai/deepseek-v3",
           "provider": "azure_ai",
-          "providerLabel": "azure ai",
+          "providerLabel": "Azure AI",
           "inputPrice": 1.14,
           "outputPrice": 4.56,
           "blendedPrice": 2.85,
@@ -2143,7 +2143,7 @@
       "spreadRatio": 14.81,
       "medianContext": 85606,
       "cheapestProvider": "hyperbolic",
-      "highestProvider": "azure ai",
+      "highestProvider": "Azure AI",
       "entries": [
         {
           "sourceKey": "hyperbolic/meta-llama/Meta-Llama-3.1-70B-Instruct",
@@ -2216,7 +2216,7 @@
         {
           "sourceKey": "azure_ai/Meta-Llama-3.1-70B-Instruct",
           "provider": "azure_ai",
-          "providerLabel": "azure ai",
+          "providerLabel": "Azure AI",
           "inputPrice": 2.68,
           "outputPrice": 3.54,
           "blendedPrice": 3.11,
@@ -2244,7 +2244,7 @@
       "spreadRatio": 13.33,
       "medianContext": 1032384,
       "cheapestProvider": "Oracle OCI",
-      "highestProvider": "replicate",
+      "highestProvider": "Replicate",
       "entries": [
         {
           "sourceKey": "oci/google.gemini-2.5-flash-lite",
@@ -2351,7 +2351,7 @@
         {
           "sourceKey": "replicate/google/gemini-2.5-flash",
           "provider": "replicate",
-          "providerLabel": "replicate",
+          "providerLabel": "Replicate",
           "inputPrice": 2.5,
           "outputPrice": 2.5,
           "blendedPrice": 2.5,
@@ -2546,7 +2546,7 @@
       "spreadRatio": 11.73,
       "medianContext": 748045,
       "cheapestProvider": "lambda ai",
-      "highestProvider": "azure ai",
+      "highestProvider": "Azure AI",
       "entries": [
         {
           "sourceKey": "lambda_ai/llama-4-maverick-17b-128e-instruct-fp8",
@@ -2636,7 +2636,7 @@
         {
           "sourceKey": "azure_ai/Llama-4-Maverick-17B-128E-Instruct-FP8",
           "provider": "azure_ai",
-          "providerLabel": "azure ai",
+          "providerLabel": "Azure AI",
           "inputPrice": 1.41,
           "outputPrice": 0.35,
           "blendedPrice": 0.88,
@@ -2664,7 +2664,7 @@
       "spreadRatio": 11.38,
       "medianContext": 74069,
       "cheapestProvider": "DeepInfra",
-      "highestProvider": "azure ai",
+      "highestProvider": "Azure AI",
       "entries": [
         {
           "sourceKey": "deepinfra/meta-llama/Meta-Llama-3.1-8B-Instruct",
@@ -2754,7 +2754,7 @@
         {
           "sourceKey": "azure_ai/Meta-Llama-3.1-8B-Instruct",
           "provider": "azure_ai",
-          "providerLabel": "azure ai",
+          "providerLabel": "Azure AI",
           "inputPrice": 0.3,
           "outputPrice": 0.61,
           "blendedPrice": 0.455,
@@ -2940,7 +2940,7 @@
         {
           "sourceKey": "azure_ai/deepseek-v3-0324",
           "provider": "azure_ai",
-          "providerLabel": "azure ai",
+          "providerLabel": "Azure AI",
           "inputPrice": 1.14,
           "outputPrice": 4.56,
           "blendedPrice": 2.85,
@@ -3109,7 +3109,7 @@
         {
           "sourceKey": "azure_ai/Llama-4-Scout-17B-16E-Instruct",
           "provider": "azure_ai",
-          "providerLabel": "azure ai",
+          "providerLabel": "Azure AI",
           "inputPrice": 0.2,
           "outputPrice": 0.78,
           "blendedPrice": 0.49,
@@ -3372,13 +3372,13 @@
       "maxBlendedPrice": 2,
       "spreadRatio": 10,
       "medianContext": 96000,
-      "cheapestProvider": "azure ai",
+      "cheapestProvider": "Azure AI",
       "highestProvider": "vertex ai-mistral models",
       "entries": [
         {
           "sourceKey": "azure_ai/mistral-small-2503",
           "provider": "azure_ai",
-          "providerLabel": "azure ai",
+          "providerLabel": "Azure AI",
           "inputPrice": 0.1,
           "outputPrice": 0.3,
           "blendedPrice": 0.2,
@@ -3834,7 +3834,7 @@
         {
           "sourceKey": "azure_ai/Llama-3.3-70B-Instruct",
           "provider": "azure_ai",
-          "providerLabel": "azure ai",
+          "providerLabel": "Azure AI",
           "inputPrice": 0.71,
           "outputPrice": 0.71,
           "blendedPrice": 0.71,
@@ -4053,7 +4053,7 @@
         {
           "sourceKey": "replicate/deepseek-ai/deepseek-v3.1",
           "provider": "replicate",
-          "providerLabel": "replicate",
+          "providerLabel": "Replicate",
           "inputPrice": 0.672,
           "outputPrice": 2.016,
           "blendedPrice": 1.344,
@@ -4249,7 +4249,7 @@
       "spreadRatio": 3.75,
       "medianContext": 130723,
       "cheapestProvider": "OpenRouter",
-      "highestProvider": "replicate",
+      "highestProvider": "Replicate",
       "entries": [
         {
           "sourceKey": "openrouter/openai/gpt-oss-20b",
@@ -4390,7 +4390,7 @@
         {
           "sourceKey": "replicateopenai/gpt-oss-20b",
           "provider": "replicate",
-          "providerLabel": "replicate",
+          "providerLabel": "Replicate",
           "inputPrice": 0.09,
           "outputPrice": 0.36,
           "blendedPrice": 0.225,
@@ -4552,13 +4552,13 @@
       "maxBlendedPrice": 6.5,
       "spreadRatio": 5.42,
       "medianContext": 130048,
-      "cheapestProvider": "azure ai",
+      "cheapestProvider": "Azure AI",
       "highestProvider": "watsonx",
       "entries": [
         {
           "sourceKey": "azure_ai/mistral-medium-2505",
           "provider": "azure_ai",
-          "providerLabel": "azure ai",
+          "providerLabel": "Azure AI",
           "inputPrice": 0.4,
           "outputPrice": 2,
           "blendedPrice": 1.2,
@@ -4620,7 +4620,7 @@
       "spreadRatio": 4.33,
       "medianContext": 23603,
       "cheapestProvider": "anyscale",
-      "highestProvider": "replicate",
+      "highestProvider": "Replicate",
       "entries": [
         {
           "sourceKey": "ollama/mixtral-8x7B-Instruct-v0.1",
@@ -4710,7 +4710,7 @@
         {
           "sourceKey": "replicate/mistralai/mixtral-8x7b-instruct-v0.1",
           "provider": "replicate",
-          "providerLabel": "replicate",
+          "providerLabel": "Replicate",
           "inputPrice": 0.3,
           "outputPrice": 1,
           "blendedPrice": 0.65,
@@ -4827,7 +4827,7 @@
         {
           "sourceKey": "azure_ai/Meta-Llama-3-70B-Instruct",
           "provider": "azure_ai",
-          "providerLabel": "azure ai",
+          "providerLabel": "Azure AI",
           "inputPrice": 1.1,
           "outputPrice": 0.37,
           "blendedPrice": 0.735,
@@ -5123,7 +5123,7 @@
       "spreadRatio": 3.38,
       "medianContext": 163840,
       "cheapestProvider": "novita",
-      "highestProvider": "azure ai",
+      "highestProvider": "Azure AI",
       "entries": [
         {
           "sourceKey": "novita/deepseek/deepseek-v3.2",
@@ -5196,7 +5196,7 @@
         {
           "sourceKey": "azure_ai/deepseek-v3.2",
           "provider": "azure_ai",
-          "providerLabel": "azure ai",
+          "providerLabel": "Azure AI",
           "inputPrice": 0.58,
           "outputPrice": 1.68,
           "blendedPrice": 1.13,
@@ -5224,7 +5224,7 @@
       "spreadRatio": 4.01,
       "medianContext": 256000,
       "cheapestProvider": "Oracle OCI",
-      "highestProvider": "cohere chat",
+      "highestProvider": "Cohere",
       "entries": [
         {
           "sourceKey": "oci/cohere.command-a-03-2025",
@@ -5246,7 +5246,7 @@
         {
           "sourceKey": "command-a-03-2025",
           "provider": "cohere_chat",
-          "providerLabel": "cohere chat",
+          "providerLabel": "Cohere",
           "inputPrice": 2.5,
           "outputPrice": 10,
           "blendedPrice": 6.25,
@@ -5274,7 +5274,7 @@
       "spreadRatio": 4.01,
       "medianContext": 128000,
       "cheapestProvider": "Oracle OCI",
-      "highestProvider": "cohere chat",
+      "highestProvider": "Cohere",
       "entries": [
         {
           "sourceKey": "oci/cohere.command-r-plus-08-2024",
@@ -5296,7 +5296,7 @@
         {
           "sourceKey": "command-r-plus-08-2024",
           "provider": "cohere_chat",
-          "providerLabel": "cohere chat",
+          "providerLabel": "Cohere",
           "inputPrice": 2.5,
           "outputPrice": 10,
           "blendedPrice": 6.25,
@@ -5442,7 +5442,7 @@
       "spreadRatio": 3.75,
       "medianContext": 8157,
       "cheapestProvider": "novita",
-      "highestProvider": "replicate",
+      "highestProvider": "Replicate",
       "entries": [
         {
           "sourceKey": "novita/meta-llama/llama-3-8b-instruct",
@@ -5481,7 +5481,7 @@
         {
           "sourceKey": "replicate/meta/llama-3-8b",
           "provider": "replicate",
-          "providerLabel": "replicate",
+          "providerLabel": "Replicate",
           "inputPrice": 0.05,
           "outputPrice": 0.25,
           "blendedPrice": 0.15,
@@ -5660,7 +5660,7 @@
       "spreadRatio": 3.6,
       "medianContext": 131072,
       "cheapestProvider": "Vercel AI Gateway",
-      "highestProvider": "replicate",
+      "highestProvider": "Replicate",
       "entries": [
         {
           "sourceKey": "vercel_ai_gateway/xai/grok-2",
@@ -5682,7 +5682,7 @@
         {
           "sourceKey": "replicate/xai/grok-4",
           "provider": "replicate",
-          "providerLabel": "replicate",
+          "providerLabel": "Replicate",
           "inputPrice": 7.2,
           "outputPrice": 36,
           "blendedPrice": 21.6,
@@ -6062,7 +6062,7 @@
       "spreadRatio": 3.25,
       "medianContext": 129536,
       "cheapestProvider": "Fireworks",
-      "highestProvider": "azure ai",
+      "highestProvider": "Azure AI",
       "entries": [
         {
           "sourceKey": "fireworks_ai/accounts/fireworks/models/phi-3-mini-128k-instruct",
@@ -6084,7 +6084,7 @@
         {
           "sourceKey": "azure_ai/Phi-3-mini-128k-instruct",
           "provider": "azure_ai",
-          "providerLabel": "azure ai",
+          "providerLabel": "Azure AI",
           "inputPrice": 0.13,
           "outputPrice": 0.52,
           "blendedPrice": 0.325,
@@ -6112,7 +6112,7 @@
       "spreadRatio": 2.72,
       "medianContext": 8192,
       "cheapestProvider": "novita",
-      "highestProvider": "replicate",
+      "highestProvider": "Replicate",
       "entries": [
         {
           "sourceKey": "novita/meta-llama/llama-3-70b-instruct",
@@ -6168,7 +6168,7 @@
         {
           "sourceKey": "replicate/meta/llama-3-70b",
           "provider": "replicate",
-          "providerLabel": "replicate",
+          "providerLabel": "Replicate",
           "inputPrice": 0.65,
           "outputPrice": 2.75,
           "blendedPrice": 1.7,
@@ -6631,13 +6631,13 @@
       "maxBlendedPrice": 1,
       "spreadRatio": 2.67,
       "medianContext": 128000,
-      "cheapestProvider": "cohere chat",
+      "cheapestProvider": "Cohere",
       "highestProvider": "AWS Bedrock",
       "entries": [
         {
           "sourceKey": "command-r",
           "provider": "cohere_chat",
-          "providerLabel": "cohere chat",
+          "providerLabel": "Cohere",
           "inputPrice": 0.15,
           "outputPrice": 0.6,
           "blendedPrice": 0.375,
@@ -6771,7 +6771,7 @@
         {
           "sourceKey": "azure_ai/claude-sonnet-4-5",
           "provider": "azure_ai",
-          "providerLabel": "azure ai",
+          "providerLabel": "Azure AI",
           "inputPrice": 3,
           "outputPrice": 15,
           "blendedPrice": 9,
@@ -7069,7 +7069,7 @@
       "spreadRatio": 2.5,
       "medianContext": 128000,
       "cheapestProvider": "Oracle OCI",
-      "highestProvider": "cohere chat",
+      "highestProvider": "Cohere",
       "entries": [
         {
           "sourceKey": "oci/cohere.command-r-08-2024",
@@ -7091,7 +7091,7 @@
         {
           "sourceKey": "command-r-08-2024",
           "provider": "cohere_chat",
-          "providerLabel": "cohere chat",
+          "providerLabel": "Cohere",
           "inputPrice": 0.15,
           "outputPrice": 0.6,
           "blendedPrice": 0.375,
@@ -7270,7 +7270,7 @@
       "spreadRatio": 1.3,
       "medianContext": 201520,
       "cheapestProvider": "OpenRouter",
-      "highestProvider": "zai",
+      "highestProvider": "ZAI",
       "entries": [
         {
           "sourceKey": "openrouter/z-ai/glm-4.6",
@@ -7360,7 +7360,7 @@
         {
           "sourceKey": "zai/glm-4.6",
           "provider": "zai",
-          "providerLabel": "zai",
+          "providerLabel": "ZAI",
           "inputPrice": 0.6,
           "outputPrice": 2.2,
           "blendedPrice": 1.4,
@@ -7410,7 +7410,7 @@
         {
           "sourceKey": "azure_ai/claude-opus-4-5",
           "provider": "azure_ai",
-          "providerLabel": "azure ai",
+          "providerLabel": "Azure AI",
           "inputPrice": 5,
           "outputPrice": 25,
           "blendedPrice": 15,
@@ -7696,7 +7696,7 @@
         {
           "sourceKey": "zai/glm-4.7",
           "provider": "zai",
-          "providerLabel": "zai",
+          "providerLabel": "ZAI",
           "inputPrice": 0.6,
           "outputPrice": 2.2,
           "blendedPrice": 1.4,
@@ -7859,7 +7859,7 @@
       "spreadRatio": 1.9,
       "medianContext": 131072,
       "cheapestProvider": "Vercel AI Gateway",
-      "highestProvider": "azure ai",
+      "highestProvider": "Azure AI",
       "entries": [
         {
           "sourceKey": "vercel_ai_gateway/xai/grok-3-mini",
@@ -7881,7 +7881,7 @@
         {
           "sourceKey": "xai/grok-3-mini",
           "provider": "xai",
-          "providerLabel": "xai",
+          "providerLabel": "xAI",
           "inputPrice": 0.3,
           "outputPrice": 0.5,
           "blendedPrice": 0.4,
@@ -7898,7 +7898,7 @@
         {
           "sourceKey": "azure_ai/global/grok-3-mini",
           "provider": "azure_ai",
-          "providerLabel": "azure ai",
+          "providerLabel": "Azure AI",
           "inputPrice": 0.25,
           "outputPrice": 1.27,
           "blendedPrice": 0.76,
@@ -7965,7 +7965,7 @@
         {
           "sourceKey": "zai/glm-4.5",
           "provider": "zai",
-          "providerLabel": "zai",
+          "providerLabel": "ZAI",
           "inputPrice": 0.6,
           "outputPrice": 2.2,
           "blendedPrice": 1.4,
@@ -8234,7 +8234,7 @@
         {
           "sourceKey": "azure_ai/kimi-k2.5",
           "provider": "azure_ai",
-          "providerLabel": "azure ai",
+          "providerLabel": "Azure AI",
           "inputPrice": 0.6,
           "outputPrice": 3,
           "blendedPrice": 1.8,
@@ -8453,7 +8453,7 @@
         {
           "sourceKey": "azure_ai/claude-opus-4-1",
           "provider": "azure_ai",
-          "providerLabel": "azure ai",
+          "providerLabel": "Azure AI",
           "inputPrice": 15,
           "outputPrice": 75,
           "blendedPrice": 45,
@@ -8571,7 +8571,7 @@
         {
           "sourceKey": "azure_ai/claude-opus-4-6",
           "provider": "azure_ai",
-          "providerLabel": "azure ai",
+          "providerLabel": "Azure AI",
           "inputPrice": 5,
           "outputPrice": 25,
           "blendedPrice": 15,
@@ -8740,7 +8740,7 @@
         {
           "sourceKey": "replicate/openai/gpt-4o",
           "provider": "replicate",
-          "providerLabel": "replicate",
+          "providerLabel": "Replicate",
           "inputPrice": 2.5,
           "outputPrice": 10,
           "blendedPrice": 6.25,
@@ -8885,7 +8885,7 @@
       "spreadRatio": 1,
       "medianContext": 1048576,
       "cheapestProvider": "Vertex AI",
-      "highestProvider": "replicate",
+      "highestProvider": "Replicate",
       "entries": [
         {
           "sourceKey": "gemini-3-pro-preview",
@@ -8975,7 +8975,7 @@
         {
           "sourceKey": "replicate/google/gemini-3-pro",
           "provider": "replicate",
-          "providerLabel": "replicate",
+          "providerLabel": "Replicate",
           "inputPrice": 2,
           "outputPrice": 12,
           "blendedPrice": 7,
@@ -9025,7 +9025,7 @@
         {
           "sourceKey": "azure_ai/claude-haiku-4-5",
           "provider": "azure_ai",
-          "providerLabel": "azure ai",
+          "providerLabel": "Azure AI",
           "inputPrice": 1,
           "outputPrice": 5,
           "blendedPrice": 3,
@@ -9103,13 +9103,13 @@
       "maxBlendedPrice": 9,
       "spreadRatio": 1.44,
       "medianContext": 128000,
-      "cheapestProvider": "cohere chat",
+      "cheapestProvider": "Cohere",
       "highestProvider": "AWS Bedrock",
       "entries": [
         {
           "sourceKey": "command-r-plus",
           "provider": "cohere_chat",
-          "providerLabel": "cohere chat",
+          "providerLabel": "Cohere",
           "inputPrice": 2.5,
           "outputPrice": 10,
           "blendedPrice": 6.25,
@@ -9378,7 +9378,7 @@
         {
           "sourceKey": "azure_ai/claude-opus-4-7",
           "provider": "azure_ai",
-          "providerLabel": "azure ai",
+          "providerLabel": "Azure AI",
           "inputPrice": 5,
           "outputPrice": 25,
           "blendedPrice": 15,
@@ -9580,7 +9580,7 @@
         {
           "sourceKey": "replicate/openai/gpt-4o-mini",
           "provider": "replicate",
-          "providerLabel": "replicate",
+          "providerLabel": "Replicate",
           "inputPrice": 0.15,
           "outputPrice": 0.6,
           "blendedPrice": 0.375,
@@ -9625,7 +9625,7 @@
       "spreadRatio": 1,
       "medianContext": 270400,
       "cheapestProvider": "Azure OpenAI",
-      "highestProvider": "replicate",
+      "highestProvider": "Replicate",
       "entries": [
         {
           "sourceKey": "azure/gpt-5",
@@ -9698,7 +9698,7 @@
         {
           "sourceKey": "replicate/openai/gpt-5",
           "provider": "replicate",
-          "providerLabel": "replicate",
+          "providerLabel": "Replicate",
           "inputPrice": 1.25,
           "outputPrice": 10,
           "blendedPrice": 5.625,
@@ -9782,7 +9782,7 @@
         {
           "sourceKey": "replicate/openai/o1",
           "provider": "replicate",
-          "providerLabel": "replicate",
+          "providerLabel": "Replicate",
           "inputPrice": 15,
           "outputPrice": 60,
           "blendedPrice": 37.5,
@@ -9933,7 +9933,7 @@
         {
           "sourceKey": "replicate/openai/gpt-4.1-nano",
           "provider": "replicate",
-          "providerLabel": "replicate",
+          "providerLabel": "Replicate",
           "inputPrice": 0.1,
           "outputPrice": 0.4,
           "blendedPrice": 0.25,
@@ -10034,7 +10034,7 @@
         {
           "sourceKey": "replicate/openai/gpt-4.1-mini",
           "provider": "replicate",
-          "providerLabel": "replicate",
+          "providerLabel": "Replicate",
           "inputPrice": 0.4,
           "outputPrice": 1.6,
           "blendedPrice": 1,
@@ -10078,13 +10078,13 @@
       "maxBlendedPrice": 6,
       "spreadRatio": 1.5,
       "medianContext": 128000,
-      "cheapestProvider": "azure ai",
+      "cheapestProvider": "Azure AI",
       "highestProvider": "Mistral",
       "entries": [
         {
           "sourceKey": "azure_ai/mistral-large-2407",
           "provider": "azure_ai",
-          "providerLabel": "azure ai",
+          "providerLabel": "Azure AI",
           "inputPrice": 2,
           "outputPrice": 6,
           "blendedPrice": 4,
@@ -10531,13 +10531,13 @@
       "maxBlendedPrice": 2.75,
       "spreadRatio": 1.1,
       "medianContext": 200000,
-      "cheapestProvider": "replicate",
+      "cheapestProvider": "Replicate",
       "highestProvider": "Vercel AI Gateway",
       "entries": [
         {
           "sourceKey": "replicate/openai/o4-mini",
           "provider": "replicate",
-          "providerLabel": "replicate",
+          "providerLabel": "Replicate",
           "inputPrice": 1,
           "outputPrice": 4,
           "blendedPrice": 2.5,
@@ -10638,7 +10638,7 @@
         {
           "sourceKey": "replicate/anthropic/claude-4-sonnet",
           "provider": "replicate",
-          "providerLabel": "replicate",
+          "providerLabel": "Replicate",
           "inputPrice": 3,
           "outputPrice": 15,
           "blendedPrice": 9,
@@ -10700,7 +10700,7 @@
       "spreadRatio": 1.33,
       "medianContext": 129024,
       "cheapestProvider": "novita",
-      "highestProvider": "zai",
+      "highestProvider": "ZAI",
       "entries": [
         {
           "sourceKey": "novita/zai-org/glm-4.5-air",
@@ -10739,7 +10739,7 @@
         {
           "sourceKey": "zai/glm-4.5-air",
           "provider": "zai",
-          "providerLabel": "zai",
+          "providerLabel": "ZAI",
           "inputPrice": 0.2,
           "outputPrice": 1.1,
           "blendedPrice": 0.65,
@@ -11086,7 +11086,7 @@
       "spreadRatio": 1,
       "medianContext": 272000,
       "cheapestProvider": "Azure OpenAI",
-      "highestProvider": "replicate",
+      "highestProvider": "Replicate",
       "entries": [
         {
           "sourceKey": "azure/gpt-5-mini",
@@ -11142,7 +11142,7 @@
         {
           "sourceKey": "replicate/openai/gpt-5-mini",
           "provider": "replicate",
-          "providerLabel": "replicate",
+          "providerLabel": "Replicate",
           "inputPrice": 0.25,
           "outputPrice": 2,
           "blendedPrice": 1.125,
@@ -11170,7 +11170,7 @@
       "spreadRatio": 1,
       "medianContext": 272000,
       "cheapestProvider": "Azure OpenAI",
-      "highestProvider": "replicate",
+      "highestProvider": "Replicate",
       "entries": [
         {
           "sourceKey": "azure/gpt-5-nano",
@@ -11226,7 +11226,7 @@
         {
           "sourceKey": "replicate/openai/gpt-5-nano",
           "provider": "replicate",
-          "providerLabel": "replicate",
+          "providerLabel": "Replicate",
           "inputPrice": 0.05,
           "outputPrice": 0.4,
           "blendedPrice": 0.225,
@@ -11506,7 +11506,7 @@
       "spreadRatio": 1.25,
       "medianContext": 200000,
       "cheapestProvider": "OpenRouter",
-      "highestProvider": "replicate",
+      "highestProvider": "Replicate",
       "entries": [
         {
           "sourceKey": "openrouter/anthropic/claude-3.5-sonnet",
@@ -11545,7 +11545,7 @@
         {
           "sourceKey": "replicate/anthropic/claude-3.5-sonnet",
           "provider": "replicate",
-          "providerLabel": "replicate",
+          "providerLabel": "Replicate",
           "inputPrice": 3.75,
           "outputPrice": 18.75,
           "blendedPrice": 11.25,
@@ -11573,7 +11573,7 @@
       "spreadRatio": 1.43,
       "medianContext": 95680,
       "cheapestProvider": "novita",
-      "highestProvider": "azure ai",
+      "highestProvider": "Azure AI",
       "entries": [
         {
           "sourceKey": "novita/mistralai/mistral-nemo",
@@ -11595,7 +11595,7 @@
         {
           "sourceKey": "azure_ai/mistral-nemo",
           "provider": "azure_ai",
-          "providerLabel": "azure ai",
+          "providerLabel": "Azure AI",
           "inputPrice": 0.15,
           "outputPrice": 0.15,
           "blendedPrice": 0.15,
@@ -12140,13 +12140,13 @@
       "maxBlendedPrice": 8.75,
       "spreadRatio": 1,
       "medianContext": 1050000,
-      "cheapestProvider": "azure ai",
+      "cheapestProvider": "Azure AI",
       "highestProvider": "OpenAI",
       "entries": [
         {
           "sourceKey": "azure_ai/gpt-5.4",
           "provider": "azure_ai",
-          "providerLabel": "azure ai",
+          "providerLabel": "Azure AI",
           "inputPrice": 2.5,
           "outputPrice": 15,
           "blendedPrice": 8.75,
@@ -12207,13 +12207,13 @@
       "maxBlendedPrice": 105,
       "spreadRatio": 1,
       "medianContext": 1050000,
-      "cheapestProvider": "azure ai",
+      "cheapestProvider": "Azure AI",
       "highestProvider": "OpenAI",
       "entries": [
         {
           "sourceKey": "azure_ai/gpt-5.4-pro",
           "provider": "azure_ai",
-          "providerLabel": "azure ai",
+          "providerLabel": "Azure AI",
           "inputPrice": 30,
           "outputPrice": 180,
           "blendedPrice": 105,
@@ -12274,13 +12274,13 @@
       "maxBlendedPrice": 2.625,
       "spreadRatio": 1,
       "medianContext": 574000,
-      "cheapestProvider": "azure ai",
+      "cheapestProvider": "Azure AI",
       "highestProvider": "OpenAI",
       "entries": [
         {
           "sourceKey": "azure_ai/gpt-5.4-mini",
           "provider": "azure_ai",
-          "providerLabel": "azure ai",
+          "providerLabel": "Azure AI",
           "inputPrice": 0.75,
           "outputPrice": 4.5,
           "blendedPrice": 2.625,
@@ -12341,13 +12341,13 @@
       "maxBlendedPrice": 0.725,
       "spreadRatio": 1,
       "medianContext": 574000,
-      "cheapestProvider": "azure ai",
+      "cheapestProvider": "Azure AI",
       "highestProvider": "OpenAI",
       "entries": [
         {
           "sourceKey": "azure_ai/gpt-5.4-nano",
           "provider": "azure_ai",
-          "providerLabel": "azure ai",
+          "providerLabel": "Azure AI",
           "inputPrice": 0.2,
           "outputPrice": 1.25,
           "blendedPrice": 0.725,
@@ -12877,13 +12877,13 @@
       "maxBlendedPrice": 9,
       "spreadRatio": 1,
       "medianContext": 214357,
-      "cheapestProvider": "azure ai",
-      "highestProvider": "xai",
+      "cheapestProvider": "Azure AI",
+      "highestProvider": "xAI",
       "entries": [
         {
           "sourceKey": "azure_ai/grok-4",
           "provider": "azure_ai",
-          "providerLabel": "azure ai",
+          "providerLabel": "Azure AI",
           "inputPrice": 3,
           "outputPrice": 15,
           "blendedPrice": 9,
@@ -12917,7 +12917,7 @@
         {
           "sourceKey": "xai/grok-4",
           "provider": "xai",
-          "providerLabel": "xai",
+          "providerLabel": "xAI",
           "inputPrice": 3,
           "outputPrice": 15,
           "blendedPrice": 9,
@@ -13235,7 +13235,7 @@
         {
           "sourceKey": "replicate/anthropic/claude-3.7-sonnet",
           "provider": "replicate",
-          "providerLabel": "replicate",
+          "providerLabel": "Replicate",
           "inputPrice": 3,
           "outputPrice": 15,
           "blendedPrice": 9,
@@ -13280,7 +13280,7 @@
       "spreadRatio": 1.25,
       "medianContext": 200000,
       "cheapestProvider": "Vercel AI Gateway",
-      "highestProvider": "replicate",
+      "highestProvider": "Replicate",
       "entries": [
         {
           "sourceKey": "vercel_ai_gateway/anthropic/claude-3.5-haiku",
@@ -13302,7 +13302,7 @@
         {
           "sourceKey": "replicate/anthropic/claude-3.5-haiku",
           "provider": "replicate",
-          "providerLabel": "replicate",
+          "providerLabel": "Replicate",
           "inputPrice": 1,
           "outputPrice": 5,
           "blendedPrice": 3,
@@ -13579,13 +13579,13 @@
       "maxBlendedPrice": 1.75,
       "spreadRatio": 1.03,
       "medianContext": 4096,
-      "cheapestProvider": "replicate",
+      "cheapestProvider": "Replicate",
       "highestProvider": "Perplexity",
       "entries": [
         {
           "sourceKey": "replicate/meta/llama-2-70b",
           "provider": "replicate",
-          "providerLabel": "replicate",
+          "providerLabel": "Replicate",
           "inputPrice": 0.65,
           "outputPrice": 2.75,
           "blendedPrice": 1.7,
@@ -13630,7 +13630,7 @@
       "spreadRatio": 1.02,
       "medianContext": 128000,
       "cheapestProvider": "Oracle OCI",
-      "highestProvider": "azure ai",
+      "highestProvider": "Azure AI",
       "entries": [
         {
           "sourceKey": "oci/meta.llama-3.2-90b-vision-instruct",
@@ -13652,7 +13652,7 @@
         {
           "sourceKey": "azure_ai/Llama-3.2-90B-Vision-Instruct",
           "provider": "azure_ai",
-          "providerLabel": "azure ai",
+          "providerLabel": "Azure AI",
           "inputPrice": 2.04,
           "outputPrice": 2.04,
           "blendedPrice": 2.04,
@@ -13930,7 +13930,7 @@
       "spreadRatio": 1,
       "medianContext": 128000,
       "cheapestProvider": "Azure OpenAI",
-      "highestProvider": "replicate",
+      "highestProvider": "Replicate",
       "entries": [
         {
           "sourceKey": "azure/o1-mini-2024-09-12",
@@ -13952,7 +13952,7 @@
         {
           "sourceKey": "replicate/openai/o1-mini",
           "provider": "replicate",
-          "providerLabel": "replicate",
+          "providerLabel": "Replicate",
           "inputPrice": 1.1,
           "outputPrice": 4.4,
           "blendedPrice": 2.75,
@@ -14629,13 +14629,13 @@
       "maxBlendedPrice": 0.1875,
       "spreadRatio": 1,
       "medianContext": 129536,
-      "cheapestProvider": "azure ai",
-      "highestProvider": "azure ai",
+      "cheapestProvider": "Azure AI",
+      "highestProvider": "Azure AI",
       "entries": [
         {
           "sourceKey": "azure_ai/Phi-4-mini-instruct",
           "provider": "azure_ai",
-          "providerLabel": "azure ai",
+          "providerLabel": "Azure AI",
           "inputPrice": 0.075,
           "outputPrice": 0.3,
           "blendedPrice": 0.1875,
@@ -14679,13 +14679,13 @@
       "maxBlendedPrice": 9,
       "spreadRatio": 1,
       "medianContext": 131072,
-      "cheapestProvider": "azure ai",
-      "highestProvider": "xai",
+      "cheapestProvider": "Azure AI",
+      "highestProvider": "xAI",
       "entries": [
         {
           "sourceKey": "azure_ai/global/grok-3",
           "provider": "azure_ai",
-          "providerLabel": "azure ai",
+          "providerLabel": "Azure AI",
           "inputPrice": 3,
           "outputPrice": 15,
           "blendedPrice": 9,
@@ -14702,7 +14702,7 @@
         {
           "sourceKey": "xai/grok-3",
           "provider": "xai",
-          "providerLabel": "xai",
+          "providerLabel": "xAI",
           "inputPrice": 3,
           "outputPrice": 15,
           "blendedPrice": 9,
@@ -14729,13 +14729,13 @@
       "maxBlendedPrice": 0.35,
       "spreadRatio": 1,
       "medianContext": 1065536,
-      "cheapestProvider": "azure ai",
-      "highestProvider": "xai",
+      "cheapestProvider": "Azure AI",
+      "highestProvider": "xAI",
       "entries": [
         {
           "sourceKey": "azure_ai/grok-4-fast-non-reasoning",
           "provider": "azure_ai",
-          "providerLabel": "azure ai",
+          "providerLabel": "Azure AI",
           "inputPrice": 0.2,
           "outputPrice": 0.5,
           "blendedPrice": 0.35,
@@ -14752,7 +14752,7 @@
         {
           "sourceKey": "xai/grok-4-fast-non-reasoning",
           "provider": "xai",
-          "providerLabel": "xai",
+          "providerLabel": "xAI",
           "inputPrice": 0.2,
           "outputPrice": 0.5,
           "blendedPrice": 0.35,
@@ -14779,13 +14779,13 @@
       "maxBlendedPrice": 0.35,
       "spreadRatio": 1,
       "medianContext": 1065536,
-      "cheapestProvider": "azure ai",
-      "highestProvider": "xai",
+      "cheapestProvider": "Azure AI",
+      "highestProvider": "xAI",
       "entries": [
         {
           "sourceKey": "azure_ai/grok-4-fast-reasoning",
           "provider": "azure_ai",
-          "providerLabel": "azure ai",
+          "providerLabel": "Azure AI",
           "inputPrice": 0.2,
           "outputPrice": 0.5,
           "blendedPrice": 0.35,
@@ -14802,7 +14802,7 @@
         {
           "sourceKey": "xai/grok-4-fast-reasoning",
           "provider": "xai",
-          "providerLabel": "xai",
+          "providerLabel": "xAI",
           "inputPrice": 0.2,
           "outputPrice": 0.5,
           "blendedPrice": 0.35,
@@ -14829,13 +14829,13 @@
       "maxBlendedPrice": 0.35,
       "spreadRatio": 1,
       "medianContext": 1065536,
-      "cheapestProvider": "azure ai",
-      "highestProvider": "xai",
+      "cheapestProvider": "Azure AI",
+      "highestProvider": "xAI",
       "entries": [
         {
           "sourceKey": "azure_ai/grok-4-1-fast-non-reasoning",
           "provider": "azure_ai",
-          "providerLabel": "azure ai",
+          "providerLabel": "Azure AI",
           "inputPrice": 0.2,
           "outputPrice": 0.5,
           "blendedPrice": 0.35,
@@ -14852,7 +14852,7 @@
         {
           "sourceKey": "xai/grok-4-1-fast-non-reasoning",
           "provider": "xai",
-          "providerLabel": "xai",
+          "providerLabel": "xAI",
           "inputPrice": 0.2,
           "outputPrice": 0.5,
           "blendedPrice": 0.35,
@@ -14879,13 +14879,13 @@
       "maxBlendedPrice": 0.35,
       "spreadRatio": 1,
       "medianContext": 1065536,
-      "cheapestProvider": "azure ai",
-      "highestProvider": "xai",
+      "cheapestProvider": "Azure AI",
+      "highestProvider": "xAI",
       "entries": [
         {
           "sourceKey": "azure_ai/grok-4-1-fast-reasoning",
           "provider": "azure_ai",
-          "providerLabel": "azure ai",
+          "providerLabel": "Azure AI",
           "inputPrice": 0.2,
           "outputPrice": 0.5,
           "blendedPrice": 0.35,
@@ -14902,7 +14902,7 @@
         {
           "sourceKey": "xai/grok-4-1-fast-reasoning",
           "provider": "xai",
-          "providerLabel": "xai",
+          "providerLabel": "xAI",
           "inputPrice": 0.2,
           "outputPrice": 0.5,
           "blendedPrice": 0.35,
@@ -14929,13 +14929,13 @@
       "maxBlendedPrice": 0.85,
       "spreadRatio": 1,
       "medianContext": 193536,
-      "cheapestProvider": "azure ai",
-      "highestProvider": "xai",
+      "cheapestProvider": "Azure AI",
+      "highestProvider": "xAI",
       "entries": [
         {
           "sourceKey": "azure_ai/grok-code-fast-1",
           "provider": "azure_ai",
-          "providerLabel": "azure ai",
+          "providerLabel": "Azure AI",
           "inputPrice": 0.2,
           "outputPrice": 1.5,
           "blendedPrice": 0.85,
@@ -14952,7 +14952,7 @@
         {
           "sourceKey": "xai/grok-code-fast-1",
           "provider": "xai",
-          "providerLabel": "xai",
+          "providerLabel": "xAI",
           "inputPrice": 0.2,
           "outputPrice": 1.5,
           "blendedPrice": 0.85,
@@ -14979,13 +14979,13 @@
       "maxBlendedPrice": 0.04,
       "spreadRatio": 1,
       "medianContext": 128000,
-      "cheapestProvider": "azure ai",
+      "cheapestProvider": "Azure AI",
       "highestProvider": "Vercel AI Gateway",
       "entries": [
         {
           "sourceKey": "azure_ai/ministral-3b",
           "provider": "azure_ai",
-          "providerLabel": "azure ai",
+          "providerLabel": "Azure AI",
           "inputPrice": 0.04,
           "outputPrice": 0.04,
           "blendedPrice": 0.04,
@@ -15029,13 +15029,13 @@
       "maxBlendedPrice": 1,
       "spreadRatio": 1,
       "medianContext": 259072,
-      "cheapestProvider": "azure ai",
+      "cheapestProvider": "Azure AI",
       "highestProvider": "Mistral",
       "entries": [
         {
           "sourceKey": "azure_ai/mistral-large-3",
           "provider": "azure_ai",
-          "providerLabel": "azure ai",
+          "providerLabel": "Azure AI",
           "inputPrice": 0.5,
           "outputPrice": 1.5,
           "blendedPrice": 1,
@@ -15579,13 +15579,13 @@
       "maxBlendedPrice": 0.3,
       "spreadRatio": 1,
       "medianContext": 256000,
-      "cheapestProvider": "ai21",
-      "highestProvider": "vertex ai-ai21 models",
+      "cheapestProvider": "AI21",
+      "highestProvider": "Vertex AI AI21",
       "entries": [
         {
           "sourceKey": "jamba-1.5",
           "provider": "ai21",
-          "providerLabel": "ai21",
+          "providerLabel": "AI21",
           "inputPrice": 0.2,
           "outputPrice": 0.4,
           "blendedPrice": 0.3,
@@ -15602,7 +15602,7 @@
         {
           "sourceKey": "vertex_ai/jamba-1.5",
           "provider": "vertex_ai-ai21_models",
-          "providerLabel": "vertex ai-ai21 models",
+          "providerLabel": "Vertex AI AI21",
           "inputPrice": 0.2,
           "outputPrice": 0.4,
           "blendedPrice": 0.3,
@@ -15629,13 +15629,13 @@
       "maxBlendedPrice": 5,
       "spreadRatio": 1,
       "medianContext": 256000,
-      "cheapestProvider": "ai21",
-      "highestProvider": "vertex ai-ai21 models",
+      "cheapestProvider": "AI21",
+      "highestProvider": "Vertex AI AI21",
       "entries": [
         {
           "sourceKey": "jamba-1.5-large",
           "provider": "ai21",
-          "providerLabel": "ai21",
+          "providerLabel": "AI21",
           "inputPrice": 2,
           "outputPrice": 8,
           "blendedPrice": 5,
@@ -15652,7 +15652,7 @@
         {
           "sourceKey": "vertex_ai/jamba-1.5-large",
           "provider": "vertex_ai-ai21_models",
-          "providerLabel": "vertex ai-ai21 models",
+          "providerLabel": "Vertex AI AI21",
           "inputPrice": 2,
           "outputPrice": 8,
           "blendedPrice": 5,
@@ -15679,13 +15679,13 @@
       "maxBlendedPrice": 5,
       "spreadRatio": 1,
       "medianContext": 256000,
-      "cheapestProvider": "ai21",
-      "highestProvider": "vertex ai-ai21 models",
+      "cheapestProvider": "AI21",
+      "highestProvider": "Vertex AI AI21",
       "entries": [
         {
           "sourceKey": "jamba-1.5-large@001",
           "provider": "ai21",
-          "providerLabel": "ai21",
+          "providerLabel": "AI21",
           "inputPrice": 2,
           "outputPrice": 8,
           "blendedPrice": 5,
@@ -15702,7 +15702,7 @@
         {
           "sourceKey": "vertex_ai/jamba-1.5-large@001",
           "provider": "vertex_ai-ai21_models",
-          "providerLabel": "vertex ai-ai21 models",
+          "providerLabel": "Vertex AI AI21",
           "inputPrice": 2,
           "outputPrice": 8,
           "blendedPrice": 5,
@@ -15729,13 +15729,13 @@
       "maxBlendedPrice": 0.3,
       "spreadRatio": 1,
       "medianContext": 256000,
-      "cheapestProvider": "ai21",
-      "highestProvider": "vertex ai-ai21 models",
+      "cheapestProvider": "AI21",
+      "highestProvider": "Vertex AI AI21",
       "entries": [
         {
           "sourceKey": "jamba-1.5-mini",
           "provider": "ai21",
-          "providerLabel": "ai21",
+          "providerLabel": "AI21",
           "inputPrice": 0.2,
           "outputPrice": 0.4,
           "blendedPrice": 0.3,
@@ -15752,7 +15752,7 @@
         {
           "sourceKey": "vertex_ai/jamba-1.5-mini",
           "provider": "vertex_ai-ai21_models",
-          "providerLabel": "vertex ai-ai21 models",
+          "providerLabel": "Vertex AI AI21",
           "inputPrice": 0.2,
           "outputPrice": 0.4,
           "blendedPrice": 0.3,
@@ -15779,13 +15779,13 @@
       "maxBlendedPrice": 0.3,
       "spreadRatio": 1,
       "medianContext": 256000,
-      "cheapestProvider": "ai21",
-      "highestProvider": "vertex ai-ai21 models",
+      "cheapestProvider": "AI21",
+      "highestProvider": "Vertex AI AI21",
       "entries": [
         {
           "sourceKey": "jamba-1.5-mini@001",
           "provider": "ai21",
-          "providerLabel": "ai21",
+          "providerLabel": "AI21",
           "inputPrice": 0.2,
           "outputPrice": 0.4,
           "blendedPrice": 0.3,
@@ -15802,7 +15802,7 @@
         {
           "sourceKey": "vertex_ai/jamba-1.5-mini@001",
           "provider": "vertex_ai-ai21_models",
-          "providerLabel": "vertex ai-ai21 models",
+          "providerLabel": "Vertex AI AI21",
           "inputPrice": 0.2,
           "outputPrice": 0.4,
           "blendedPrice": 0.3,
@@ -16279,8 +16279,8 @@
       "maxBlendedPrice": 0.15,
       "spreadRatio": 1,
       "medianContext": 18432,
-      "cheapestProvider": "replicate",
-      "highestProvider": "replicate",
+      "cheapestProvider": "Replicate",
+      "highestProvider": "Replicate",
       "entries": [
         {
           "sourceKey": "ollama/mistral-7B-Instruct-v0.2",
@@ -16302,7 +16302,7 @@
         {
           "sourceKey": "replicate/mistralai/mistral-7b-instruct-v0.2",
           "provider": "replicate",
-          "providerLabel": "replicate",
+          "providerLabel": "Replicate",
           "inputPrice": 0.05,
           "outputPrice": 0.25,
           "blendedPrice": 0.15,
@@ -16730,7 +16730,7 @@
       "spreadRatio": 1,
       "medianContext": 32768,
       "cheapestProvider": "Vercel AI Gateway",
-      "highestProvider": "xai",
+      "highestProvider": "xAI",
       "entries": [
         {
           "sourceKey": "vercel_ai_gateway/xai/grok-2-vision",
@@ -16752,7 +16752,7 @@
         {
           "sourceKey": "xai/grok-2-vision",
           "provider": "xai",
-          "providerLabel": "xai",
+          "providerLabel": "xAI",
           "inputPrice": 2,
           "outputPrice": 10,
           "blendedPrice": 6,
@@ -16780,7 +16780,7 @@
       "spreadRatio": 1,
       "medianContext": 131072,
       "cheapestProvider": "Vercel AI Gateway",
-      "highestProvider": "xai",
+      "highestProvider": "xAI",
       "entries": [
         {
           "sourceKey": "vercel_ai_gateway/xai/grok-3-fast",
@@ -16802,7 +16802,7 @@
         {
           "sourceKey": "xai/grok-3-fast-latest",
           "provider": "xai",
-          "providerLabel": "xai",
+          "providerLabel": "xAI",
           "inputPrice": 5,
           "outputPrice": 25,
           "blendedPrice": 15,
@@ -16830,7 +16830,7 @@
       "spreadRatio": 1,
       "medianContext": 131072,
       "cheapestProvider": "Vercel AI Gateway",
-      "highestProvider": "xai",
+      "highestProvider": "xAI",
       "entries": [
         {
           "sourceKey": "vercel_ai_gateway/xai/grok-3-mini-fast",
@@ -16852,7 +16852,7 @@
         {
           "sourceKey": "xai/grok-3-mini-fast",
           "provider": "xai",
-          "providerLabel": "xai",
+          "providerLabel": "xAI",
           "inputPrice": 0.6,
           "outputPrice": 4,
           "blendedPrice": 2.3,
@@ -16929,13 +16929,13 @@
       "maxBlendedPrice": 1.2,
       "spreadRatio": 1,
       "medianContext": 96768,
-      "cheapestProvider": "zai",
+      "cheapestProvider": "ZAI",
       "highestProvider": "novita",
       "entries": [
         {
           "sourceKey": "zai/glm-4.5v",
           "provider": "zai",
-          "providerLabel": "zai",
+          "providerLabel": "ZAI",
           "inputPrice": 0.6,
           "outputPrice": 1.8,
           "blendedPrice": 1.2,

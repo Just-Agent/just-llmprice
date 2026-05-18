@@ -88,6 +88,8 @@ type BrandMeta = {
   logoUrl?: string
 }
 
+type PlatformLogoMeta = BrandMeta
+
 type PriceData = {
   meta: {
     generatedAt: string
@@ -158,6 +160,37 @@ const brandMeta: Record<string, BrandMeta> = {
   Mistral: { initials: 'M', logoUrl: 'https://cdn.simpleicons.org/mistralai/FA520F' },
   Cohere: { initials: 'C', logoUrl: 'https://cohere.com/favicon.ico' },
   Other: { initials: 'AI' },
+}
+const platformLogoMeta: Record<string, PlatformLogoMeta> = {
+  openai: { initials: 'OA', logoUrl: 'https://www.google.com/s2/favicons?domain=openai.com&sz=64' },
+  azure: { initials: 'AZ', logoUrl: 'https://www.google.com/s2/favicons?domain=azure.microsoft.com&sz=64' },
+  azure_ai: { initials: 'AI', logoUrl: 'https://www.google.com/s2/favicons?domain=ai.azure.com&sz=64' },
+  vertex_ai: { initials: 'G', logoUrl: 'https://www.google.com/s2/favicons?domain=cloud.google.com&sz=64' },
+  'vertex_ai-language-models': { initials: 'VE', logoUrl: 'https://www.google.com/s2/favicons?domain=cloud.google.com&sz=64' },
+  'vertex_ai-anthropic_models': { initials: 'VA', logoUrl: 'https://www.google.com/s2/favicons?domain=cloud.google.com&sz=64' },
+  gemini: { initials: 'G', logoUrl: 'https://www.google.com/s2/favicons?domain=gemini.google.com&sz=64' },
+  anthropic: { initials: 'A', logoUrl: 'https://www.google.com/s2/favicons?domain=anthropic.com&sz=64' },
+  bedrock: { initials: 'AWS', logoUrl: 'https://www.google.com/s2/favicons?domain=aws.amazon.com&sz=64' },
+  bedrock_converse: { initials: 'AWS', logoUrl: 'https://www.google.com/s2/favicons?domain=aws.amazon.com&sz=64' },
+  openrouter: { initials: 'OR', logoUrl: 'https://www.google.com/s2/favicons?domain=openrouter.ai&sz=64' },
+  vercel_ai_gateway: { initials: 'V', logoUrl: 'https://www.google.com/s2/favicons?domain=vercel.com&sz=64' },
+  deepinfra: { initials: 'DI', logoUrl: 'https://www.google.com/s2/favicons?domain=deepinfra.com&sz=64' },
+  fireworks_ai: { initials: 'FW', logoUrl: 'https://www.google.com/s2/favicons?domain=fireworks.ai&sz=64' },
+  together_ai: { initials: 'TG', logoUrl: 'https://www.google.com/s2/favicons?domain=together.ai&sz=64' },
+  xai: { initials: 'xAI', logoUrl: 'https://www.google.com/s2/favicons?domain=x.ai&sz=64' },
+  ai21: { initials: '21', logoUrl: 'https://www.google.com/s2/favicons?domain=ai21.com&sz=64' },
+  'vertex_ai-ai21_models': { initials: '21', logoUrl: 'https://www.google.com/s2/favicons?domain=ai21.com&sz=64' },
+  zai: { initials: 'Z', logoUrl: 'https://www.google.com/s2/favicons?domain=chatglm.cn&sz=64' },
+  deepseek: { initials: 'DS', logoUrl: 'https://www.google.com/s2/favicons?domain=deepseek.com&sz=64' },
+  groq: { initials: 'GR', logoUrl: 'https://www.google.com/s2/favicons?domain=groq.com&sz=64' },
+  cerebras: { initials: 'CB', logoUrl: 'https://www.google.com/s2/favicons?domain=cerebras.ai&sz=64' },
+  baseten: { initials: 'B', logoUrl: 'https://www.google.com/s2/favicons?domain=baseten.co&sz=64' },
+  novita: { initials: 'N', logoUrl: 'https://www.google.com/s2/favicons?domain=novita.ai&sz=64' },
+  replicate: { initials: 'R', logoUrl: 'https://www.google.com/s2/favicons?domain=replicate.com&sz=64' },
+  perplexity: { initials: 'P', logoUrl: 'https://www.google.com/s2/favicons?domain=perplexity.ai&sz=64' },
+  mistral: { initials: 'M', logoUrl: 'https://www.google.com/s2/favicons?domain=mistral.ai&sz=64' },
+  oci: { initials: 'OCI', logoUrl: 'https://www.google.com/s2/favicons?domain=oracle.com&sz=64' },
+  cohere_chat: { initials: 'C', logoUrl: 'https://www.google.com/s2/favicons?domain=cohere.com&sz=64' },
 }
 const cnyRate = 7.2
 
@@ -583,7 +616,7 @@ function App() {
               onClick={() => selectPlatformAndFocus(platform.label)}
             >
               <div className="platform-card-head">
-                <span className="platform-avatar">{platform.label.slice(0, 2).toUpperCase()}</span>
+                <PlatformLogo label={platform.label} provider={platform.provider} />
                 <span>
                   <strong>{platform.label}</strong>
                   <small>{platform.modelCount} 个模型可比</small>
@@ -839,6 +872,23 @@ function FamilyBadge({ family }: { family: string }) {
     <span className={familyClass(family)}>
       <BrandLogo family={family} />
       {family}
+    </span>
+  )
+}
+
+function PlatformLogo({ provider, label }: { provider: string; label: string }) {
+  const fallback = label
+    .split(/\s+/)
+    .map((part) => part[0])
+    .join('')
+    .slice(0, 3)
+    .toUpperCase()
+  const meta = platformLogoMeta[provider] ?? { initials: fallback || label.slice(0, 2).toUpperCase() }
+
+  return (
+    <span className="platform-avatar" aria-hidden="true">
+      <span>{meta.initials}</span>
+      {meta.logoUrl && <img alt="" loading="lazy" src={meta.logoUrl} onError={(event) => (event.currentTarget.style.display = 'none')} />}
     </span>
   )
 }
