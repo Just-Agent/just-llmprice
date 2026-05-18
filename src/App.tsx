@@ -62,6 +62,11 @@ type LeaderboardItem = {
   highestProvider?: string | null
 }
 
+type RadarAxis = {
+  label: string
+  value: number
+}
+
 type PriceData = {
   meta: {
     generatedAt: string
@@ -127,6 +132,40 @@ function cleanEntries(entries: PriceEntry[], includeZero: boolean, includeExtrem
 
 function familyClass(family: string) {
   return `family family-${family.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`
+}
+
+function clamp(value: number, min = 0, max = 100) {
+  return Math.min(Math.max(value, min), max)
+}
+
+function lowerPriceScore(value: number | null | undefined) {
+  if (!value || value <= 0) return 0
+  const low = Math.log10(0.02)
+  const high = Math.log10(20)
+  return clamp(((high - Math.log10(Math.max(value, 0.02))) / (high - low)) * 100)
+}
+
+function spreadOpportunityScore(value: number | null | undefined) {
+  if (!value || value <= 1) return 12
+  return clamp((Math.log10(Math.min(value, 300)) / Math.log10(300)) * 100)
+}
+
+function capabilityScore(model: ModelSummary) {
+  const entries = model.entries.filter((entry) => !entry.isExtremePrice)
+  const hasReasoning = entries.some((entry) => entry.supportsReasoning)
+  const hasVision = entries.some((entry) => entry.supportsVision)
+  const hasTools = entries.some((entry) => entry.supportsFunctionCalling)
+  return clamp(24 + (hasReasoning ? 24 : 0) + (hasVision ? 22 : 0) + (hasTools ? 22 : 0) + Math.min(model.providerCount, 8))
+}
+
+function radarAxes(model: ModelSummary): RadarAxis[] {
+  return [
+    { label: '低价', value: lowerPriceScore(model.minBlendedPrice) },
+    { label: '平台', value: clamp((model.providerCount / 20) * 100) },
+    { label: '窗口', value: clamp(((model.medianContext ?? 0) / 1_000_000) * 100) },
+    { label: '价差', value: spreadOpportunityScore(model.spreadRatio) },
+    { label: '能力', value: capabilityScore(model) },
+  ]
 }
 
 function App() {
@@ -320,6 +359,29 @@ function App() {
             />
           ))}
         </div>
+
+        <section className="radar-showcase" aria-label="热门模型多维雷达矩阵">
+          <div className="radar-showcase-head">
+            <span>
+              <Radar size={17} aria-hidden="true" />
+              多维雷达矩阵
+            </span>
+            <small>低价 / 平台 / 窗口 / 价差 / 能力</small>
+          </div>
+          <div className="radar-cards">
+            {hotModels.slice(0, 4).map((model) => (
+              <button className="radar-card" key={`radar-${model.id}`} type="button" onClick={() => selectModelAndFocus(model.id)}>
+                <RadarChart axes={radarAxes(model)} showLabels size={148} />
+                <span>
+                  <strong>{model.label}</strong>
+                  <small>
+                    {formatPrice(model.minBlendedPrice, currency)} 起 · {model.providerCount} 平台
+                  </small>
+                </span>
+              </button>
+            ))}
+          </div>
+        </section>
       </section>
 
       <section className="status-strip" aria-label="数据摘要">
@@ -557,7 +619,10 @@ function HotModelCard({
 
   return (
     <button className="hot-card" type="button" onClick={onSelect}>
-      <span className={familyClass(model.family)}>{model.family}</span>
+      <div className="hot-card-top">
+        <span className={familyClass(model.family)}>{model.family}</span>
+        <RadarChart axes={radarAxes(model)} size={82} />
+      </div>
       <h2>{model.label}</h2>
       <div className="hot-card-stats">
         <span>
@@ -622,6 +687,59 @@ function Leaderboard({
         </button>
       ))}
     </div>
+  )
+}
+
+function RadarChart({ axes, size = 120, showLabels = false }: { axes: RadarAxis[]; size?: number; showLabels?: boolean }) {
+  const center = size / 2
+  const radius = showLabels ? size * 0.31 : size * 0.37
+  const pointFor = (index: number, value: number) => {
+    const angle = -Math.PI / 2 + (index * Math.PI * 2) / axes.length
+    const distance = radius * clamp(value) / 100
+    return {
+      x: center + Math.cos(angle) * distance,
+      y: center + Math.sin(angle) * distance,
+    }
+  }
+  const ringPoints = (scale: number) =>
+    axes
+      .map((_, index) => {
+        const point = pointFor(index, scale)
+        return `${point.x.toFixed(2)},${point.y.toFixed(2)}`
+      })
+      .join(' ')
+  const shapePoints = axes
+    .map((axis, index) => {
+      const point = pointFor(index, axis.value)
+      return `${point.x.toFixed(2)},${point.y.toFixed(2)}`
+    })
+    .join(' ')
+
+  return (
+    <svg className="radar-chart" width={size} height={size} viewBox={`0 0 ${size} ${size}`} aria-hidden="true">
+      {[100, 68, 36].map((ring) => (
+        <polygon className="radar-ring" key={ring} points={ringPoints(ring)} />
+      ))}
+      {axes.map((axis, index) => {
+        const edge = pointFor(index, 100)
+        const label = pointFor(index, 119)
+        return (
+          <g key={axis.label}>
+            <line className="radar-spoke" x1={center} y1={center} x2={edge.x} y2={edge.y} />
+            {showLabels && (
+              <text className="radar-label" x={label.x} y={label.y} textAnchor="middle" dominantBaseline="middle">
+                {axis.label}
+              </text>
+            )}
+          </g>
+        )
+      })}
+      <polygon className="radar-shape" points={shapePoints} />
+      {axes.map((axis, index) => {
+        const point = pointFor(index, axis.value)
+        return <circle className="radar-dot" cx={point.x} cy={point.y} key={`${axis.label}-dot`} r={showLabels ? 3.2 : 2.5} />
+      })}
+    </svg>
   )
 }
 
