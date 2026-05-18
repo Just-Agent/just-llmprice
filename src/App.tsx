@@ -1,9 +1,13 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import {
+  Activity,
   ArrowDownUp,
+  ArrowRight,
   BarChart3,
   Database,
+  Flame,
   GitBranch,
+  Radar,
   Search,
   SlidersHorizontal,
   Sparkles,
@@ -82,6 +86,7 @@ const metricLabels: Record<PriceMetric, string> = {
 }
 
 const familyOrder = ['全部', 'OpenAI', 'Anthropic', 'Google', 'DeepSeek', 'Qwen', 'Llama', 'Mistral', 'Cohere', 'Other']
+const hotModelIds = ['deepseek-r1', 'qwen3', 'gpt-4o-mini', 'claude-sonnet-4', 'gemini-2.5-pro', 'gpt-oss-120b']
 const cnyRate = 7.2
 
 function formatPrice(value: number | null | undefined, currency: Currency) {
@@ -125,6 +130,7 @@ function familyClass(family: string) {
 }
 
 function App() {
+  const analysisRef = useRef<HTMLElement | null>(null)
   const [data, setData] = useState<PriceData | null>(null)
   const [selectedModelId, setSelectedModelId] = useState('gpt-4o-mini')
   const [query, setQuery] = useState('')
@@ -175,8 +181,32 @@ function App() {
 
   const selectedModel = useMemo(() => {
     if (!data) return null
-    return data.models.find((model) => model.id === selectedModelId) ?? filteredModels[0] ?? data.models[0] ?? null
-  }, [data, filteredModels, selectedModelId])
+    const selected = data.models.find((model) => model.id === selectedModelId) ?? null
+    const filterActive = query.trim() !== '' || family !== '全部'
+    const selectedInFiltered = selected ? filteredModels.some((model) => model.id === selected.id) : false
+
+    if (!filterActive || selectedInFiltered) return selected ?? filteredModels[0] ?? data.models[0] ?? null
+    return filteredModels[0] ?? selected ?? data.models[0] ?? null
+  }, [data, family, filteredModels, query, selectedModelId])
+
+  const hotModels = useMemo(() => {
+    if (!data) return []
+    const byId = new Map(data.models.map((model) => [model.id, model]))
+    const picked = new Map<string, ModelSummary>()
+
+    for (const id of hotModelIds) {
+      const model = byId.get(id)
+      if (model) picked.set(model.id, model)
+    }
+
+    for (const item of data.leaderboards.priceSpread) {
+      const model = byId.get(item.id)
+      if (model) picked.set(model.id, model)
+      if (picked.size >= 6) break
+    }
+
+    return Array.from(picked.values()).slice(0, 6)
+  }, [data])
 
   const visibleEntries = useMemo(() => {
     if (!selectedModel) return []
@@ -191,6 +221,11 @@ function App() {
   const highest = visibleEntries[visibleEntries.length - 1] ?? null
   const spread =
     cheapest?.[metric] && highest?.[metric] && cheapest[metric] > 0 ? (highest[metric] ?? 0) / cheapest[metric] : null
+
+  const selectModelAndFocus = (modelId: string) => {
+    setSelectedModelId(modelId)
+    analysisRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
 
   if (loadError) {
     return (
@@ -250,6 +285,43 @@ function App() {
         </div>
       </header>
 
+      <section className="hot-hero" aria-label="热门模型价格雷达">
+        <div className="hot-copy">
+          <span className="radar-mark">
+            <Radar size={28} aria-hidden="true" />
+          </span>
+          <span className="hot-label">
+            <Flame size={16} aria-hidden="true" />
+            热门模型价格雷达
+          </span>
+          <h1>同一个模型，平台价差可以很离谱。</h1>
+          <p>
+            先看高热模型的最低价、最高价和价差，再进入下方分析台做模型族筛选、平台排行和价格分布对比。
+          </p>
+          <div className="hot-actions">
+            <button type="button" onClick={() => analysisRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })}>
+              进入完整分析台
+              <ArrowRight size={16} aria-hidden="true" />
+            </button>
+            <span>
+              <Activity size={15} aria-hidden="true" />
+              每 1M tokens · 来自 LiteLLM
+            </span>
+          </div>
+        </div>
+
+        <div className="hot-grid">
+          {hotModels.map((model) => (
+            <HotModelCard
+              currency={currency}
+              key={model.id}
+              model={model}
+              onSelect={() => selectModelAndFocus(model.id)}
+            />
+          ))}
+        </div>
+      </section>
+
       <section className="status-strip" aria-label="数据摘要">
         <div>
           <span>模型组</span>
@@ -269,7 +341,7 @@ function App() {
         </div>
       </section>
 
-      <div className="workspace">
+      <div className="workspace" id="analysis">
         <aside className="sidebar" aria-label="模型筛选">
           <div className="panel-title">
             <SlidersHorizontal size={16} aria-hidden="true" />
@@ -311,7 +383,7 @@ function App() {
           </div>
         </aside>
 
-        <section className="main-panel">
+        <section className="main-panel" ref={analysisRef}>
           <div className="model-header">
             <div>
               <span className={familyClass(selectedModel.family)}>{selectedModel.family}</span>
@@ -437,33 +509,85 @@ function App() {
               </div>
             </aside>
           </div>
+
+          <section className="leaderboards" aria-label="排行榜">
+            <Leaderboard
+              currency={currency}
+              items={data.leaderboards.priceSpread}
+              label="价差最大"
+              onSelect={selectModelAndFocus}
+              value={(item) => (item.spreadRatio ? `${item.spreadRatio}x` : '-')}
+            />
+            <Leaderboard
+              currency={currency}
+              items={data.leaderboards.cheapestAverage}
+              label="最低综合价"
+              onSelect={selectModelAndFocus}
+              value={(item) => formatPrice(item.minBlendedPrice, currency)}
+            />
+            <Leaderboard
+              currency={currency}
+              items={data.leaderboards.mostProviders}
+              label="覆盖平台最多"
+              onSelect={selectModelAndFocus}
+              value={(item) => `${item.providerCount} 家`}
+            />
+          </section>
         </section>
       </div>
-
-      <section className="leaderboards" aria-label="排行榜">
-        <Leaderboard
-          currency={currency}
-          items={data.leaderboards.priceSpread}
-          label="价差最大"
-          onSelect={setSelectedModelId}
-          value={(item) => (item.spreadRatio ? `${item.spreadRatio}x` : '-')}
-        />
-        <Leaderboard
-          currency={currency}
-          items={data.leaderboards.cheapestAverage}
-          label="最低综合价"
-          onSelect={setSelectedModelId}
-          value={(item) => formatPrice(item.minBlendedPrice, currency)}
-        />
-        <Leaderboard
-          currency={currency}
-          items={data.leaderboards.mostProviders}
-          label="覆盖平台最多"
-          onSelect={setSelectedModelId}
-          value={(item) => `${item.providerCount} 家`}
-        />
-      </section>
     </main>
+  )
+}
+
+function HotModelCard({
+  model,
+  currency,
+  onSelect,
+}: {
+  model: ModelSummary
+  currency: Currency
+  onSelect: () => void
+}) {
+  const entries = cleanEntries(model.entries, false, false, 'blendedPrice').slice(0, 4)
+  const max = Math.max(...entries.map((entry) => entry.blendedPrice ?? 0), 0.001)
+  const best = entries[0] ?? null
+  const worst = entries[entries.length - 1] ?? null
+  const spread =
+    best?.blendedPrice && worst?.blendedPrice && best.blendedPrice > 0 ? worst.blendedPrice / best.blendedPrice : model.spreadRatio
+
+  return (
+    <button className="hot-card" type="button" onClick={onSelect}>
+      <span className={familyClass(model.family)}>{model.family}</span>
+      <h2>{model.label}</h2>
+      <div className="hot-card-stats">
+        <span>
+          最低
+          <strong>{formatPrice(best?.blendedPrice ?? model.minBlendedPrice, currency)}</strong>
+        </span>
+        <span>
+          价差
+          <strong>{spread ? `${spread.toFixed(spread > 10 ? 1 : 2)}x` : '-'}</strong>
+        </span>
+        <span>
+          平台
+          <strong>{model.providerCount}</strong>
+        </span>
+      </div>
+      <div className="hot-mini-bars">
+        {entries.map((entry, index) => {
+          const width = Math.max(((entry.blendedPrice ?? 0) / max) * 100, 5)
+          return (
+            <div className="hot-mini-row" key={`${model.id}-${entry.provider}`}>
+              <span>{entry.providerLabel}</span>
+              <div className="hot-mini-track">
+                <i className={index === 0 ? 'best' : ''} style={{ width: `${width}%` }} />
+              </div>
+              <strong>{formatPrice(entry.blendedPrice, currency)}</strong>
+            </div>
+          )
+        })}
+      </div>
+    </button>
   )
 }
 
