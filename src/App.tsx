@@ -131,6 +131,10 @@ type AbilityValueItem = {
   valueScore: number
 }
 
+type FlagshipValueItem = AbilityValueItem & {
+  flagshipRank: number
+}
+
 type PriceData = {
   meta: {
     generatedAt: string
@@ -413,7 +417,6 @@ function normalizeBenchmarkKey(value: string | null | undefined) {
     .replace(/preview/g, '')
     .replace(/instruct/g, '')
     .replace(/thinking/g, '')
-    .replace(/xhigh|high|medium|low|max/g, '')
     .replace(/[_./]+/g, '-')
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/-+/g, '-')
@@ -528,6 +531,40 @@ function buildAbilityValueItems(
     })
     .filter((item): item is AbilityValueItem => item !== null)
     .toSorted((a, b) => b.valueScore - a.valueScore || b.score - a.score)
+}
+
+function buildFlagshipValueItems(
+  models: ModelSummary[],
+  benchmarkIndex: Map<string, BenchmarkModel>,
+  mode: BenchmarkMode,
+) {
+  const byId = new Map(models.map((model) => [model.id, model]))
+
+  return flagshipModelIds
+    .map<FlagshipValueItem | null>((id) => {
+      const model = byId.get(id)
+      if (!model) return null
+      const match = findBenchmarkMatch(model, benchmarkIndex)
+      if (!match) return null
+      const score = scoreForBenchmark(match.benchmark, mode)
+      const entries = cleanEntries(model.entries, false, false, 'blendedPrice')
+      const price = entries[0]?.blendedPrice ?? model.minBlendedPrice
+      if (!score || !price || price <= 0) return null
+
+      return {
+        model,
+        benchmark: match.benchmark,
+        matchedKey: match.matchedKey,
+        score,
+        price,
+        pricePerPoint: price / score,
+        valueScore: score / price,
+        flagshipRank: 0,
+      }
+    })
+    .filter((item): item is FlagshipValueItem => item !== null)
+    .map((item, index) => ({ ...item, flagshipRank: index + 1 }))
+    .slice(0, 8)
 }
 
 function buildUnmatchedBenchmarkHighlights(
@@ -666,6 +703,10 @@ function App() {
   )
   const abilityValueItems = useMemo(
     () => (data && benchmarkData ? buildAbilityValueItems(data.models, benchmarkIndex, benchmarkMode) : []),
+    [benchmarkData, benchmarkIndex, benchmarkMode, data],
+  )
+  const flagshipValueItems = useMemo(
+    () => (data && benchmarkData ? buildFlagshipValueItems(data.models, benchmarkIndex, benchmarkMode) : []),
     [benchmarkData, benchmarkIndex, benchmarkMode, data],
   )
   const unmatchedBenchmarkHighlights = useMemo(
@@ -918,6 +959,31 @@ function App() {
 
         {benchmarkData && (
           <>
+            {flagshipValueItems.length > 0 && (
+              <div className="flagship-strip" aria-label="顶尖闭源模型能力对照">
+                <div className="flagship-strip-head">
+                  <strong>顶尖闭源/旗舰模型</strong>
+                  <small>这组按精选旗舰顺序展示，不按价比排序；贵模型会在这里保留可见性。</small>
+                </div>
+                <div className="flagship-list">
+                  {flagshipValueItems.map((item) => (
+                    <button
+                      className="flagship-chip"
+                      key={`${benchmarkMode}-flagship-${item.model.id}`}
+                      type="button"
+                      onClick={() => selectModelAndFocus(item.model.id)}
+                    >
+                      <span className="flagship-rank">{item.flagshipRank}</span>
+                      <FamilyBadge family={item.model.family} />
+                      <strong>{item.model.label}</strong>
+                      <em>{formatBenchmarkScore(item.score)}</em>
+                      <small>{formatPrice(item.price, currency)} 起</small>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+
             <div className="value-grid">
               {abilityValueItems.slice(0, 8).map((item, index) => (
                 <AbilityValueCard

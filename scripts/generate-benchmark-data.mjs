@@ -40,7 +40,6 @@ function normalizeKey(value) {
     .replace(/preview/g, '')
     .replace(/instruct/g, '')
     .replace(/thinking/g, '')
-    .replace(/xhigh|high|medium|low|max/g, '')
     .replace(/[_./]+/g, '-')
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/-+/g, '-')

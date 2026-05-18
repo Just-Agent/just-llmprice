@@ -750,6 +750,100 @@
   margin-top: 16px;
 }
 
+.flagship-strip {
+  display: grid;
+  grid-template-columns: minmax(230px, 0.3fr) minmax(0, 1fr);
+  gap: 14px;
+  align-items: center;
+  margin-top: 16px;
+  padding: 12px;
+  border: 1px solid rgba(124, 247, 234, 0.22);
+  border-radius: 8px;
+  background: rgba(3, 11, 13, 0.62);
+}
+
+.flagship-strip-head strong,
+.flagship-strip-head small {
+  display: block;
+}
+
+.flagship-strip-head strong {
+  color: #ffffff;
+  font-size: 14px;
+}
+
+.flagship-strip-head small {
+  margin-top: 5px;
+  color: #9db8b7;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.flagship-list {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.flagship-chip {
+  display: grid;
+  grid-template-columns: 24px auto minmax(0, 1fr) auto auto;
+  gap: 8px;
+  align-items: center;
+  min-height: 42px;
+  padding: 7px 9px;
+  border: 1px solid rgba(255, 211, 124, 0.18);
+  border-radius: 8px;
+  color: #eefaf7;
+  text-align: left;
+  background: rgba(255, 211, 124, 0.075);
+  cursor: pointer;
+}
+
+.flagship-chip:hover {
+  border-color: rgba(255, 211, 124, 0.44);
+  background: rgba(255, 211, 124, 0.12);
+}
+
+.flagship-rank {
+  display: grid;
+  width: 24px;
+  height: 24px;
+  place-items: center;
+  border-radius: 999px;
+  color: #062426;
+  font-size: 12px;
+  font-weight: 850;
+  background: #dffefa;
+}
+
+.flagship-chip .family {
+  width: fit-content;
+}
+
+.flagship-chip strong {
+  overflow: hidden;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 820;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.flagship-chip em {
+  color: #7cf7ea;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 850;
+}
+
+.flagship-chip small {
+  color: #ffd37c;
+  font-size: 12px;
+  font-weight: 760;
+  white-space: nowrap;
+}
+
 .value-card {
   display: flex;
   min-height: 260px;
@@ -1617,8 +1711,13 @@ p {
   }
 
   .value-head,
+  .flagship-strip,
   .benchmark-note-strip {
     grid-template-columns: 1fr;
+  }
+
+  .flagship-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .value-grid {
@@ -1670,14 +1769,29 @@ p {
   .hot-grid,
   .radar-cards,
   .platform-grid,
-  .value-grid,
   .hot-card-stats,
   .leaderboards {
     grid-template-columns: 1fr;
   }
 
+  .value-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
   .value-card {
     min-height: 236px;
+  }
+
+  .flagship-list {
+    grid-template-columns: 1fr;
+  }
+
+  .flagship-chip {
+    grid-template-columns: 24px auto minmax(0, 1fr) auto;
+  }
+
+  .flagship-chip small {
+    display: none;
   }
 
   .value-card-top {
@@ -1751,7 +1865,12 @@ p {
   }
 
   .price-table {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    max-width: calc(100vw - 32px);
     overflow-x: auto;
+    overflow-y: hidden;
   }
 
   .price-row {

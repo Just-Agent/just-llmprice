@@ -1,12 +1,12 @@
 {
   "meta": {
-    "generatedAt": "2026-05-18T13:02:31.159Z",
+    "generatedAt": "2026-05-18T17:11:08.223Z",
     "sourceName": "DataLearner AI",
     "sourceUrl": "https://www.datalearner.com/leaderboards",
     "fetchedFrom": "D:\\study\\code\\0ai\\产品\\07-mobile-app\\just-llmprice\\data\\raw\\datalearner-leaderboards.html",
     "license": "CC BY 4.0 as declared in DataLearner Dataset metadata",
     "extractedRowCount": 224,
-    "modelCount": 189,
+    "modelCount": 193,
     "note": "Benchmark scores are parsed from DataLearner public leaderboards and matched to LiteLLM model ids by normalized aliases in the frontend."
   },
   "benchmarkKeys": [
@@ -309,29 +309,6 @@
       ]
     },
     {
-      "modelName": "GPT-5.1 Codex",
-      "modelCode": "gpt-5-1-codex",
-      "organization": "OpenAI",
-      "aaScore": null,
-      "aaRank": null,
-      "arenaScore": null,
-      "arenaRank": null,
-      "benchmarks": {
-        "SWE-bench Verified": 76.8,
-        "LiveCodeBench": 85.5
-      },
-      "categoryScores": {
-        "overall": null,
-        "math": null,
-        "coding": 81.15,
-        "agent": null
-      },
-      "compositeScore": 81.15,
-      "matchKeys": [
-        "gpt-5-1-codex"
-      ]
-    },
-    {
       "modelName": "Pangu Embedded",
       "modelCode": "pangu-embedded",
       "organization": "华为",
@@ -401,6 +378,29 @@
       ]
     },
     {
+      "modelName": "GPT-5.1 Codex",
+      "modelCode": "gpt-5-1-codex",
+      "organization": "OpenAI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "SWE-bench Verified": 70.4,
+        "LiveCodeBench": 85.5
+      },
+      "categoryScores": {
+        "overall": null,
+        "math": null,
+        "coding": 77.95,
+        "agent": null
+      },
+      "compositeScore": 77.95,
+      "matchKeys": [
+        "gpt-5-1-codex"
+      ]
+    },
+    {
       "modelName": "Qwen3 Max (Preview)",
       "modelCode": "qwen3-max-preview",
       "organization": "阿里巴巴",
@@ -424,7 +424,7 @@
       },
       "compositeScore": 77.762,
       "matchKeys": [
-        "qwen3"
+        "qwen3-max"
       ]
     },
     {
@@ -450,6 +450,28 @@
       "compositeScore": 77.517,
       "matchKeys": [
         "claude-mythos"
+      ]
+    },
+    {
+      "modelName": "GPT-5.1-Codex-Max",
+      "modelCode": "gpt-5-1-codex-max",
+      "organization": "OpenAI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "SWE-bench Verified": 76.8
+      },
+      "categoryScores": {
+        "overall": null,
+        "math": null,
+        "coding": 76.8,
+        "agent": null
+      },
+      "compositeScore": 76.8,
+      "matchKeys": [
+        "gpt-5-1-codex-max"
       ]
     },
     {
@@ -640,7 +662,7 @@
       },
       "compositeScore": 73.8,
       "matchKeys": [
-        "kimi-k1-6-ioi"
+        "kimi-k1-6-ioi-high"
       ]
     },
     {
@@ -975,7 +997,7 @@
       },
       "compositeScore": 69.662,
       "matchKeys": [
-        "mini-m2"
+        "minimax-m2"
       ]
     },
     {
@@ -1416,6 +1438,28 @@
       ]
     },
     {
+      "modelName": "Kimi-k1.6-IOI",
+      "modelCode": "Kimi-k1_6-IOI",
+      "organization": "Moonshot AI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "LiveCodeBench": 65.9
+      },
+      "categoryScores": {
+        "overall": null,
+        "math": null,
+        "coding": 65.9,
+        "agent": null
+      },
+      "compositeScore": 65.9,
+      "matchKeys": [
+        "kimi-k1-6-ioi"
+      ]
+    },
+    {
       "modelName": "DeepSeek-V4-Flash",
       "modelCode": "deepseek-v4-flash",
       "organization": "DeepSeek-AI",
@@ -1461,7 +1505,7 @@
       },
       "compositeScore": 65.6,
       "matchKeys": [
-        "qwq"
+        "qwq-max"
       ]
     },
     {
@@ -1569,7 +1613,7 @@
       },
       "compositeScore": 64.033,
       "matchKeys": [
-        "mini-m1-80k"
+        "minimax-m1-80k"
       ]
     },
     {
@@ -1720,7 +1764,7 @@
       },
       "compositeScore": 62.717,
       "matchKeys": [
-        "mini-m1-40k"
+        "minimax-m1-40k"
       ]
     },
     {
@@ -1766,7 +1810,7 @@
       },
       "compositeScore": 62.155,
       "matchKeys": [
-        "magistral-2506"
+        "magistral-medium-2506"
       ]
     },
     {
@@ -1882,7 +1926,7 @@
       },
       "compositeScore": 61.6,
       "matchKeys": [
-        "devstral"
+        "devstral-medium"
       ]
     },
     {
@@ -1905,7 +1949,7 @@
       },
       "compositeScore": 61.35,
       "matchKeys": [
-        "qwen3-6"
+        "qwen3-6-max"
       ]
     },
     {
@@ -1959,7 +2003,7 @@
       "compositeScore": 61.037,
       "matchKeys": [
         "m2-1",
-        "mini-m2-1"
+        "minimax-m2-1"
       ]
     },
     {
@@ -2791,7 +2835,7 @@
       },
       "compositeScore": 54.487,
       "matchKeys": [
-        "mini-m2-5"
+        "minimax-m2-5"
       ]
     },
     {
@@ -3546,6 +3590,33 @@
       ]
     },
     {
+      "modelName": "OpenAI o3-mini (high)",
+      "modelCode": "openai-o3-mini-high",
+      "organization": "OpenAI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "FrontierMath": 11,
+        "FrontierMath - Tier 4": 4.2,
+        "MATH-500": 97.9,
+        "SWE-bench Verified": 49.3,
+        "LiveCodeBench": 69.5
+      },
+      "categoryScores": {
+        "overall": null,
+        "math": 37.7,
+        "coding": 59.4,
+        "agent": null
+      },
+      "compositeScore": 48.55,
+      "matchKeys": [
+        "openai-o3-mini",
+        "openai-o3-mini-high"
+      ]
+    },
+    {
       "modelName": "Kimi K2 0905",
       "modelCode": "kimi-k2-0905",
       "organization": "Moonshot AI",
@@ -4044,7 +4115,7 @@
       },
       "compositeScore": 42.1,
       "matchKeys": [
-        "mini-m2-7"
+        "minimax-m2-7"
       ]
     },
     {
@@ -4117,34 +4188,6 @@
       "matchKeys": [
         "qwen-4b",
         "qwen3-4b-2507"
-      ]
-    },
-    {
-      "modelName": "OpenAI o3-mini (high)",
-      "modelCode": "openai-o3-mini-high",
-      "organization": "OpenAI",
-      "aaScore": null,
-      "aaRank": null,
-      "arenaScore": null,
-      "arenaRank": null,
-      "benchmarks": {
-        "HLE": 13.4,
-        "AIME2025": 86.5,
-        "FrontierMath - Tier 4": 4.2,
-        "MATH-500": 97.9,
-        "SWE-bench Verified": 49.3,
-        "FrontierMath": 11,
-        "LiveCodeBench": 69.5
-      },
-      "categoryScores": {
-        "overall": 13.4,
-        "math": 49.9,
-        "coding": 59.4,
-        "agent": null
-      },
-      "compositeScore": 40.9,
-      "matchKeys": [
-        "openai-o3-mini"
       ]
     },
     {
@@ -4330,6 +4373,32 @@
       ]
     },
     {
+      "modelName": "OpenAI o3-mini",
+      "modelCode": "openai-o3-mini",
+      "organization": "OpenAI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "HLE": 13.4,
+        "AIME2025": 86.5,
+        "FrontierMath - Tier 4": 4.2,
+        "MATH-500": 95.8,
+        "SWE-bench Verified": 40.8
+      },
+      "categoryScores": {
+        "overall": 13.4,
+        "math": 62.167,
+        "coding": 40.8,
+        "agent": null
+      },
+      "compositeScore": 38.789,
+      "matchKeys": [
+        "openai-o3-mini"
+      ]
+    },
+    {
       "modelName": "Qwen2.5-Max",
       "modelCode": "Qwen2_5-Max",
       "organization": "阿里巴巴",
@@ -4349,7 +4418,7 @@
       },
       "compositeScore": 38.55,
       "matchKeys": [
-        "qwen2-5"
+        "qwen2-5-max"
       ]
     },
     {
@@ -4423,6 +4492,30 @@
       "compositeScore": 37.9,
       "matchKeys": [
         "codestral-25-01"
+      ]
+    },
+    {
+      "modelName": "OpenAI o3-mini (medium)",
+      "modelCode": "openai-o3-mini-medium",
+      "organization": "OpenAI",
+      "aaScore": null,
+      "aaRank": null,
+      "arenaScore": null,
+      "arenaRank": null,
+      "benchmarks": {
+        "FrontierMath": 8.1,
+        "LiveCodeBench": 67.4
+      },
+      "categoryScores": {
+        "overall": null,
+        "math": 8.1,
+        "coding": 67.4,
+        "agent": null
+      },
+      "compositeScore": 37.75,
+      "matchKeys": [
+        "openai-o3-mini",
+        "openai-o3-mini-medium"
       ]
     },
     {
