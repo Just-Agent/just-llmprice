@@ -91,6 +91,16 @@ type BrandMeta = {
 
 type PlatformLogoMeta = BrandMeta
 
+type ExchangeRateState = {
+  usdToCny: number
+  updatedAt: string | null
+  nextUpdateAt: string | null
+  sourceName: string
+  sourceUrl: string
+  status: 'loading' | 'live' | 'fallback'
+  error: string | null
+}
+
 type BenchmarkModel = {
   modelName: string
   modelCode: string | null
@@ -167,6 +177,8 @@ const benchmarkModeLabels: Record<BenchmarkMode, string> = {
 }
 
 const litellmSourceUrl = 'https://github.com/BerriAI/litellm/blob/main/model_prices_and_context_window.json'
+const exchangeRateSourceUrl = 'https://www.exchangerate-api.com/docs/free'
+const exchangeRateEndpoint = 'https://open.er-api.com/v6/latest/USD'
 
 const familyOrder = [
   '全部',
@@ -245,11 +257,11 @@ const platformLogoMeta: Record<string, PlatformLogoMeta> = {
   oci: { initials: 'OCI', logoUrl: localLogo('platform-oracle.png') },
   cohere_chat: { initials: 'C', logoUrl: localLogo('platform-cohere.ico') },
 }
-const cnyRate = 7.2
+const fallbackUsdToCny = 7.2
 
-function formatPrice(value: number | null | undefined, currency: Currency) {
+function formatPrice(value: number | null | undefined, currency: Currency, usdToCny = fallbackUsdToCny) {
   if (value === null || value === undefined || Number.isNaN(value)) return '-'
-  const converted = currency === 'CNY' ? value * cnyRate : value
+  const converted = currency === 'CNY' ? value * usdToCny : value
   const prefix = currency === 'CNY' ? '¥' : '$'
   if (converted === 0) return `${prefix}0`
   if (converted < 0.01) return `${prefix}${converted.toFixed(4)}`
@@ -273,6 +285,40 @@ function formatDate(value: string) {
     hour: '2-digit',
     minute: '2-digit',
   }).format(new Date(value))
+}
+
+function formatRateDate(value: string | null) {
+  if (!value) return '固定回退'
+  return new Intl.DateTimeFormat('zh-CN', {
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+  }).format(new Date(value))
+}
+
+function getInitialExchangeRate(): ExchangeRateState {
+  const fallback: ExchangeRateState = {
+    usdToCny: fallbackUsdToCny,
+    updatedAt: null,
+    nextUpdateAt: null,
+    sourceName: '固定回退汇率',
+    sourceUrl: exchangeRateSourceUrl,
+    status: 'loading',
+    error: null,
+  }
+
+  if (typeof window === 'undefined') return fallback
+
+  try {
+    const cached = window.localStorage.getItem('just-llmprice-usd-cny')
+    if (!cached) return fallback
+    const parsed = JSON.parse(cached) as ExchangeRateState
+    return parsed.usdToCny > 0 ? parsed : fallback
+  } catch {
+    window.localStorage.removeItem('just-llmprice-usd-cny')
+    return fallback
+  }
 }
 
 function cleanEntries(entries: PriceEntry[], includeZero: boolean, includeExtreme: boolean, metric: PriceMetric) {
@@ -606,6 +652,7 @@ function App() {
   const [benchmarkData, setBenchmarkData] = useState<BenchmarkData | null>(null)
   const [benchmarkMode, setBenchmarkMode] = useState<BenchmarkMode>('aa')
   const [benchmarkError, setBenchmarkError] = useState<string | null>(null)
+  const [exchangeRate, setExchangeRate] = useState<ExchangeRateState>(() => getInitialExchangeRate())
 
   useEffect(() => {
     fetch(`${import.meta.env.BASE_URL}data/llm-prices.json`)
@@ -634,6 +681,44 @@ function App() {
         setBenchmarkError(null)
       })
       .catch((error) => setBenchmarkError(error instanceof Error ? error.message : '能力榜数据加载失败'))
+  }, [])
+
+  useEffect(() => {
+    fetch(exchangeRateEndpoint)
+      .then((response) => {
+        if (!response.ok) throw new Error(`HTTP ${response.status}`)
+        return response.json() as Promise<{
+          result: string
+          provider?: string
+          documentation?: string
+          time_last_update_utc?: string
+          time_next_update_utc?: string
+          rates?: Record<string, number>
+        }>
+      })
+      .then((payload) => {
+        const rate = payload.rates?.CNY
+        if (payload.result !== 'success' || !rate || rate <= 0) throw new Error('USD/CNY 汇率缺失')
+        const next: ExchangeRateState = {
+          usdToCny: rate,
+          updatedAt: payload.time_last_update_utc ?? new Date().toISOString(),
+          nextUpdateAt: payload.time_next_update_utc ?? null,
+          sourceName: 'ExchangeRate-API',
+          sourceUrl: payload.documentation ?? exchangeRateSourceUrl,
+          status: 'live',
+          error: null,
+        }
+        window.localStorage.setItem('just-llmprice-usd-cny', JSON.stringify(next))
+        setExchangeRate(next)
+      })
+      .catch((error) => {
+        setExchangeRate((current) => ({
+          ...current,
+          status: current.status === 'live' ? 'live' : 'fallback',
+          sourceName: current.status === 'live' ? current.sourceName : '固定回退汇率',
+          error: error instanceof Error ? error.message : '汇率加载失败',
+        }))
+      })
   }, [])
 
   const families = useMemo(() => {
@@ -761,6 +846,14 @@ function App() {
     )
   }
 
+  const usdToCny = exchangeRate.usdToCny
+  const fxStatusLabel =
+    exchangeRate.status === 'live'
+      ? `更新 ${formatRateDate(exchangeRate.updatedAt)}`
+      : exchangeRate.status === 'loading'
+        ? '载入中'
+        : '固定回退'
+
   return (
     <main className="app-shell">
       <header className="topbar">
@@ -782,6 +875,11 @@ function App() {
         </label>
 
         <div className="top-actions" aria-label="全局设置">
+          <a className="fx-chip" href={exchangeRate.sourceUrl} rel="noreferrer" target="_blank" title="USD/CNY 汇率来源">
+            <span>USD/CNY</span>
+            <strong>{usdToCny.toFixed(4)}</strong>
+            <small>{fxStatusLabel}</small>
+          </a>
           <div className="segmented" aria-label="货币">
             {(['USD', 'CNY'] as const).map((item) => (
               <button
@@ -836,6 +934,7 @@ function App() {
               key={model.id}
               model={model}
               onSelect={() => selectModelAndFocus(model.id)}
+              usdToCny={usdToCny}
             />
           ))}
         </div>
@@ -855,7 +954,7 @@ function App() {
                 <span>
                   <strong>{model.label}</strong>
                   <small>
-                    {formatPrice(model.minBlendedPrice, currency)} 起 · {model.providerCount} 平台
+                    {formatPrice(model.minBlendedPrice, currency, usdToCny)} 起 · {model.providerCount} 平台
                   </small>
                 </span>
               </button>
@@ -931,6 +1030,9 @@ function App() {
               >
                 能力源：DataLearner Leaderboards
               </a>
+              <a href={exchangeRate.sourceUrl} rel="noreferrer" target="_blank">
+                汇率源：{exchangeRate.sourceName} USD/CNY {usdToCny.toFixed(4)}
+              </a>
             </div>
           </div>
         </div>
@@ -977,7 +1079,7 @@ function App() {
                       <FamilyBadge family={item.model.family} />
                       <strong>{item.model.label}</strong>
                       <em>{formatBenchmarkScore(item.score)}</em>
-                      <small>{formatPrice(item.price, currency)} 起</small>
+                      <small>{formatPrice(item.price, currency, usdToCny)} 起</small>
                     </button>
                   ))}
                 </div>
@@ -993,6 +1095,7 @@ function App() {
                   mode={benchmarkMode}
                   onSelect={() => selectModelAndFocus(item.model.id)}
                   rank={index + 1}
+                  usdToCny={usdToCny}
                 />
               ))}
             </div>
@@ -1031,6 +1134,11 @@ function App() {
         <div>
           <span>更新</span>
           <strong>{formatDate(data.meta.generatedAt)}</strong>
+        </div>
+        <div>
+          <span>汇率</span>
+          <strong>{currency === 'CNY' ? `USD/CNY ${usdToCny.toFixed(4)}` : 'USD 原价'}</strong>
+          <small>{exchangeRate.status === 'live' ? formatRateDate(exchangeRate.updatedAt) : '固定回退'}</small>
         </div>
       </section>
 
@@ -1091,12 +1199,12 @@ function App() {
             <div className="model-stats">
               <div>
                 <span>最低</span>
-                <strong>{formatPrice(cheapest?.[metric], currency)}</strong>
+                <strong>{formatPrice(cheapest?.[metric], currency, usdToCny)}</strong>
                 <small>{cheapest?.providerLabel ?? '-'}</small>
               </div>
               <div>
                 <span>最高</span>
-                <strong>{formatPrice(highest?.[metric], currency)}</strong>
+                <strong>{formatPrice(highest?.[metric], currency, usdToCny)}</strong>
                 <small>{highest?.providerLabel ?? '-'}</small>
               </div>
               <div>
@@ -1156,8 +1264,8 @@ function App() {
                       <strong>{entry.providerLabel}</strong>
                       <small>{entry.sourceKey}</small>
                     </span>
-                    <span>{formatPrice(entry.inputPrice, currency)}</span>
-                    <span>{formatPrice(entry.outputPrice, currency)}</span>
+                    <span>{formatPrice(entry.inputPrice, currency, usdToCny)}</span>
+                    <span>{formatPrice(entry.outputPrice, currency, usdToCny)}</span>
                     <span>{formatNumber(entry.contextWindow)}</span>
                     <span className="tag-line">
                       {index === 0 && <em className="tag best">最低</em>}
@@ -1194,7 +1302,7 @@ function App() {
                     <div className="bar-row" key={`${entry.sourceKey}-bar`}>
                       <div className="bar-meta">
                         <span>{entry.providerLabel}</span>
-                        <strong>{formatPrice(value, currency)}</strong>
+                        <strong>{formatPrice(value, currency, usdToCny)}</strong>
                       </div>
                       <div className="bar-track">
                         <span className={index === 0 ? 'bar best' : 'bar'} style={{ width: `${width}%` }} />
@@ -1219,7 +1327,7 @@ function App() {
               items={data.leaderboards.cheapestAverage}
               label="最低综合价"
               onSelect={selectModelAndFocus}
-              value={(item) => formatPrice(item.minBlendedPrice, currency)}
+              value={(item) => formatPrice(item.minBlendedPrice, currency, usdToCny)}
             />
             <Leaderboard
               currency={currency}
@@ -1291,10 +1399,12 @@ function MetricBar({ label, value }: { label: string; value: number }) {
 function HotModelCard({
   model,
   currency,
+  usdToCny,
   onSelect,
 }: {
   model: ModelSummary
   currency: Currency
+  usdToCny: number
   onSelect: () => void
 }) {
   const entries = cleanEntries(model.entries, false, false, 'blendedPrice').slice(0, 4)
@@ -1314,7 +1424,7 @@ function HotModelCard({
       <div className="hot-card-stats">
         <span>
           最低
-          <strong>{formatPrice(best?.blendedPrice ?? model.minBlendedPrice, currency)}</strong>
+          <strong>{formatPrice(best?.blendedPrice ?? model.minBlendedPrice, currency, usdToCny)}</strong>
         </span>
         <span>
           价差
@@ -1334,7 +1444,7 @@ function HotModelCard({
               <div className="hot-mini-track">
                 <i className={index === 0 ? 'best' : ''} style={{ width: `${width}%` }} />
               </div>
-              <strong>{formatPrice(entry.blendedPrice, currency)}</strong>
+              <strong>{formatPrice(entry.blendedPrice, currency, usdToCny)}</strong>
             </div>
           )
         })}
@@ -1347,17 +1457,19 @@ function AbilityValueCard({
   item,
   mode,
   currency,
+  usdToCny,
   rank,
   onSelect,
 }: {
   item: AbilityValueItem
   mode: BenchmarkMode
   currency: Currency
+  usdToCny: number
   rank: number
   onSelect: () => void
 }) {
   const bestEntry = cleanEntries(item.model.entries, false, false, 'blendedPrice')[0]
-  const convertedPrice = currency === 'CNY' ? item.price * cnyRate : item.price
+  const convertedPrice = currency === 'CNY' ? item.price * usdToCny : item.price
   const valuePerCurrency = item.score / convertedPrice
   const meterWidth = clamp(item.score)
 
@@ -1380,11 +1492,11 @@ function AbilityValueCard({
         </span>
         <span>
           <small>最低综合价</small>
-          <strong>{formatPrice(item.price, currency)}</strong>
+          <strong>{formatPrice(item.price, currency, usdToCny)}</strong>
         </span>
         <span>
           <small>每分成本</small>
-          <strong>{formatPrice(item.pricePerPoint, currency)}</strong>
+          <strong>{formatPrice(item.pricePerPoint, currency, usdToCny)}</strong>
         </span>
       </div>
       <div className="value-meter" aria-hidden="true">
