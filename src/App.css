@@ -916,6 +916,24 @@
   gap: 12px;
 }
 
+.chatgpt-plan-toolbar {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.chatgpt-plan-toolbar > span {
+  color: #687078;
+  font-size: 12px;
+  font-weight: 760;
+}
+
+.chatgpt-plan-tabs {
+  width: fit-content;
+}
+
 .chatgpt-card {
   display: grid;
   gap: 12px;
@@ -936,6 +954,7 @@
 }
 
 .country-code,
+.plan-badge,
 .risk {
   display: inline-grid;
   min-width: 34px;
@@ -949,6 +968,22 @@
 .country-code {
   color: #eafffc;
   background: #062f31;
+}
+
+.plan-badge {
+  padding: 0 9px;
+  color: #006e67;
+  background: #e7f8f5;
+}
+
+.plan-pro {
+  color: #06457d;
+  background: #e7f1ff;
+}
+
+.plan-proplus {
+  color: #875400;
+  background: #fff1d0;
 }
 
 .risk {
@@ -2162,6 +2197,11 @@ p {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .chatgpt-plan-toolbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
   .value-head,
   .flagship-strip,
   .benchmark-note-strip {
@@ -2238,6 +2278,10 @@ p {
   .chatgpt-overview,
   .chatgpt-grid {
     grid-template-columns: 1fr;
+  }
+
+  .chatgpt-plan-tabs {
+    width: 100%;
   }
 
   .chatgpt-card {

@@ -20,6 +20,8 @@ type PriceMetric = 'blendedPrice' | 'inputPrice' | 'outputPrice'
 type Currency = 'USD' | 'CNY'
 type BenchmarkMode = 'aa' | 'overall' | 'coding' | 'math' | 'agent'
 type AppPage = 'home' | 'models' | 'platforms' | 'chatgpt' | 'value'
+type ChatGptPlan = 'Go' | 'Plus' | 'Pro' | 'Pro+'
+type ChatGptPlanFilter = 'all' | 'Plus' | 'Pro' | 'Pro+'
 
 type PriceEntry = {
   sourceKey: string
@@ -153,7 +155,7 @@ type ChatGptSubscriptionItem = {
   id: string
   region: string
   countryCode: string
-  plan: 'Go' | 'Plus' | 'Pro'
+  plan: ChatGptPlan
   channel: string
   localPrice: string
   currencyCode?: string
@@ -205,8 +207,21 @@ const exchangeRateEndpoint = 'https://open.er-api.com/v6/latest/USD'
 const chatGptApparkSourceUrl = 'https://appark.ai/cn/cheapest-price/chatgpt'
 const chatGptApparkTurkeyGuideUrl = 'https://appark.ai/cn/blog/chatgpt-turkey-discount-subscription-guide'
 const chatGptOfficialPricingUrl = 'https://openai.com/chatgpt/pricing/'
+const chatGptOfficialProTiersUrl = 'https://help.openai.com/en/articles/9793128-chatgpt-pro-tiers'
 const chatGptPlusBaselineUsd = 20
-const chatGptProBaselineUsd = 200
+const chatGptProBaselineUsd = 100
+const chatGptProPlusBaselineUsd = 200
+const chatGptPlanFilterLabels: Record<ChatGptPlanFilter, string> = {
+  all: '全部',
+  Plus: 'Plus',
+  Pro: 'Pro',
+  'Pro+': 'Pro+',
+}
+const chatGptPlanProfiles: Record<Exclude<ChatGptPlan, 'Go'>, { usd: number; caption: string; sourceUrl: string }> = {
+  Plus: { usd: chatGptPlusBaselineUsd, caption: '高阶个人订阅', sourceUrl: chatGptOfficialPricingUrl },
+  Pro: { usd: chatGptProBaselineUsd, caption: '5x Plus 用量', sourceUrl: chatGptOfficialProTiersUrl },
+  'Pro+': { usd: chatGptProPlusBaselineUsd, caption: '20x Plus 用量', sourceUrl: chatGptOfficialProTiersUrl },
+}
 const pageHash: Record<AppPage, string> = {
   home: '#home',
   models: '#models',
@@ -438,21 +453,37 @@ const chatGptSubscriptionItems: ChatGptSubscriptionItem[] = [
     countryCode: 'US',
     plan: 'Pro',
     channel: 'Web',
-    localPrice: 'USD 200.00',
+    localPrice: 'USD 100.00',
     currencyCode: 'USD',
     localAmount: chatGptProBaselineUsd,
     usdMonthly: chatGptProBaselineUsd,
-    sourceName: 'OpenAI / AppArk',
-    sourceUrl: chatGptOfficialPricingUrl,
+    sourceName: 'OpenAI Pro tiers',
+    sourceUrl: chatGptOfficialProTiersUrl,
     risk: '基准',
-    note: 'Pro 官方美元基准；跨区 Pro 价格需要单独核验应用内购显示。',
+    note: 'Pro 入门档，适合需要更高用量但还未到重度并行工作流的用户。',
     signal: 'Pro 基准',
   },
   {
-    id: 'tr-pro',
+    id: 'us-pro-plus',
+    region: '美国',
+    countryCode: 'US',
+    plan: 'Pro+',
+    channel: 'Web',
+    localPrice: 'USD 200.00',
+    currencyCode: 'USD',
+    localAmount: chatGptProPlusBaselineUsd,
+    usdMonthly: chatGptProPlusBaselineUsd,
+    sourceName: 'OpenAI Pro tiers',
+    sourceUrl: chatGptOfficialProTiersUrl,
+    risk: '基准',
+    note: '最高个人用量档，适合长时间、并行和高强度工作流。',
+    signal: 'Pro+ 基准',
+  },
+  {
+    id: 'tr-pro-plus',
     region: '土耳其',
     countryCode: 'TR',
-    plan: 'Pro',
+    plan: 'Pro+',
     channel: 'App Store / Google Play',
     localPrice: 'TRY 7,999',
     currencyCode: 'TRY',
@@ -461,8 +492,8 @@ const chatGptSubscriptionItems: ChatGptSubscriptionItem[] = [
     sourceName: 'AppArk 土区指南',
     sourceUrl: chatGptApparkTurkeyGuideUrl,
     risk: '中',
-    note: 'Pro 土区价格仍低于美国 Pro，同样要关注账号与支付环境。',
-    signal: 'Pro 土区参考',
+    note: 'Pro+ 土区价格仍低于美国 Pro+，同样要关注账号与支付环境。',
+    signal: 'Pro+ 土区参考',
   },
 ]
 
@@ -516,6 +547,11 @@ function formatSavings(value: number | null) {
   if (value === null || Number.isNaN(value)) return '-'
   if (Math.abs(value) < 0.5) return '持平'
   return value > 0 ? `省 ${Math.round(value)}%` : `贵 ${Math.abs(Math.round(value))}%`
+}
+
+function subscriptionBaselineCny(plan: ChatGptPlan, usdToCny: number) {
+  if (plan === 'Go') return null
+  return chatGptPlanProfiles[plan].usd * usdToCny
 }
 
 function formatNumber(value: number | null | undefined) {
@@ -911,6 +947,7 @@ function App() {
   const [benchmarkMode, setBenchmarkMode] = useState<BenchmarkMode>('aa')
   const [benchmarkError, setBenchmarkError] = useState<string | null>(null)
   const [exchangeRate, setExchangeRate] = useState<ExchangeRateState>(() => getInitialExchangeRate())
+  const [chatGptPlanFilter, setChatGptPlanFilter] = useState<ChatGptPlanFilter>('Plus')
   const [page, setPage] = useState<AppPage>(() =>
     typeof window === 'undefined' ? 'home' : pageFromHash(window.location.hash),
   )
@@ -1136,15 +1173,25 @@ function App() {
   const usdToCny = exchangeRate.usdToCny
   const chatGptPlusBaselineCny = chatGptPlusBaselineUsd * usdToCny
   const chatGptProBaselineCny = chatGptProBaselineUsd * usdToCny
+  const chatGptProPlusBaselineCny = chatGptProPlusBaselineUsd * usdToCny
   const chatGptSubscriptionRows = chatGptSubscriptionItems
     .map((item) => {
       const monthlyCny = subscriptionMonthlyCny(item, exchangeRate)
-      const baselineCny =
-        item.plan === 'Pro' ? chatGptProBaselineCny : item.plan === 'Plus' ? chatGptPlusBaselineCny : null
+      const baselineCny = subscriptionBaselineCny(item.plan, usdToCny)
       const savings = baselineCny && monthlyCny ? ((baselineCny - monthlyCny) / baselineCny) * 100 : null
       return { ...item, monthlyCny, savings, fxLabel: subscriptionFxLabel(item, exchangeRate) }
     })
     .toSorted((a, b) => (a.monthlyCny ?? Number.POSITIVE_INFINITY) - (b.monthlyCny ?? Number.POSITIVE_INFINITY))
+  const visibleChatGptSubscriptionRows = chatGptSubscriptionRows.filter(
+    (item) => chatGptPlanFilter === 'all' || item.plan === chatGptPlanFilter,
+  )
+  const chatGptPlanCounts = chatGptSubscriptionRows.reduce(
+    (counts, item) => {
+      if (item.plan === 'Plus' || item.plan === 'Pro' || item.plan === 'Pro+') counts[item.plan] += 1
+      return counts
+    },
+    { Plus: 0, Pro: 0, 'Pro+': 0 } as Record<Exclude<ChatGptPlanFilter, 'all'>, number>,
+  )
   const turkeyPlusCny = subscriptionMonthlyCny(chatGptSubscriptionItems.find((item) => item.id === 'tr-plus')!, exchangeRate)
   const turkeyPlusSavings =
     turkeyPlusCny && chatGptPlusBaselineCny ? ((chatGptPlusBaselineCny - turkeyPlusCny) / chatGptPlusBaselineCny) * 100 : null
@@ -1355,11 +1402,11 @@ function App() {
               <CreditCard size={17} aria-hidden="true" />
               ChatGPT 订阅全球比价
             </span>
-            <h2>ChatGPT Plus 全球订阅低价榜</h2>
+            <h2>Plus、Pro、Pro+ 分档看全球订阅价</h2>
           </div>
           <div>
             <p>
-              比较不同地区的 ChatGPT Plus / Pro 月费，并按最新汇率折算成人民币。地区税费、应用商店汇率和支付环境都会影响最终价格。
+              比较不同地区的 ChatGPT Plus、Pro 和 Pro+ 月费，并按最新汇率折算成人民币。地区税费、应用商店汇率和支付环境都会影响最终价格。
             </p>
             <div className="source-links chatgpt-source-links" aria-label="ChatGPT 订阅数据来源">
               <a href={chatGptApparkSourceUrl} rel="noreferrer" target="_blank">
@@ -1370,6 +1417,9 @@ function App() {
               </a>
               <a href={exchangeRate.sourceUrl} rel="noreferrer" target="_blank">
                 汇率源：{exchangeRate.sourceName} {subscriptionFxScope} · USD/CNY {usdToCny.toFixed(4)}
+              </a>
+              <a href={chatGptOfficialProTiersUrl} rel="noreferrer" target="_blank">
+                档位源：OpenAI Pro tiers
               </a>
             </div>
           </div>
@@ -1392,17 +1442,35 @@ function App() {
           <div>
             <span>美国 Pro 基准</span>
             <strong>{formatSubscriptionCny(chatGptProBaselineCny)}</strong>
-            <small>{formatSubscriptionUsd(chatGptProBaselineUsd)} / 月 · 最新折人民币</small>
+            <small>{formatSubscriptionUsd(chatGptProBaselineUsd)} / 月 · 5x Plus 用量</small>
           </div>
           <div>
-            <span>地区覆盖</span>
-            <strong>{chatGptSubscriptionRows.length}</strong>
-            <small>覆盖低价区、基准区和高税区</small>
+            <span>美国 Pro+ 基准</span>
+            <strong>{formatSubscriptionCny(chatGptProPlusBaselineCny)}</strong>
+            <small>{formatSubscriptionUsd(chatGptProPlusBaselineUsd)} / 月 · 20x Plus 用量</small>
           </div>
         </div>
 
+        <div className="chatgpt-plan-toolbar">
+          <div className="segmented chatgpt-plan-tabs" aria-label="订阅档位">
+            {(Object.keys(chatGptPlanFilterLabels) as ChatGptPlanFilter[]).map((item) => (
+              <button
+                className={chatGptPlanFilter === item ? 'active' : ''}
+                key={item}
+                type="button"
+                onClick={() => setChatGptPlanFilter(item)}
+              >
+                {chatGptPlanFilterLabels[item]}
+              </button>
+            ))}
+          </div>
+          <span>
+            Plus {chatGptPlanCounts.Plus} 个 · Pro {chatGptPlanCounts.Pro} 个 · Pro+ {chatGptPlanCounts['Pro+']} 个
+          </span>
+        </div>
+
         <div className="chatgpt-grid">
-          {chatGptSubscriptionRows.map((item) => (
+          {visibleChatGptSubscriptionRows.map((item) => (
             <ChatGptSubscriptionCard item={item} key={item.id} />
           ))}
         </div>
@@ -1410,7 +1478,7 @@ function App() {
         <div className="chatgpt-note">
           <Globe2 size={16} aria-hidden="true" />
           <span>
-            订阅价格来自 AppArk，API 价格来自 LiteLLM；两类价格分开统计。跨区订阅可能受到账号、税费和支付环境影响。
+            订阅价格来自 AppArk，API 价格来自 LiteLLM；两类价格分开统计。页面里的 Pro+ 对应 OpenAI Pro 20x 档，跨区订阅可能受到账号、税费和支付环境影响。
           </span>
         </div>
       </section>
@@ -1830,6 +1898,7 @@ function ChatGptSubscriptionCard({
     <article className="chatgpt-card">
       <div className="chatgpt-card-top">
         <span className="country-code">{item.countryCode}</span>
+        <span className={`plan-badge plan-${item.plan.toLowerCase().replace('+', 'plus')}`}>{item.plan}</span>
         <span className={`risk ${riskClass}`}>{item.risk}</span>
       </div>
       <div className="chatgpt-card-title">
