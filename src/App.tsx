@@ -4,9 +4,11 @@ import {
   ArrowDownUp,
   ArrowRight,
   BarChart3,
+  CreditCard,
   Database,
   Flame,
   GitBranch,
+  Globe2,
   Radar,
   Search,
   SlidersHorizontal,
@@ -145,6 +147,22 @@ type FlagshipValueItem = AbilityValueItem & {
   flagshipRank: number
 }
 
+type ChatGptSubscriptionItem = {
+  id: string
+  region: string
+  countryCode: string
+  plan: 'Go' | 'Plus' | 'Pro'
+  channel: string
+  localPrice: string
+  usdMonthly?: number
+  cnyMonthly?: number
+  sourceName: string
+  sourceUrl: string
+  risk: '低' | '中' | '基准' | '高税'
+  note: string
+  signal: string
+}
+
 type PriceData = {
   meta: {
     generatedAt: string
@@ -179,6 +197,11 @@ const benchmarkModeLabels: Record<BenchmarkMode, string> = {
 const litellmSourceUrl = 'https://github.com/BerriAI/litellm/blob/main/model_prices_and_context_window.json'
 const exchangeRateSourceUrl = 'https://www.exchangerate-api.com/docs/free'
 const exchangeRateEndpoint = 'https://open.er-api.com/v6/latest/USD'
+const chatGptApparkSourceUrl = 'https://appark.ai/cn/cheapest-price/chatgpt'
+const chatGptApparkTurkeyGuideUrl = 'https://appark.ai/cn/blog/complete-guide-chatgpt-plus-turkey-2026'
+const chatGptOfficialPricingUrl = 'https://openai.com/chatgpt/pricing/'
+const chatGptPlusBaselineUsd = 20
+const chatGptProBaselineUsd = 200
 
 const familyOrder = [
   '全部',
@@ -259,6 +282,149 @@ const platformLogoMeta: Record<string, PlatformLogoMeta> = {
 }
 const fallbackUsdToCny = 7.2
 
+const chatGptSubscriptionItems: ChatGptSubscriptionItem[] = [
+  {
+    id: 'tr-plus',
+    region: '土耳其',
+    countryCode: 'TR',
+    plan: 'Plus',
+    channel: 'App Store / Google Play',
+    localPrice: 'TRY 499.99',
+    cnyMonthly: 77.08,
+    sourceName: 'AppArk ChatGPT 比价页',
+    sourceUrl: chatGptApparkSourceUrl,
+    risk: '中',
+    note: 'AppArk 标注为当前低价区；实际订阅通常依赖本地账号、礼品卡或账单环境。',
+    signal: '当前最低可见样例',
+  },
+  {
+    id: 'tr-go',
+    region: '土耳其',
+    countryCode: 'TR',
+    plan: 'Go',
+    channel: 'App Store / Google Play',
+    localPrice: 'TRY 249',
+    cnyMonthly: 38,
+    sourceName: 'AppArk 土区指南',
+    sourceUrl: chatGptApparkTurkeyGuideUrl,
+    risk: '中',
+    note: '轻量订阅档位，适合把土区价格作为低价锚点观察。',
+    signal: '低门槛订阅',
+  },
+  {
+    id: 'ph-plus',
+    region: '菲律宾',
+    countryCode: 'PH',
+    plan: 'Plus',
+    channel: 'App Store / Google Play',
+    localPrice: 'PHP 1,100-1,300',
+    usdMonthly: 20.5,
+    sourceName: 'AppArk 土区指南',
+    sourceUrl: chatGptApparkTurkeyGuideUrl,
+    risk: '低',
+    note: 'AppArk 将其列为低风险备选区，价格优势小于土耳其。',
+    signal: '低风险备选',
+  },
+  {
+    id: 'us-plus',
+    region: '美国',
+    countryCode: 'US',
+    plan: 'Plus',
+    channel: 'Web',
+    localPrice: 'USD 20.00',
+    usdMonthly: chatGptPlusBaselineUsd,
+    sourceName: 'OpenAI / AppArk',
+    sourceUrl: chatGptOfficialPricingUrl,
+    risk: '基准',
+    note: '网页端 Plus 基准价；不含可能出现的州税或支付通道费用。',
+    signal: '官方美元基准',
+  },
+  {
+    id: 'uk-plus',
+    region: '英国',
+    countryCode: 'GB',
+    plan: 'Plus',
+    channel: 'App Store / Web',
+    localPrice: 'GBP 16.99',
+    usdMonthly: 22.8,
+    sourceName: 'AppArk 土区指南',
+    sourceUrl: chatGptApparkTurkeyGuideUrl,
+    risk: '高税',
+    note: 'AppArk 解释主要受 VAT、平台汇率保护和本地税费影响。',
+    signal: '高税地区',
+  },
+  {
+    id: 'in-plus',
+    region: '印度',
+    countryCode: 'IN',
+    plan: 'Plus',
+    channel: 'App Store / Google Play',
+    localPrice: 'INR 1,999',
+    usdMonthly: 22.7,
+    sourceName: 'AppArk 土区指南',
+    sourceUrl: chatGptApparkTurkeyGuideUrl,
+    risk: '基准',
+    note: 'AppArk 样例显示并非低价区，适合作为亚洲地区参考价。',
+    signal: '区域参考',
+  },
+  {
+    id: 'ng-plus',
+    region: '尼日利亚',
+    countryCode: 'NG',
+    plan: 'Plus',
+    channel: 'App Store / Google Play',
+    localPrice: 'NGN 31,500',
+    usdMonthly: 23.8,
+    sourceName: 'AppArk 土区指南',
+    sourceUrl: chatGptApparkTurkeyGuideUrl,
+    risk: '基准',
+    note: 'AppArk 标注已涨价，不再是主要套利低价区。',
+    signal: '已涨价样例',
+  },
+  {
+    id: 'eu-plus',
+    region: '欧盟',
+    countryCode: 'EU',
+    plan: 'Plus',
+    channel: 'App Store / Web',
+    localPrice: 'EUR 22-25',
+    usdMonthly: 27.35,
+    sourceName: 'AppArk 土区指南',
+    sourceUrl: chatGptApparkTurkeyGuideUrl,
+    risk: '高税',
+    note: 'AppArk 样例为区间价，折美元后明显高于美国网页基准。',
+    signal: '高价区间',
+  },
+  {
+    id: 'us-pro',
+    region: '美国',
+    countryCode: 'US',
+    plan: 'Pro',
+    channel: 'Web',
+    localPrice: 'USD 200.00',
+    usdMonthly: chatGptProBaselineUsd,
+    sourceName: 'OpenAI / AppArk',
+    sourceUrl: chatGptOfficialPricingUrl,
+    risk: '基准',
+    note: 'Pro 官方美元基准；跨区 Pro 价格需要单独核验应用内购显示。',
+    signal: 'Pro 基准',
+  },
+  {
+    id: 'tr-pro',
+    region: '土耳其',
+    countryCode: 'TR',
+    plan: 'Pro',
+    channel: 'App Store / Google Play',
+    localPrice: 'TRY 7,999',
+    cnyMonthly: 1209,
+    sourceName: 'AppArk 土区指南',
+    sourceUrl: chatGptApparkTurkeyGuideUrl,
+    risk: '中',
+    note: 'AppArk 给出的 20x Pro 档位样例；和 Plus 一样存在账号与支付风控。',
+    signal: 'Pro 土区样例',
+  },
+]
+
 function formatPrice(value: number | null | undefined, currency: Currency, usdToCny = fallbackUsdToCny) {
   if (value === null || value === undefined || Number.isNaN(value)) return '-'
   const converted = currency === 'CNY' ? value * usdToCny : value
@@ -268,6 +434,29 @@ function formatPrice(value: number | null | undefined, currency: Currency, usdTo
   if (converted < 1) return `${prefix}${converted.toFixed(3)}`
   if (converted < 100) return `${prefix}${converted.toFixed(2)}`
   return `${prefix}${Math.round(converted).toLocaleString()}`
+}
+
+function subscriptionMonthlyCny(item: ChatGptSubscriptionItem, usdToCny: number) {
+  if (item.cnyMonthly !== undefined) return item.cnyMonthly
+  if (item.usdMonthly !== undefined) return item.usdMonthly * usdToCny
+  return null
+}
+
+function formatSubscriptionCny(value: number | null) {
+  if (value === null || Number.isNaN(value)) return '-'
+  if (value < 100) return `¥${value.toFixed(2)}`
+  return `¥${Math.round(value).toLocaleString()}`
+}
+
+function formatSubscriptionUsd(value: number | null | undefined) {
+  if (value === null || value === undefined || Number.isNaN(value)) return '-'
+  return `$${value.toFixed(value >= 100 ? 0 : 2)}`
+}
+
+function formatSavings(value: number | null) {
+  if (value === null || Number.isNaN(value)) return '-'
+  if (Math.abs(value) < 0.5) return '持平'
+  return value > 0 ? `省 ${Math.round(value)}%` : `贵 ${Math.abs(Math.round(value))}%`
 }
 
 function formatNumber(value: number | null | undefined) {
@@ -847,6 +1036,20 @@ function App() {
   }
 
   const usdToCny = exchangeRate.usdToCny
+  const chatGptPlusBaselineCny = chatGptPlusBaselineUsd * usdToCny
+  const chatGptProBaselineCny = chatGptProBaselineUsd * usdToCny
+  const chatGptSubscriptionRows = chatGptSubscriptionItems
+    .map((item) => {
+      const monthlyCny = subscriptionMonthlyCny(item, usdToCny)
+      const baselineCny =
+        item.plan === 'Pro' ? chatGptProBaselineCny : item.plan === 'Plus' ? chatGptPlusBaselineCny : null
+      const savings = baselineCny && monthlyCny ? ((baselineCny - monthlyCny) / baselineCny) * 100 : null
+      return { ...item, monthlyCny, savings }
+    })
+    .toSorted((a, b) => (a.monthlyCny ?? Number.POSITIVE_INFINITY) - (b.monthlyCny ?? Number.POSITIVE_INFINITY))
+  const turkeyPlusCny = subscriptionMonthlyCny(chatGptSubscriptionItems.find((item) => item.id === 'tr-plus')!, usdToCny)
+  const turkeyPlusSavings =
+    turkeyPlusCny && chatGptPlusBaselineCny ? ((chatGptPlusBaselineCny - turkeyPlusCny) / chatGptPlusBaselineCny) * 100 : null
   const fxStatusLabel =
     exchangeRate.status === 'live'
       ? `更新 ${formatRateDate(exchangeRate.updatedAt)}`
@@ -1002,6 +1205,75 @@ function App() {
               </div>
             </button>
           ))}
+        </div>
+      </section>
+
+      <section className="chatgpt-section" id="chatgpt-subscriptions" aria-label="ChatGPT 订阅全球比价">
+        <div className="chatgpt-head">
+          <div>
+            <span>
+              <CreditCard size={17} aria-hidden="true" />
+              ChatGPT 订阅全球比价
+            </span>
+            <h2>Plus / Pro 月费单独看，不和 API token 价格混在一起。</h2>
+          </div>
+          <div>
+            <p>
+              这里比较的是 ChatGPT 订阅与应用内购地区价；美元项按当前 USD/CNY 汇率折算成人民币。订阅价格受地区、税费、App Store
+              汇率保护和支付风控影响，和 LiteLLM API 报价不是同一类数据。
+            </p>
+            <div className="source-links chatgpt-source-links" aria-label="ChatGPT 订阅数据来源">
+              <a href={chatGptApparkSourceUrl} rel="noreferrer" target="_blank">
+                订阅价源：AppArk ChatGPT 全球比价
+              </a>
+              <a href={chatGptApparkTurkeyGuideUrl} rel="noreferrer" target="_blank">
+                样例价源：AppArk 土区订阅指南
+              </a>
+              <a href={exchangeRate.sourceUrl} rel="noreferrer" target="_blank">
+                汇率源：{exchangeRate.sourceName} USD/CNY {usdToCny.toFixed(4)}
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div className="chatgpt-overview" aria-label="ChatGPT 订阅关键价差">
+          <div className="chatgpt-spotlight">
+            <span className="chatgpt-mark">
+              <BrandLogo family="OpenAI" />
+              ChatGPT Plus
+            </span>
+            <strong>{formatSubscriptionCny(turkeyPlusCny)}</strong>
+            <small>土耳其 App 内购可见低价 · 对比美国网页 $20 约{formatSavings(turkeyPlusSavings)}</small>
+          </div>
+          <div>
+            <span>美国 Plus 基准</span>
+            <strong>{formatSubscriptionCny(chatGptPlusBaselineCny)}</strong>
+            <small>{formatSubscriptionUsd(chatGptPlusBaselineUsd)} / 月 · 实时折人民币</small>
+          </div>
+          <div>
+            <span>美国 Pro 基准</span>
+            <strong>{formatSubscriptionCny(chatGptProBaselineCny)}</strong>
+            <small>{formatSubscriptionUsd(chatGptProBaselineUsd)} / 月 · 单独展示 Pro</small>
+          </div>
+          <div>
+            <span>样例覆盖</span>
+            <strong>{chatGptSubscriptionRows.length}</strong>
+            <small>公开页面可见地区/档位，先做可核验样例</small>
+          </div>
+        </div>
+
+        <div className="chatgpt-grid">
+          {chatGptSubscriptionRows.map((item) => (
+            <ChatGptSubscriptionCard item={item} key={item.id} />
+          ))}
+        </div>
+
+        <div className="chatgpt-note">
+          <Globe2 size={16} aria-hidden="true" />
+          <span>
+            目前先收录 AppArk 页面/指南中可核验的公开样例。若后续拿到完整 46+ 国家地区表，可把这里升级成可筛选的全球订阅榜，
+            并继续保留和 API 价格区分的数据来源标签。
+          </span>
         </div>
       </section>
 
@@ -1393,6 +1665,47 @@ function MetricBar({ label, value }: { label: string; value: number }) {
         <b style={{ width: `${safeValue}%` }} />
       </i>
     </div>
+  )
+}
+
+function ChatGptSubscriptionCard({
+  item,
+}: {
+  item: ChatGptSubscriptionItem & {
+    monthlyCny: number | null
+    savings: number | null
+  }
+}) {
+  const isBaseline = item.risk === '基准'
+  const riskClass =
+    item.risk === '低' ? 'risk-low' : item.risk === '中' ? 'risk-mid' : item.risk === '高税' ? 'risk-tax' : 'risk-base'
+  const savingsLabel = item.plan === 'Go' ? '参考价' : isBaseline ? '对照基准' : formatSavings(item.savings)
+
+  return (
+    <article className="chatgpt-card">
+      <div className="chatgpt-card-top">
+        <span className="country-code">{item.countryCode}</span>
+        <span className={`risk ${riskClass}`}>{item.risk}</span>
+      </div>
+      <div className="chatgpt-card-title">
+        <strong>{item.region}</strong>
+        <small>
+          {item.plan} · {item.channel}
+        </small>
+      </div>
+      <div className="chatgpt-card-price">
+        <span>{item.localPrice}</span>
+        <strong>{formatSubscriptionCny(item.monthlyCny)}</strong>
+      </div>
+      <div className="chatgpt-card-meta">
+        <span>{item.signal}</span>
+        <em>{savingsLabel}</em>
+      </div>
+      <p>{item.note}</p>
+      <a href={item.sourceUrl} rel="noreferrer" target="_blank">
+        来源：{item.sourceName}
+      </a>
+    </article>
   )
 }
 
