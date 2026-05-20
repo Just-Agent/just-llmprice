@@ -896,6 +896,11 @@
   font-weight: 760;
 }
 
+.chatgpt-card-price small {
+  color: #7a838c;
+  font-size: 11px;
+}
+
 .chatgpt-card-price strong {
   color: #006e67;
   font-size: 25px;

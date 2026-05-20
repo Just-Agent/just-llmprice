@@ -95,6 +95,7 @@ type PlatformLogoMeta = BrandMeta
 
 type ExchangeRateState = {
   usdToCny: number
+  rates: Record<string, number> | null
   updatedAt: string | null
   nextUpdateAt: string | null
   sourceName: string
@@ -154,6 +155,9 @@ type ChatGptSubscriptionItem = {
   plan: 'Go' | 'Plus' | 'Pro'
   channel: string
   localPrice: string
+  currencyCode?: string
+  localAmount?: number
+  localAmountMax?: number
   usdMonthly?: number
   cnyMonthly?: number
   sourceName: string
@@ -198,7 +202,7 @@ const litellmSourceUrl = 'https://github.com/BerriAI/litellm/blob/main/model_pri
 const exchangeRateSourceUrl = 'https://www.exchangerate-api.com/docs/free'
 const exchangeRateEndpoint = 'https://open.er-api.com/v6/latest/USD'
 const chatGptApparkSourceUrl = 'https://appark.ai/cn/cheapest-price/chatgpt'
-const chatGptApparkTurkeyGuideUrl = 'https://appark.ai/cn/blog/complete-guide-chatgpt-plus-turkey-2026'
+const chatGptApparkTurkeyGuideUrl = 'https://appark.ai/cn/blog/chatgpt-turkey-discount-subscription-guide'
 const chatGptOfficialPricingUrl = 'https://openai.com/chatgpt/pricing/'
 const chatGptPlusBaselineUsd = 20
 const chatGptProBaselineUsd = 200
@@ -290,6 +294,8 @@ const chatGptSubscriptionItems: ChatGptSubscriptionItem[] = [
     plan: 'Plus',
     channel: 'App Store / Google Play',
     localPrice: 'TRY 499.99',
+    currencyCode: 'TRY',
+    localAmount: 499.99,
     cnyMonthly: 77.08,
     sourceName: 'AppArk ChatGPT 比价页',
     sourceUrl: chatGptApparkSourceUrl,
@@ -304,6 +310,8 @@ const chatGptSubscriptionItems: ChatGptSubscriptionItem[] = [
     plan: 'Go',
     channel: 'App Store / Google Play',
     localPrice: 'TRY 249',
+    currencyCode: 'TRY',
+    localAmount: 249,
     cnyMonthly: 38,
     sourceName: 'AppArk 土区指南',
     sourceUrl: chatGptApparkTurkeyGuideUrl,
@@ -318,6 +326,9 @@ const chatGptSubscriptionItems: ChatGptSubscriptionItem[] = [
     plan: 'Plus',
     channel: 'App Store / Google Play',
     localPrice: 'PHP 1,100-1,300',
+    currencyCode: 'PHP',
+    localAmount: 1100,
+    localAmountMax: 1300,
     usdMonthly: 20.5,
     sourceName: 'AppArk 土区指南',
     sourceUrl: chatGptApparkTurkeyGuideUrl,
@@ -332,6 +343,8 @@ const chatGptSubscriptionItems: ChatGptSubscriptionItem[] = [
     plan: 'Plus',
     channel: 'Web',
     localPrice: 'USD 20.00',
+    currencyCode: 'USD',
+    localAmount: chatGptPlusBaselineUsd,
     usdMonthly: chatGptPlusBaselineUsd,
     sourceName: 'OpenAI / AppArk',
     sourceUrl: chatGptOfficialPricingUrl,
@@ -346,6 +359,8 @@ const chatGptSubscriptionItems: ChatGptSubscriptionItem[] = [
     plan: 'Plus',
     channel: 'App Store / Web',
     localPrice: 'GBP 16.99',
+    currencyCode: 'GBP',
+    localAmount: 16.99,
     usdMonthly: 22.8,
     sourceName: 'AppArk 土区指南',
     sourceUrl: chatGptApparkTurkeyGuideUrl,
@@ -360,6 +375,8 @@ const chatGptSubscriptionItems: ChatGptSubscriptionItem[] = [
     plan: 'Plus',
     channel: 'App Store / Google Play',
     localPrice: 'INR 1,999',
+    currencyCode: 'INR',
+    localAmount: 1999,
     usdMonthly: 22.7,
     sourceName: 'AppArk 土区指南',
     sourceUrl: chatGptApparkTurkeyGuideUrl,
@@ -374,6 +391,8 @@ const chatGptSubscriptionItems: ChatGptSubscriptionItem[] = [
     plan: 'Plus',
     channel: 'App Store / Google Play',
     localPrice: 'NGN 31,500',
+    currencyCode: 'NGN',
+    localAmount: 31500,
     usdMonthly: 23.8,
     sourceName: 'AppArk 土区指南',
     sourceUrl: chatGptApparkTurkeyGuideUrl,
@@ -388,6 +407,9 @@ const chatGptSubscriptionItems: ChatGptSubscriptionItem[] = [
     plan: 'Plus',
     channel: 'App Store / Web',
     localPrice: 'EUR 22-25',
+    currencyCode: 'EUR',
+    localAmount: 22,
+    localAmountMax: 25,
     usdMonthly: 27.35,
     sourceName: 'AppArk 土区指南',
     sourceUrl: chatGptApparkTurkeyGuideUrl,
@@ -402,6 +424,8 @@ const chatGptSubscriptionItems: ChatGptSubscriptionItem[] = [
     plan: 'Pro',
     channel: 'Web',
     localPrice: 'USD 200.00',
+    currencyCode: 'USD',
+    localAmount: chatGptProBaselineUsd,
     usdMonthly: chatGptProBaselineUsd,
     sourceName: 'OpenAI / AppArk',
     sourceUrl: chatGptOfficialPricingUrl,
@@ -416,6 +440,8 @@ const chatGptSubscriptionItems: ChatGptSubscriptionItem[] = [
     plan: 'Pro',
     channel: 'App Store / Google Play',
     localPrice: 'TRY 7,999',
+    currencyCode: 'TRY',
+    localAmount: 7999,
     cnyMonthly: 1209,
     sourceName: 'AppArk 土区指南',
     sourceUrl: chatGptApparkTurkeyGuideUrl,
@@ -436,10 +462,28 @@ function formatPrice(value: number | null | undefined, currency: Currency, usdTo
   return `${prefix}${Math.round(converted).toLocaleString()}`
 }
 
-function subscriptionMonthlyCny(item: ChatGptSubscriptionItem, usdToCny: number) {
+function subscriptionMonthlyCny(item: ChatGptSubscriptionItem, exchangeRate: ExchangeRateState) {
+  const localAmount =
+    item.localAmount !== undefined && item.localAmountMax !== undefined
+      ? (item.localAmount + item.localAmountMax) / 2
+      : item.localAmount
+  const currencyRate = item.currencyCode ? exchangeRate.rates?.[item.currencyCode] : null
+
+  if (localAmount !== undefined && item.currencyCode === 'USD') return localAmount * exchangeRate.usdToCny
+  if (localAmount !== undefined && currencyRate && exchangeRate.rates?.CNY) {
+    return (localAmount / currencyRate) * exchangeRate.rates.CNY
+  }
   if (item.cnyMonthly !== undefined) return item.cnyMonthly
-  if (item.usdMonthly !== undefined) return item.usdMonthly * usdToCny
+  if (item.usdMonthly !== undefined) return item.usdMonthly * exchangeRate.usdToCny
   return null
+}
+
+function subscriptionFxLabel(item: ChatGptSubscriptionItem, exchangeRate: ExchangeRateState) {
+  if (!item.currencyCode || item.currencyCode === 'USD') return 'USD/CNY 实时折算'
+  if (item.currencyCode && exchangeRate.rates?.[item.currencyCode] && exchangeRate.rates?.CNY) {
+    return `${item.currencyCode}/CNY 实时折算`
+  }
+  return 'AppArk 样例折算'
 }
 
 function formatSubscriptionCny(value: number | null) {
@@ -489,6 +533,7 @@ function formatRateDate(value: string | null) {
 function getInitialExchangeRate(): ExchangeRateState {
   const fallback: ExchangeRateState = {
     usdToCny: fallbackUsdToCny,
+    rates: null,
     updatedAt: null,
     nextUpdateAt: null,
     sourceName: '固定回退汇率',
@@ -503,7 +548,7 @@ function getInitialExchangeRate(): ExchangeRateState {
     const cached = window.localStorage.getItem('just-llmprice-usd-cny')
     if (!cached) return fallback
     const parsed = JSON.parse(cached) as ExchangeRateState
-    return parsed.usdToCny > 0 ? parsed : fallback
+    return parsed.usdToCny > 0 ? { ...fallback, ...parsed, rates: parsed.rates ?? null } : fallback
   } catch {
     window.localStorage.removeItem('just-llmprice-usd-cny')
     return fallback
@@ -890,6 +935,7 @@ function App() {
         if (payload.result !== 'success' || !rate || rate <= 0) throw new Error('USD/CNY 汇率缺失')
         const next: ExchangeRateState = {
           usdToCny: rate,
+          rates: payload.rates ?? null,
           updatedAt: payload.time_last_update_utc ?? new Date().toISOString(),
           nextUpdateAt: payload.time_next_update_utc ?? null,
           sourceName: 'ExchangeRate-API',
@@ -1040,16 +1086,17 @@ function App() {
   const chatGptProBaselineCny = chatGptProBaselineUsd * usdToCny
   const chatGptSubscriptionRows = chatGptSubscriptionItems
     .map((item) => {
-      const monthlyCny = subscriptionMonthlyCny(item, usdToCny)
+      const monthlyCny = subscriptionMonthlyCny(item, exchangeRate)
       const baselineCny =
         item.plan === 'Pro' ? chatGptProBaselineCny : item.plan === 'Plus' ? chatGptPlusBaselineCny : null
       const savings = baselineCny && monthlyCny ? ((baselineCny - monthlyCny) / baselineCny) * 100 : null
-      return { ...item, monthlyCny, savings }
+      return { ...item, monthlyCny, savings, fxLabel: subscriptionFxLabel(item, exchangeRate) }
     })
     .toSorted((a, b) => (a.monthlyCny ?? Number.POSITIVE_INFINITY) - (b.monthlyCny ?? Number.POSITIVE_INFINITY))
-  const turkeyPlusCny = subscriptionMonthlyCny(chatGptSubscriptionItems.find((item) => item.id === 'tr-plus')!, usdToCny)
+  const turkeyPlusCny = subscriptionMonthlyCny(chatGptSubscriptionItems.find((item) => item.id === 'tr-plus')!, exchangeRate)
   const turkeyPlusSavings =
     turkeyPlusCny && chatGptPlusBaselineCny ? ((chatGptPlusBaselineCny - turkeyPlusCny) / chatGptPlusBaselineCny) * 100 : null
+  const subscriptionFxScope = exchangeRate.rates ? '全币种折算' : 'USD/CNY 折算'
   const fxStatusLabel =
     exchangeRate.status === 'live'
       ? `更新 ${formatRateDate(exchangeRate.updatedAt)}`
@@ -1208,7 +1255,7 @@ function App() {
         </div>
       </section>
 
-      <section className="chatgpt-section" id="chatgpt-subscriptions" aria-label="ChatGPT 订阅全球比价">
+      <section className="chatgpt-section" id="chatgpt-subscription" aria-label="ChatGPT 订阅全球比价">
         <div className="chatgpt-head">
           <div>
             <span>
@@ -1219,7 +1266,7 @@ function App() {
           </div>
           <div>
             <p>
-              这里比较的是 ChatGPT 订阅与应用内购地区价；美元项按当前 USD/CNY 汇率折算成人民币。订阅价格受地区、税费、App Store
+              这里比较的是 ChatGPT 订阅与应用内购地区价；本币项按当前汇率折算成人民币。订阅价格受地区、税费、App Store
               汇率保护和支付风控影响，和 LiteLLM API 报价不是同一类数据。
             </p>
             <div className="source-links chatgpt-source-links" aria-label="ChatGPT 订阅数据来源">
@@ -1230,7 +1277,7 @@ function App() {
                 样例价源：AppArk 土区订阅指南
               </a>
               <a href={exchangeRate.sourceUrl} rel="noreferrer" target="_blank">
-                汇率源：{exchangeRate.sourceName} USD/CNY {usdToCny.toFixed(4)}
+                汇率源：{exchangeRate.sourceName} {subscriptionFxScope} · USD/CNY {usdToCny.toFixed(4)}
               </a>
             </div>
           </div>
@@ -1674,6 +1721,7 @@ function ChatGptSubscriptionCard({
   item: ChatGptSubscriptionItem & {
     monthlyCny: number | null
     savings: number | null
+    fxLabel: string
   }
 }) {
   const isBaseline = item.risk === '基准'
@@ -1696,6 +1744,7 @@ function ChatGptSubscriptionCard({
       <div className="chatgpt-card-price">
         <span>{item.localPrice}</span>
         <strong>{formatSubscriptionCny(item.monthlyCny)}</strong>
+        <small>{item.fxLabel}</small>
       </div>
       <div className="chatgpt-card-meta">
         <span>{item.signal}</span>
