@@ -222,6 +222,18 @@ const chatGptPlanProfiles: Record<Exclude<ChatGptPlan, 'Go'>, { usd: number; cap
   Pro: { usd: chatGptProBaselineUsd, caption: '5x Plus 用量', sourceUrl: chatGptOfficialProTiersUrl },
   'Pro+': { usd: chatGptProPlusBaselineUsd, caption: '20x Plus 用量', sourceUrl: chatGptOfficialProTiersUrl },
 }
+const chatGptPlanCoverage: Partial<Record<ChatGptPlanFilter, { title: string; body: string; action: ChatGptPlanFilter }>> = {
+  Pro: {
+    title: 'Pro 跨区价格点还少',
+    body: '目前收录 OpenAI 官方 $100 / 5x 基准；AppArk 可见跨区价格主要集中在 Plus 和 $200 / 20x 档。',
+    action: 'Pro+',
+  },
+  'Pro+': {
+    title: 'Pro+ 先看美国和土耳其',
+    body: '美国基准来自 OpenAI，土耳其价格来自 AppArk 指南；更多地区价格适合等公开页面继续补齐。',
+    action: 'all',
+  },
+}
 const pageHash: Record<AppPage, string> = {
   home: '#home',
   models: '#models',
@@ -1192,6 +1204,7 @@ function App() {
     },
     { Plus: 0, Pro: 0, 'Pro+': 0 } as Record<Exclude<ChatGptPlanFilter, 'all'>, number>,
   )
+  const chatGptCoverage = visibleChatGptSubscriptionRows.length <= 2 ? chatGptPlanCoverage[chatGptPlanFilter] : null
   const turkeyPlusCny = subscriptionMonthlyCny(chatGptSubscriptionItems.find((item) => item.id === 'tr-plus')!, exchangeRate)
   const turkeyPlusSavings =
     turkeyPlusCny && chatGptPlusBaselineCny ? ((chatGptPlusBaselineCny - turkeyPlusCny) / chatGptPlusBaselineCny) * 100 : null
@@ -1469,7 +1482,20 @@ function App() {
           </span>
         </div>
 
-        <div className="chatgpt-grid">
+        {chatGptCoverage && (
+          <div className="chatgpt-coverage" aria-label="订阅档位覆盖情况">
+            <span>
+              <strong>{chatGptCoverage.title}</strong>
+              <small>{chatGptCoverage.body}</small>
+            </span>
+            <button type="button" onClick={() => setChatGptPlanFilter(chatGptCoverage.action)}>
+              {chatGptCoverage.action === 'all' ? '查看全部档位' : `查看 ${chatGptCoverage.action}`}
+              <ArrowRight size={15} aria-hidden="true" />
+            </button>
+          </div>
+        )}
+
+        <div className={`chatgpt-grid ${visibleChatGptSubscriptionRows.length <= 2 ? 'is-sparse' : ''}`}>
           {visibleChatGptSubscriptionRows.map((item) => (
             <ChatGptSubscriptionCard item={item} key={item.id} />
           ))}
