@@ -26,6 +26,7 @@ npm run dev
 
 ```bash
 npm run lint
+npm run expression:lint
 npm run build
 ```
 
@@ -34,6 +35,17 @@ GitHub Pages 项目页构建时需要设置：
 ```bash
 VITE_BASE=/just-llmprice/ npm run build
 ```
+
+## Product Expression Guard
+
+UI 可见文字要从用户任务出发，不能把开发者备注、实现边界、调试词、数据匹配细节写进标题、按钮和卡片标题。
+
+```bash
+npm run expression:lint
+npm run hooks:install
+```
+
+`hooks:install` 会在本地安装 pre-commit hook，提交前自动运行表达门禁。规则详见 `AGENTS.md`。
 
 ## Data Pipeline
 

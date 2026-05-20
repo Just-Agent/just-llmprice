@@ -19,6 +19,7 @@ import './App.css'
 type PriceMetric = 'blendedPrice' | 'inputPrice' | 'outputPrice'
 type Currency = 'USD' | 'CNY'
 type BenchmarkMode = 'aa' | 'overall' | 'coding' | 'math' | 'agent'
+type AppPage = 'home' | 'models' | 'platforms' | 'chatgpt' | 'value'
 
 type PriceEntry = {
   sourceKey: string
@@ -206,6 +207,20 @@ const chatGptApparkTurkeyGuideUrl = 'https://appark.ai/cn/blog/chatgpt-turkey-di
 const chatGptOfficialPricingUrl = 'https://openai.com/chatgpt/pricing/'
 const chatGptPlusBaselineUsd = 20
 const chatGptProBaselineUsd = 200
+const pageHash: Record<AppPage, string> = {
+  home: '#home',
+  models: '#models',
+  platforms: '#platforms',
+  chatgpt: '#chatgpt-subscription',
+  value: '#value',
+}
+const pageNavItems: Array<{ id: AppPage; label: string; description: string }> = [
+  { id: 'home', label: '首页', description: '热门模型' },
+  { id: 'models', label: '模型比价', description: '平台排行' },
+  { id: 'platforms', label: '平台优势', description: '长期便宜' },
+  { id: 'chatgpt', label: 'ChatGPT 订阅', description: '全球月费' },
+  { id: 'value', label: '能力价比', description: '分数/成本' },
+]
 
 const familyOrder = [
   '全部',
@@ -300,8 +315,8 @@ const chatGptSubscriptionItems: ChatGptSubscriptionItem[] = [
     sourceName: 'AppArk ChatGPT 比价页',
     sourceUrl: chatGptApparkSourceUrl,
     risk: '中',
-    note: 'AppArk 标注为当前低价区；实际订阅通常依赖本地账号、礼品卡或账单环境。',
-    signal: '当前最低可见样例',
+    note: '土耳其区通常需要匹配当地支付环境，适合做低价参考。',
+    signal: '当前低价参考',
   },
   {
     id: 'tr-go',
@@ -333,7 +348,7 @@ const chatGptSubscriptionItems: ChatGptSubscriptionItem[] = [
     sourceName: 'AppArk 土区指南',
     sourceUrl: chatGptApparkTurkeyGuideUrl,
     risk: '低',
-    note: 'AppArk 将其列为低风险备选区，价格优势小于土耳其。',
+    note: '低风险备选区，价格优势小于土耳其。',
     signal: '低风险备选',
   },
   {
@@ -365,7 +380,7 @@ const chatGptSubscriptionItems: ChatGptSubscriptionItem[] = [
     sourceName: 'AppArk 土区指南',
     sourceUrl: chatGptApparkTurkeyGuideUrl,
     risk: '高税',
-    note: 'AppArk 解释主要受 VAT、平台汇率保护和本地税费影响。',
+    note: 'VAT 与平台汇率保护推高最终月费。',
     signal: '高税地区',
   },
   {
@@ -381,7 +396,7 @@ const chatGptSubscriptionItems: ChatGptSubscriptionItem[] = [
     sourceName: 'AppArk 土区指南',
     sourceUrl: chatGptApparkTurkeyGuideUrl,
     risk: '基准',
-    note: 'AppArk 样例显示并非低价区，适合作为亚洲地区参考价。',
+    note: '亚洲地区参考价，价格接近美国基准。',
     signal: '区域参考',
   },
   {
@@ -397,8 +412,8 @@ const chatGptSubscriptionItems: ChatGptSubscriptionItem[] = [
     sourceName: 'AppArk 土区指南',
     sourceUrl: chatGptApparkTurkeyGuideUrl,
     risk: '基准',
-    note: 'AppArk 标注已涨价，不再是主要套利低价区。',
-    signal: '已涨价样例',
+    note: '价格已接近美国基准，不再是明显低价区。',
+    signal: '已涨价区域',
   },
   {
     id: 'eu-plus',
@@ -414,7 +429,7 @@ const chatGptSubscriptionItems: ChatGptSubscriptionItem[] = [
     sourceName: 'AppArk 土区指南',
     sourceUrl: chatGptApparkTurkeyGuideUrl,
     risk: '高税',
-    note: 'AppArk 样例为区间价，折美元后明显高于美国网页基准。',
+    note: '区间价，折算后明显高于美国网页基准。',
     signal: '高价区间',
   },
   {
@@ -446,8 +461,8 @@ const chatGptSubscriptionItems: ChatGptSubscriptionItem[] = [
     sourceName: 'AppArk 土区指南',
     sourceUrl: chatGptApparkTurkeyGuideUrl,
     risk: '中',
-    note: 'AppArk 给出的 20x Pro 档位样例；和 Plus 一样存在账号与支付风控。',
-    signal: 'Pro 土区样例',
+    note: 'Pro 土区价格仍低于美国 Pro，同样要关注账号与支付环境。',
+    signal: 'Pro 土区参考',
   },
 ]
 
@@ -479,11 +494,11 @@ function subscriptionMonthlyCny(item: ChatGptSubscriptionItem, exchangeRate: Exc
 }
 
 function subscriptionFxLabel(item: ChatGptSubscriptionItem, exchangeRate: ExchangeRateState) {
-  if (!item.currencyCode || item.currencyCode === 'USD') return 'USD/CNY 实时折算'
+  if (!item.currencyCode || item.currencyCode === 'USD') return 'USD/CNY 最新折算'
   if (item.currencyCode && exchangeRate.rates?.[item.currencyCode] && exchangeRate.rates?.CNY) {
-    return `${item.currencyCode}/CNY 实时折算`
+    return `${item.currencyCode}/CNY 最新折算`
   }
-  return 'AppArk 样例折算'
+  return '参考折算'
 }
 
 function formatSubscriptionCny(value: number | null) {
@@ -521,7 +536,7 @@ function formatDate(value: string) {
 }
 
 function formatRateDate(value: string | null) {
-  if (!value) return '固定回退'
+  if (!value) return '备用汇率'
   return new Intl.DateTimeFormat('zh-CN', {
     month: '2-digit',
     day: '2-digit',
@@ -536,7 +551,7 @@ function getInitialExchangeRate(): ExchangeRateState {
     rates: null,
     updatedAt: null,
     nextUpdateAt: null,
-    sourceName: '固定回退汇率',
+    sourceName: '备用汇率',
     sourceUrl: exchangeRateSourceUrl,
     status: 'loading',
     error: null,
@@ -553,6 +568,15 @@ function getInitialExchangeRate(): ExchangeRateState {
     window.localStorage.removeItem('just-llmprice-usd-cny')
     return fallback
   }
+}
+
+function pageFromHash(hash: string): AppPage {
+  const normalized = hash.toLowerCase()
+  if (normalized === '#models' || normalized === '#analysis') return 'models'
+  if (normalized === '#platforms') return 'platforms'
+  if (normalized === '#chatgpt-subscription' || normalized === '#chatgpt') return 'chatgpt'
+  if (normalized === '#value' || normalized === '#ability-value') return 'value'
+  return 'home'
 }
 
 function cleanEntries(entries: PriceEntry[], includeZero: boolean, includeExtreme: boolean, metric: PriceMetric) {
@@ -887,6 +911,9 @@ function App() {
   const [benchmarkMode, setBenchmarkMode] = useState<BenchmarkMode>('aa')
   const [benchmarkError, setBenchmarkError] = useState<string | null>(null)
   const [exchangeRate, setExchangeRate] = useState<ExchangeRateState>(() => getInitialExchangeRate())
+  const [page, setPage] = useState<AppPage>(() =>
+    typeof window === 'undefined' ? 'home' : pageFromHash(window.location.hash),
+  )
 
   useEffect(() => {
     fetch(`${import.meta.env.BASE_URL}data/llm-prices.json`)
@@ -950,10 +977,20 @@ function App() {
         setExchangeRate((current) => ({
           ...current,
           status: current.status === 'live' ? 'live' : 'fallback',
-          sourceName: current.status === 'live' ? current.sourceName : '固定回退汇率',
+          sourceName: current.status === 'live' ? current.sourceName : '备用汇率',
           error: error instanceof Error ? error.message : '汇率加载失败',
         }))
       })
+  }, [])
+
+  useEffect(() => {
+    const syncPage = () => setPage(pageFromHash(window.location.hash))
+    window.addEventListener('hashchange', syncPage)
+    window.addEventListener('popstate', syncPage)
+    return () => {
+      window.removeEventListener('hashchange', syncPage)
+      window.removeEventListener('popstate', syncPage)
+    }
   }, [])
 
   const families = useMemo(() => {
@@ -1015,6 +1052,7 @@ function App() {
 
     return Array.from(picked.values()).slice(0, 14)
   }, [data])
+  const homeHotModels = hotModels.slice(0, 6)
 
   const platformInsights = useMemo(() => (data ? buildPlatformInsights(data.models) : []), [data])
   const benchmarkIndex = useMemo(
@@ -1051,15 +1089,29 @@ function App() {
   const spread =
     cheapest?.[metric] && highest?.[metric] && cheapest[metric] > 0 ? (highest[metric] ?? 0) / cheapest[metric] : null
 
+  const navigateToPage = (nextPage: AppPage) => {
+    setPage(nextPage)
+    if (typeof window !== 'undefined') {
+      window.history.pushState(null, '', `${window.location.pathname}${window.location.search}${pageHash[nextPage]}`)
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
+  }
+
   const selectModelAndFocus = (modelId: string) => {
     setSelectedModelId(modelId)
-    analysisRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    navigateToPage('models')
+    window.requestAnimationFrame(() => {
+      analysisRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    })
   }
 
   const selectPlatformAndFocus = (providerLabel: string) => {
     setFamily('全部')
     setQuery(providerLabel)
-    analysisRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    navigateToPage('models')
+    window.requestAnimationFrame(() => {
+      analysisRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    })
   }
 
   if (loadError) {
@@ -1102,12 +1154,19 @@ function App() {
       ? `更新 ${formatRateDate(exchangeRate.updatedAt)}`
       : exchangeRate.status === 'loading'
         ? '载入中'
-        : '固定回退'
+        : '备用汇率'
 
   return (
     <main className="app-shell">
       <header className="topbar">
-        <button className="brand" type="button" onClick={() => setSelectedModelId(resolveDefaultModel(data.models))}>
+        <button
+          className="brand"
+          type="button"
+          onClick={() => {
+            setSelectedModelId(resolveDefaultModel(data.models))
+            navigateToPage('home')
+          }}
+        >
           <span className="brand-mark">jl</span>
           <span>
             <strong>just-llmprice</strong>
@@ -1146,9 +1205,20 @@ function App() {
             <GitBranch size={18} aria-hidden="true" />
           </a>
         </div>
+
+        <nav className="page-nav" aria-label="专题导航">
+          {pageNavItems.map((item) => (
+            <button className={page === item.id ? 'active' : ''} key={item.id} type="button" onClick={() => navigateToPage(item.id)}>
+              <strong>{item.label}</strong>
+              <small>{item.description}</small>
+            </button>
+          ))}
+        </nav>
       </header>
 
-      <section className="hot-hero" aria-label="热门模型价格雷达">
+      {page === 'home' && (
+        <>
+      <section className="hot-hero" id="home" aria-label="热门模型价格雷达">
         <div className="hot-copy">
           <span className="radar-mark">
             <Radar size={28} aria-hidden="true" />
@@ -1166,19 +1236,19 @@ function App() {
             先看 GPT、Claude、Gemini、Qwen、Kimi、GLM 等旗舰模型的最低价、最高价和价差，再进入下方分析台做模型族筛选、平台排行和价格分布对比。
           </p>
           <div className="hot-actions">
-            <button type="button" onClick={() => analysisRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })}>
+            <button type="button" onClick={() => navigateToPage('models')}>
               进入完整分析台
               <ArrowRight size={16} aria-hidden="true" />
             </button>
             <span>
               <Activity size={15} aria-hidden="true" />
-              {hotModels.length} 个模型 · 每 1M tokens · 来自 LiteLLM
+              {homeHotModels.length} 个热门模型 · 每 1M tokens
             </span>
           </div>
         </div>
 
         <div className="hot-grid">
-          {hotModels.map((model) => (
+          {homeHotModels.map((model) => (
             <HotModelCard
               currency={currency}
               key={model.id}
@@ -1198,7 +1268,7 @@ function App() {
             <small>低价 / 平台 / 窗口 / 价差 / 能力</small>
           </div>
           <div className="radar-cards">
-            {hotModels.slice(0, 6).map((model) => (
+            {homeHotModels.slice(0, 6).map((model) => (
               <button className="radar-card" key={`radar-${model.id}`} type="button" onClick={() => selectModelAndFocus(model.id)}>
                 <RadarChart axes={radarAxes(model)} showLabels size={148} />
                 <span>
@@ -1213,17 +1283,38 @@ function App() {
         </section>
       </section>
 
-      <section className="platform-section" aria-label="平台优势分析">
+      <section className="topic-hub" aria-label="专题入口">
+        {pageNavItems
+          .filter((item) => item.id !== 'home')
+          .map((item) => (
+            <button className="topic-card" key={item.id} type="button" onClick={() => navigateToPage(item.id)}>
+              <span>{item.description}</span>
+              <strong>{item.label}</strong>
+              <small>
+                {item.id === 'models' && '按模型查看最低价、最高价和价差'}
+                {item.id === 'platforms' && '看哪些平台长期更有价格优势'}
+                {item.id === 'chatgpt' && '按最新汇率比较 ChatGPT 订阅月费'}
+                {item.id === 'value' && '把能力榜分数和 API 成本放在一起看'}
+              </small>
+              <ArrowRight size={16} aria-hidden="true" />
+            </button>
+          ))}
+      </section>
+        </>
+      )}
+
+      {page === 'platforms' && (
+      <section className="platform-section page-panel" id="platforms" aria-label="平台优势分析">
         <div className="platform-head">
           <div>
             <span>
               <BarChart3 size={17} aria-hidden="true" />
               平台优势分析
             </span>
-            <h2>哪些平台不是偶尔便宜，而是经常便宜？</h2>
+            <h2>哪些平台经常更便宜？</h2>
           </div>
           <p>
-            综合每个平台在全部可比模型里的最低价命中、Top 3 命中、覆盖模型数和平均溢价倍数，筛出更像“全方位优势”的平台。
+            综合最低价命中、Top 3 命中、覆盖模型数和平均溢价倍数，看哪些平台更适合长期比价。
           </p>
         </div>
         <div className="platform-grid">
@@ -1254,27 +1345,28 @@ function App() {
           ))}
         </div>
       </section>
+      )}
 
-      <section className="chatgpt-section" id="chatgpt-subscription" aria-label="ChatGPT 订阅全球比价">
+      {page === 'chatgpt' && (
+      <section className="chatgpt-section page-panel" id="chatgpt-subscription" aria-label="ChatGPT 订阅全球比价">
         <div className="chatgpt-head">
           <div>
             <span>
               <CreditCard size={17} aria-hidden="true" />
               ChatGPT 订阅全球比价
             </span>
-            <h2>Plus / Pro 月费单独看，不和 API token 价格混在一起。</h2>
+            <h2>ChatGPT Plus 全球订阅低价榜</h2>
           </div>
           <div>
             <p>
-              这里比较的是 ChatGPT 订阅与应用内购地区价；本币项按当前汇率折算成人民币。订阅价格受地区、税费、App Store
-              汇率保护和支付风控影响，和 LiteLLM API 报价不是同一类数据。
+              比较不同地区的 ChatGPT Plus / Pro 月费，并按最新汇率折算成人民币。地区税费、应用商店汇率和支付环境都会影响最终价格。
             </p>
             <div className="source-links chatgpt-source-links" aria-label="ChatGPT 订阅数据来源">
               <a href={chatGptApparkSourceUrl} rel="noreferrer" target="_blank">
                 订阅价源：AppArk ChatGPT 全球比价
               </a>
               <a href={chatGptApparkTurkeyGuideUrl} rel="noreferrer" target="_blank">
-                样例价源：AppArk 土区订阅指南
+                指南：AppArk 土区订阅指南
               </a>
               <a href={exchangeRate.sourceUrl} rel="noreferrer" target="_blank">
                 汇率源：{exchangeRate.sourceName} {subscriptionFxScope} · USD/CNY {usdToCny.toFixed(4)}
@@ -1290,22 +1382,22 @@ function App() {
               ChatGPT Plus
             </span>
             <strong>{formatSubscriptionCny(turkeyPlusCny)}</strong>
-            <small>土耳其 App 内购可见低价 · 对比美国网页 $20 约{formatSavings(turkeyPlusSavings)}</small>
+            <small>土耳其 App 内购参考价 · 对比美国网页 $20 约{formatSavings(turkeyPlusSavings)}</small>
           </div>
           <div>
             <span>美国 Plus 基准</span>
             <strong>{formatSubscriptionCny(chatGptPlusBaselineCny)}</strong>
-            <small>{formatSubscriptionUsd(chatGptPlusBaselineUsd)} / 月 · 实时折人民币</small>
+            <small>{formatSubscriptionUsd(chatGptPlusBaselineUsd)} / 月 · 最新折人民币</small>
           </div>
           <div>
             <span>美国 Pro 基准</span>
             <strong>{formatSubscriptionCny(chatGptProBaselineCny)}</strong>
-            <small>{formatSubscriptionUsd(chatGptProBaselineUsd)} / 月 · 单独展示 Pro</small>
+            <small>{formatSubscriptionUsd(chatGptProBaselineUsd)} / 月 · 最新折人民币</small>
           </div>
           <div>
-            <span>样例覆盖</span>
+            <span>地区覆盖</span>
             <strong>{chatGptSubscriptionRows.length}</strong>
-            <small>公开页面可见地区/档位，先做可核验样例</small>
+            <small>覆盖低价区、基准区和高税区</small>
           </div>
         </div>
 
@@ -1318,25 +1410,25 @@ function App() {
         <div className="chatgpt-note">
           <Globe2 size={16} aria-hidden="true" />
           <span>
-            目前先收录 AppArk 页面/指南中可核验的公开样例。若后续拿到完整 46+ 国家地区表，可把这里升级成可筛选的全球订阅榜，
-            并继续保留和 API 价格区分的数据来源标签。
+            订阅价格来自 AppArk，API 价格来自 LiteLLM；两类价格分开统计。跨区订阅可能受到账号、税费和支付环境影响。
           </span>
         </div>
       </section>
+      )}
 
-      <section className="value-section" aria-label="能力价比 Beta">
+      {page === 'value' && (
+      <section className="value-section page-panel" id="value" aria-label="能力价比 Beta">
         <div className="value-head">
           <div>
             <span>
               <Sparkles size={17} aria-hidden="true" />
               能力价比 Beta
             </span>
-            <h2>把能力榜分数除以真实 API 最低价。</h2>
+            <h2>同等能力，谁更划算？</h2>
           </div>
           <div>
             <p>
-              价格只取 LiteLLM JSON 里的每 1M tokens 报价；能力分来自 DataLearner 榜单。这里只做标准化别名匹配，
-              未能同名匹配的强模型会单独列出，避免把近似型号混成同一个模型。
+              把 DataLearner 能力榜和 LiteLLM API 价格放到同一张表里，快速看高分模型的真实调用成本。
             </p>
             <div className="source-links" aria-label="数据来源">
               <a href={litellmSourceUrl} rel="noreferrer" target="_blank">
@@ -1357,7 +1449,7 @@ function App() {
         </div>
 
         <div className="value-toolbar">
-          <div className="segmented value-tabs" aria-label="能力口径">
+          <div className="segmented value-tabs" aria-label="能力分类">
             {(Object.keys(benchmarkModeLabels) as BenchmarkMode[]).map((item) => (
               <button
                 className={benchmarkMode === item ? 'active' : ''}
@@ -1371,7 +1463,7 @@ function App() {
           </div>
           <span>
             {benchmarkData
-              ? `${benchmarkData.meta.modelCount} 个 DataLearner 模型 · ${abilityValueItems.length} 个已匹配价格`
+              ? `${benchmarkData.meta.modelCount} 个榜单模型 · ${abilityValueItems.length} 个可比价格`
               : benchmarkError
                 ? `DataLearner 加载失败：${benchmarkError}`
                 : '正在载入 DataLearner 能力榜...'}
@@ -1384,7 +1476,7 @@ function App() {
               <div className="flagship-strip" aria-label="顶尖闭源模型能力对照">
                 <div className="flagship-strip-head">
                   <strong>顶尖闭源/旗舰模型</strong>
-                  <small>这组按精选旗舰顺序展示，不按价比排序；贵模型会在这里保留可见性。</small>
+                  <small>专门保留强模型入口，让旗舰模型也保持可见。</small>
                 </div>
                 <div className="flagship-list">
                   {flagshipValueItems.map((item) => (
@@ -1421,8 +1513,8 @@ function App() {
 
             <div className="benchmark-note-strip">
               <div>
-                <strong>能力强，但暂无同名 LiteLLM 可比价</strong>
-                <small>这些卡片只来自 DataLearner，不参与价格排行；适合提醒后续手动确认 LiteLLM 是否新增了同名模型。</small>
+                <strong>强模型观察名单</strong>
+                <small>这些模型还缺少可直接比较的 API 报价，适合继续关注。</small>
               </div>
               <div className="benchmark-ghost-list">
                 {unmatchedBenchmarkHighlights.map(({ model, score }) => (
@@ -1436,7 +1528,10 @@ function App() {
           </>
         )}
       </section>
+      )}
 
+      {page === 'models' && (
+        <>
       <section className="status-strip" aria-label="数据摘要">
         <div>
           <span>模型组</span>
@@ -1447,7 +1542,7 @@ function App() {
           <strong>{data.meta.entryCount}</strong>
         </div>
         <div>
-          <span>源条目</span>
+          <span>原始报价</span>
           <strong>{data.meta.rawModelCount}</strong>
         </div>
         <div>
@@ -1457,7 +1552,7 @@ function App() {
         <div>
           <span>汇率</span>
           <strong>{currency === 'CNY' ? `USD/CNY ${usdToCny.toFixed(4)}` : 'USD 原价'}</strong>
-          <small>{exchangeRate.status === 'live' ? formatRateDate(exchangeRate.updatedAt) : '固定回退'}</small>
+          <small>{exchangeRate.status === 'live' ? formatRateDate(exchangeRate.updatedAt) : '备用汇率'}</small>
         </div>
       </section>
 
@@ -1535,7 +1630,7 @@ function App() {
           </div>
 
           <div className="controls-row">
-            <div className="segmented metric-tabs" aria-label="价格口径">
+            <div className="segmented metric-tabs" aria-label="价格分类">
               {(['blendedPrice', 'inputPrice', 'outputPrice'] as const).map((item) => (
                 <button
                   className={metric === item ? 'active' : ''}
@@ -1658,6 +1753,8 @@ function App() {
           </section>
         </section>
       </div>
+        </>
+      )}
     </main>
   )
 }
@@ -1868,7 +1965,7 @@ function AbilityValueCard({
         <span>{bestEntry?.providerLabel ?? item.model.cheapestProvider ?? '未知平台'}</span>
         <span>{valuePerCurrency.toFixed(valuePerCurrency > 100 ? 0 : 1)} 分/{currency === 'CNY' ? '¥' : '$'}</span>
       </div>
-      <div className="value-source">LiteLLM 价格 × DataLearner 能力 · 匹配键 {item.matchedKey}</div>
+      <div className="value-source">LiteLLM 价格 × DataLearner 能力 · 按同名/别名对齐</div>
     </button>
   )
 }

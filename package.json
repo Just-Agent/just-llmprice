@@ -10,6 +10,9 @@
     "prebuild": "node scripts/generate-price-data.mjs --prefer-local && node scripts/generate-benchmark-data.mjs --prefer-local",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
+    "expression:lint": "node scripts/lint-product-expression.mjs",
+    "hooks:install": "node scripts/install-product-expression-hook.mjs",
+    "quality": "npm run lint && npm run expression:lint",
     "preview": "vite preview"
   },
   "dependencies": {

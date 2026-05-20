@@ -39,6 +39,9 @@ jobs:
       - name: Lint
         run: npm run lint
 
+      - name: Product expression guard
+        run: npm run expression:lint
+
       - name: Build
         run: npm run build
         env:
